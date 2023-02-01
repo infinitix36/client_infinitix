@@ -3,7 +3,6 @@ import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
-import "../css/Project.css"
 
 const Project = () => {
   const [userData, setUserData] = useState({

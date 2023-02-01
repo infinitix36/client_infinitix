@@ -29,7 +29,7 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item rounded">
-                <Link className="nav-link active" to="#">
+                <Link className="nav-link active" to="/allprojects">
                 <i class="bi bi-code-square me-2"></i>  All Projects
                 </Link>
               </li>

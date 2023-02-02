@@ -6,72 +6,69 @@ const AllProjects = () => {
       <NavBar />
       <div className="container mt-5">
         <div className="row mt-3">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <Card />
           </div>{" "}
-          <div className="col-md-3">
+          <div className="col-md-4">
             <Card />
           </div>{" "}
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>
+          <div className="col-md-4">
             <Card />
           </div>{" "}
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
+            <Card />
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <Card />
-          </div>
-          <div className="col-md-3">
+          </div>{" "}
+          <div className="col-md-4">
             <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
-          <div className="col-md-3">
-            <Card />
-          </div>
+          </div>{" "}
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
+
 const Dashboard = () => {
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
@@ -30,7 +31,10 @@ const Dashboard = () => {
         <div className="row mt-5">
           <div className="col-md-10 overflow-auto">
             <div className="container-fluid">
-              <div className="row flex-row flex-nowrap mt-4 pb-4 pt-2" style={{"overflowX":"auto"}}>
+              <div
+                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                style={{ overflowX: "auto" }}
+              >
                 {ProjectDetails.map((e) => {
                   return (
                     <div className="col-md-3">
@@ -48,7 +52,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to=""
+                            to={"/project/"+e.projectId}
                             className="btn btn-outline-primary form-control"
                           >
                             Open

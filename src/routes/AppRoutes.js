@@ -11,6 +11,7 @@ const AppRoutes = () => {
         <Route exact path="/project" element={<Project></Project>} />
         <Route exact path="/dashboard" element={<Dashboard/>} />
         <Route exact path="/allprojects" element={<AllProjects/>} />
+        <Route exact path="/project/:projectId" element={<Project/>}/>
       </Routes>
     </BrowserRouter>
   );

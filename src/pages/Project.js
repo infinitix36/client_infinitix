@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
-
 const Project = () => {
+  const { projectId } = useParams();
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -26,6 +26,7 @@ const Project = () => {
   return (
     <div>
       <NavBar />
+      <h1>This project ID is = {projectId}</h1>
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">

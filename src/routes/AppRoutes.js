@@ -8,7 +8,8 @@ import List from "../pages/List";
 import Lboard from "../pages/Lboard";
 import CreateProject from "../pages/CreateProject";
 import FurtherProjectDetails from "../pages/FurtherProjectDetails";
-
+import DashboardBA from "../pages/DashboardBA";
+import DashboardQA from "../pages/DashboardQA";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -23,7 +24,8 @@ const AppRoutes = () => {
         <Route exact path="/project/:projectId" element={<Project/>}/>
         <Route exact path="/project/createProject" element={<CreateProject/>}/>
         <Route exact path="/project/furtherProject" element={<FurtherProjectDetails/>}/>
-        
+        <Route exact path="/DashboardBA" element={<DashboardBA />} />
+        <Route exact path="/DashboardQA" element={<DashboardQA/>} />
       </Routes>
     </BrowserRouter>
   );

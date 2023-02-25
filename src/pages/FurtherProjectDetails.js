@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import NavBar from "../components/Navbar";
+
 const FurtherProjectDetails = () => {
   const [contributorsData, setContributorsData] = useState([]);
   useEffect(() => {
@@ -26,10 +27,9 @@ const FurtherProjectDetails = () => {
         clientName: clientName,
         clientAddress: clientAddress,
         clientPhone: clientPhone,
-        gitHubLink: gitHubLink,
-        jiraLink: jiraLink,
-        projectID:"
-        "
+        //gitHubLink: gitHubLink,
+        //jiraLink: jiraLink,
+        //projectID:""
         
       };
       axios

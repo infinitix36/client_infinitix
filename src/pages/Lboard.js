@@ -72,7 +72,7 @@ const renderdata = (data, index) => {
   return (
     <div>
     <Navbar/>
-    <Link to='/list'><i class="bi bi-caret-left-fill"></i></Link>
+    <Link to='/stats'><i class="bi bi-caret-left-fill"></i></Link>
     <h1 class="position-absolute top-16 start-50 translate-middle-x">Ranking</h1><br/><br/>
         {data.map(renderdata)}
     </div>

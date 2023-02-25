@@ -34,7 +34,7 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item rounded">
-                <Link className="nav-link active" to="#">
+                <Link className="nav-link active" aria-current="page" to="/stats">
                   <i className="bi bi-telephone-fill me-2"></i>Stats
                 </Link>
               </li>

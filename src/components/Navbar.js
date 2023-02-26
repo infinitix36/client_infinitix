@@ -24,18 +24,27 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-md-auto gap-2">
               <li className="nav-item rounded">
-                <Link className="nav-link active" aria-current="page" to="/dashboard">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/dashboard"
+                >
                   <i className="bi bi-house-fill me-2"></i>Dashboard
                 </Link>
               </li>
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/allprojects">
-                <i class="bi bi-code-square me-2"></i>  All Projects
+                  <i class="bi bi-code-square me-2"></i> All Projects
                 </Link>
               </li>
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="#">
                   <i className="bi bi-telephone-fill me-2"></i>Stats
+                </Link>
+              </li>
+              <li className="nav-item rounded">
+                <Link className="nav-link active" to="/todolist">
+                  <i className="bi bi-telephone-fill me-2"></i>Todo
                 </Link>
               </li>
               <li className="nav-item dropdown rounded">

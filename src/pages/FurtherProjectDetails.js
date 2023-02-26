@@ -28,8 +28,7 @@ const FurtherProjectDetails = () => {
         clientPhone: clientPhone,
         gitHubLink: gitHubLink,
         jiraLink: jiraLink,
-        projectID:"
-        "
+        
         
       };
       axios

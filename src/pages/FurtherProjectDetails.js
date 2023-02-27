@@ -121,6 +121,29 @@ const FurtherProjectDetails = () => {
                     ></input>
                     <label for="jiraLink">jiraLink</label>
                   </div>
+                  
+                </div>
+                <div className="col-md-6">
+                  <div className="form-floating mb-3">
+                    <select
+                      id="contibutors"
+                      required
+                      className="form-control"
+                      onChange={(e) => setContributors(e.target.value)}
+                    >
+                      <option selected value="" disabled>
+                        Select contibutors
+                      </option>
+                      {
+                        contributorsData.map((item)=>{
+                          return(
+                            <option value={item._id}>{item.fname+" "+item.lname}</option>
+                          )
+                        })
+                      }
+                    </select>
+                    <label for="">Select contributors</label>
+                  </div>
                 </div>
               </div>
               <div className="row m-2">
@@ -145,6 +168,7 @@ const FurtherProjectDetails = () => {
                     value="Reset"
                   ></input>
                 </div>
+                
               </div>
             </div>
           </form>

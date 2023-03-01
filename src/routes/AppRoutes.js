@@ -12,6 +12,7 @@ import DashboardBA from "../pages/DashboardBA";
 import DashboardQA from "../pages/DashboardQA";
 import TodoList from "../pages/TodoList";
 import FurtherAddProjects from "../pages/FurtherAddProjects";
+import ProjectPM from "../pages/ProjectPM";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -43,6 +44,7 @@ const AppRoutes = () => {
         <Route exact path="/DashboardBA" element={<DashboardBA />} />
         <Route exact path="/DashboardQA" element={<DashboardQA />} />
         <Route exact path="/Todolist" element={<TodoList />} />
+        <Route exact path="/projectpm" element={<ProjectPM/>} />
       </Routes>
     </BrowserRouter>
   );

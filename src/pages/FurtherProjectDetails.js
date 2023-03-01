@@ -31,6 +31,7 @@ const FurtherProjectDetails = () => {
       clientPhone: clientPhone,
       gitHubLink: gitHubLink,
       jiraLink: jiraLink,
+      projectName: projectName,
     };
     axios
       .post("http://localhost:8000/projects/addExtraProjDetails", postData)

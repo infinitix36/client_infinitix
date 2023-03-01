@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
@@ -20,8 +21,17 @@ const FurtherAddProjects = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="container">{renderedItems}</div>
-          </div>
+      {incompleteDetProj.map((e)=>{
+        return (
+          <Link to={"/project/furtherproject/"+e.projectName}
+          className="btn btn-outline-primary form-control mt-2">
+          <li key={e.id}>{e.projectName}</li>
+          </Link>
+
+         
+        )
+      })}
+  </div>
   );
 };
 export default FurtherAddProjects;

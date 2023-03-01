@@ -30,6 +30,7 @@ const AppRoutes = () => {
           element={<FurtherAddProjects />}
         />
         <Route exact path="/project/:projectId" element={<Project />} />
+        <Route exact path="/project/furtherproject/:projectName" element={<FurtherProjectDetails />} />
         <Route
           exact
           path="/project/createproject"

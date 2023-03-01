@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useParams } from "react-router-dom";
+
 
 import axios from "axios";
-import swal from "sweetalert";
 import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
+  const { projectName } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
   useEffect(() => {
     axios
@@ -42,6 +44,7 @@ const FurtherProjectDetails = () => {
   return (
     <React.Fragment>
       <NavBar></NavBar>
+      <h1>This project ID is = {projectName}</h1>
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>

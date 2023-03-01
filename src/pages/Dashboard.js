@@ -52,7 +52,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/"+e.projectId}
+                            to={"/project/" + e.projectId}
                             className="btn btn-outline-primary form-control"
                           >
                             Open
@@ -65,7 +65,16 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-2"></div>
+          <div className="col-md-2">
+            <div className="mt-5">
+              <Link
+                to="/furtheraddprojects"
+                className="btn btn-outline-primary form-control"
+              >
+                Incomplete project details
+              </Link>
+            </div>
+          </div>
         </div>
         <div className="row mt-5">
           <div className="col-md-10">

@@ -5,8 +5,8 @@ const NavBar = () => {
   return (
     <React.Fragment>
       <nav
-        className="navbar navbar-expand-lg navbar-dark"
-        style={{ backgroundColor: "#431c53" }}
+        className="navbar navbar-expand-lg navbar-dark fixed-top"
+        style={{ backgroundColor: "rgb(59,73,104)" }}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/"></Link>
@@ -34,7 +34,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/allprojects">
-                  <i class="bi bi-code-square me-2"></i> All Projects
+                  <i className="bi bi-code-square me-2"></i> All Projects
                 </Link>
               </li>
               <li className="nav-item rounded">

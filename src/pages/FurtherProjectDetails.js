@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
-import swal from "sweetalert";
 import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
+  const { projectName } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
   useEffect(() => {
     axios
@@ -18,31 +20,32 @@ const FurtherProjectDetails = () => {
   const [clientPhone, setClientPhone] = useState();
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
-  const [contributors, setContributors] = useState();
+  const [contributors, setContributors] = useState([]);
 
-    const submitProjectData = (e) => {
-      e.preventDefault();
-      const postData = {
-        clientName: clientName,
-        clientAddress: clientAddress,
-        clientPhone: clientPhone,
-        gitHubLink: gitHubLink,
-        jiraLink: jiraLink,
-        
-        
-      };
-      axios
-        .post("http://localhost:8000/projects/addExtraProjDetails", postData)
-        .then((res) => {
-          alert(res.data.message);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  const submitProjectData = (e) => {
+    e.preventDefault();
+    const postData = {
+      clientName: clientName,
+      clientAddress: clientAddress,
+      clientPhone: clientPhone,
+      gitHubLink: gitHubLink,
+      jiraLink: jiraLink,
+      projectName: projectName,
+      contributors: contributors,
     };
+    axios
+      .post("http://localhost:8000/projects/addExtraProjDetails", postData)
+      .then((res) => {
+        alert(res.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <React.Fragment>
       <NavBar></NavBar>
+      <h1>This project ID is = {projectName}</h1>
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>
@@ -121,28 +124,17 @@ const FurtherProjectDetails = () => {
                     ></input>
                     <label for="jiraLink">jiraLink</label>
                   </div>
-                  
                 </div>
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
-                    <select
-                      id="contibutors"
-                      required
-                      className="form-control"
-                      onChange={(e) => setContributors(e.target.value)}
-                    >
-                      <option selected value="" disabled>
-                        Select contibutors
-                      </option>
-                      {
-                        contributorsData.map((item)=>{
-                          return(
-                            <option value={item._id}>{item.fname+" "+item.lname}</option>
-                          )
-                        })
-                      }
-                    </select>
-                    <label for="">Select contributors</label>
+                    <Select
+                      isMulti
+                      name="contributors"
+                      options={contributorsData}
+                      className="basic-multi-select"
+                      classNamePrefix="select contibutors"
+                    />
+                    <label for=""></label>
                   </div>
                 </div>
               </div>
@@ -168,7 +160,6 @@ const FurtherProjectDetails = () => {
                     value="Reset"
                   ></input>
                 </div>
-                
               </div>
             </div>
           </form>

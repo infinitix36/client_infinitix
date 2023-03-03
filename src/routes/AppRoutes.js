@@ -13,25 +13,44 @@ import DashboardQA from "../pages/DashboardQA";
 import DashboardDEV from "../pages/DashboardDEV";
 import Profile from "../pages/Profile";
 import TodoList from "../pages/TodoList";
+import FurtherAddProjects from "../pages/FurtherAddProjects";
+import ProjectPM from "../pages/ProjectPM";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Project></Project>} />
         <Route exact path="/project" element={<Project></Project>} />
-        <Route exact path="/dashboard" element={<Dashboard/>} />
-        <Route exact path="/dashboardpm" element={<DashboardPM/>} />
-        <Route exact path="/stats" element={<List/>} />
-        <Route exact path="/lboard" element={<Lboard/>} />
-        <Route exact path="/allprojects" element={<AllProjects/>} />
-        <Route exact path="/project/:projectId" element={<Project/>}/>
-        <Route exact path="/project/createProject" element={<CreateProject/>}/>
-        <Route exact path="/project/furtherProject" element={<FurtherProjectDetails/>}/>
+        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/dashboardpm" element={<DashboardPM />} />
+        <Route exact path="/stats" element={<List />} />
+        <Route exact path="/lboard" element={<Lboard />} />
+        <Route exact path="/allprojects" element={<AllProjects />} />
+        <Route
+          exact
+          path="/furtheraddprojects"
+          element={<FurtherAddProjects />}
+        />
+        <Route exact path="/project/:projectId" element={<Project />} />
+        <Route exact path="/project/furtherproject/:projectName" element={<FurtherProjectDetails />} />
+        <Route
+          exact
+          path="/project/createproject"
+          element={<CreateProject />}
+        />
+        <Route
+          exact
+          path="/project/furtherproject"
+          element={<FurtherProjectDetails />}
+        />
+
         <Route exact path="/DashboardBA" element={<DashboardBA />} />
         <Route exact path="/DashboardQA" element={<DashboardQA/>} />
         <Route exact path="/DashboardDEV" element={<DashboardDEV />} />
         <Route exact path="/Profile" element={<Profile />} />
         <Route exact path="/Todolist" element={<TodoList/>} />
+        <Route exact path="/DashboardQA" element={<DashboardQA />} />
+        <Route exact path="/projectpm" element={<ProjectPM/>} />
       </Routes>
     </BrowserRouter>
   );

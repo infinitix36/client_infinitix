@@ -4,6 +4,7 @@ import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
+import SideBar from "../components/Sidebar";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState({
@@ -27,7 +28,13 @@ const Dashboard = () => {
   return (
     <div>
       <NavBar />
+      
       <div className="container">
+      <div className="side-bar"
+            style={{position: "fixed",left: "0",top: "64px",bottom: "0",}}
+          >
+            <SideBar />
+          </div>
         <div className="row mt-5">
           <div className="col-md-10 overflow-auto">
             <div className="container-fluid">

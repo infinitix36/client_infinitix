@@ -7,11 +7,11 @@ const Dough = () => {
     
   // Sample data
   const data = {
-    labels: ["Java", "Python", "Javascript", "React"],
+    labels: ["Java", "Javascript", "React"],
       datasets: [
         {
           label: "Programming Language used",
-          data: [12, 45, 78, 32],
+          data: [16, 68, 32],
           backgroundColor: ["blue", "red", "green", "orange"],
         }
       ]

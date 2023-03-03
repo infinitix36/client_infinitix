@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 
-
 import axios from "axios";
 import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
@@ -21,7 +20,7 @@ const FurtherProjectDetails = () => {
   const [clientPhone, setClientPhone] = useState();
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
-  const [contributors, setContributors] = useState();
+  const [contributors, setContributors] = useState([]);
 
   const submitProjectData = (e) => {
     e.preventDefault();
@@ -32,6 +31,7 @@ const FurtherProjectDetails = () => {
       gitHubLink: gitHubLink,
       jiraLink: jiraLink,
       projectName: projectName,
+      contributors: contributors,
     };
     axios
       .post("http://localhost:8000/projects/addExtraProjDetails", postData)

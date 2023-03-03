@@ -47,7 +47,7 @@ const AppRoutes = () => {
         <Route exact path="/DashboardBA" element={<DashboardBA />} />
         <Route exact path="/DashboardQA" element={<DashboardQA/>} />
         <Route exact path="/DashboardDEV" element={<DashboardDEV />} />
-        <Route exact path="/Profile" element={<Profile />} />
+        <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/Todolist" element={<TodoList/>} />
         <Route exact path="/DashboardQA" element={<DashboardQA />} />
         <Route exact path="/projectpm" element={<ProjectPM/>} />

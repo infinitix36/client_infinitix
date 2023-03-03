@@ -37,7 +37,7 @@ const CreateProject = () => {
   return (
     <React.Fragment>
       <NavBar></NavBar>
-      <div className="container mt-3">
+      <div className="container mt-3 ">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>
             <div className="card-body mt-3">
@@ -117,13 +117,13 @@ const CreateProject = () => {
                       <option selected value="" disabled>
                         Select Techlead
                       </option>
-                      {
-                        techLeadData.map((item)=>{
-                          return(
-                            <option value={item._id}>{item.fname+" "+item.lname}</option>
-                          )
-                        })
-                      }
+                      {techLeadData.map((item) => {
+                        return (
+                          <option value={item._id}>
+                            {item.fname + " " + item.lname}
+                          </option>
+                        );
+                      })}
                     </select>
                     <label for="dep">Select Techlead</label>
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import NavBar from "../components/Navbar";
 import "../css/Profile.css";
-import { useDispatch, useSelector , Provider } from "react-redux";
+import { useDispatch, useSelector,Provider} from "react-redux";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { updateProfile} from "../actions/userActions";
 import ErrorMessage from "../components/ErrorMessage";
@@ -66,7 +66,8 @@ const Profile = ({ location, history }) => {
       dispatch(updateProfile({ name, email, password, pic }));
     };
   
-    return (
+    return (<>
+      <Provider store={"hi"} >
         
       <Profile title="EDIT PROFILE">
       <div>
@@ -149,6 +150,8 @@ const Profile = ({ location, history }) => {
             </div>
         </div>
       </Profile>
+      </Provider>
+      </>
     );
   };
   

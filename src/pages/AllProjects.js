@@ -4,6 +4,7 @@ const AllProjects = () => {
   return (
     <div>
       <NavBar />
+      
       <div className="container mt-5">
         <div className="row mt-3">
           <div className="col-md-4">

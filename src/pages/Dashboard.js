@@ -45,7 +45,7 @@ const Dashboard = () => {
                 {ProjectDetails.map((e) => {
                   return (
                     <div className="col-md-3">
-                      <div className="card">
+                      <div className="card" style={{ backgroundColor: "rgb(223,255,213)" }}>
                         <div className="card-header">
                           <h5 className="card-title">{e.projectName}</h5>
                         </div>
@@ -85,8 +85,9 @@ const Dashboard = () => {
         </div>
         <div className="row mt-5">
           <div className="col-md-10">
-            <table className="table align-middle mb-0 bg-white ">
-              <thead className="bg-light">
+          <div class="table-responsive-sm">
+            <table className="table align-middle mb-0  ">
+              <thead className="text-light text-center">
                 <tr>
                   <th>Name</th>
                   <th>Title</th>
@@ -204,6 +205,7 @@ const Dashboard = () => {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
           <div className=" col-md-2"></div>
         </div>

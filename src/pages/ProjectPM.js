@@ -7,6 +7,7 @@ import Dough from "../components/chart/Dough";
 import {BsFillPlusCircleFill} from "react-icons/bs";
 import Table from "./Table";
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import SideBar from "../components/Sidebar";
 
 const ProjectPM = () => {
   const [userData, setUserData] = useState({
@@ -35,6 +36,12 @@ const ProjectPM = () => {
   return (
     <div>
       <NavBar />
+      <div
+        className="side-bar"
+        style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
+      >
+        <SideBar />
+      </div>
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">

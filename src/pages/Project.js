@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
 import { useState } from "react";
 const Project = () => {
   const { projectId } = useParams();
@@ -26,6 +27,12 @@ const Project = () => {
   return (
     <div>
       <NavBar />
+      <div
+        className="side-bar"
+        style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
+      >
+        <SideBar />
+      </div>
       <h1>This project ID is = {projectId}</h1>
       <div className="container">
         <div className="row mt-5">

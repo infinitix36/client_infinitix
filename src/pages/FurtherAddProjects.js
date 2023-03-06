@@ -15,7 +15,7 @@ const FurtherAddProjects = () => {
   console.log(incompleteDetProj);
 
   const renderedItems = incompleteDetProj.map((item) => (
-    <li key={item.id}>{item.projectName}</li>
+    <li key={item.id}>{item._id}</li>
   ));
 
   return (
@@ -23,9 +23,9 @@ const FurtherAddProjects = () => {
       <NavBar></NavBar>
       {incompleteDetProj.map((e)=>{
         return (
-          <Link to={"/project/furtherproject/"+e.projectName}
+          <Link to={"/project/furtherproject/"+e._id}
           className="btn btn-outline-primary form-control mt-2">
-          <li key={e.id}>{e.projectName}</li>
+          <li key={e._id}>{e._id + e.projectName}</li>
           </Link>
 
          

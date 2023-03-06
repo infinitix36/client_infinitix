@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
-  const { projectName } = useParams();
+  const { _id } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
   useEffect(() => {
     axios
@@ -30,7 +30,8 @@ const FurtherProjectDetails = () => {
       clientPhone: clientPhone,
       gitHubLink: gitHubLink,
       jiraLink: jiraLink,
-      projectName: projectName,
+      projectId: _id,
+
       contributors: contributors,
     };
     axios
@@ -45,7 +46,7 @@ const FurtherProjectDetails = () => {
   return (
     <React.Fragment>
       <NavBar></NavBar>
-      <h1>This project ID is = {projectName}</h1>
+      <h1>This project ID is = {_id}</h1>
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>
@@ -164,6 +165,7 @@ const FurtherProjectDetails = () => {
             </div>
           </form>
         </div>
+        <h1>This project ID is = {_id}</h1>
       </div>
       <br></br>
     </React.Fragment>

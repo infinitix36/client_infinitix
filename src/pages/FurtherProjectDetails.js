@@ -20,7 +20,7 @@ const FurtherProjectDetails = () => {
   const [clientPhone, setClientPhone] = useState();
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
-  const [contributors, setContributors] = useState([]);
+  const [contributors, setContributors] = useState();
 
   const submitProjectData = (e) => {
     e.preventDefault();
@@ -131,6 +131,7 @@ const FurtherProjectDetails = () => {
                     <Select
                       isMulti
                       name="contributors"
+                      onChange={setContributors}
                       options={contributorsData}
                       className="basic-multi-select"
                       classNamePrefix="select contibutors"

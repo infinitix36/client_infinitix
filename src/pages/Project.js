@@ -3,9 +3,20 @@ import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { useState } from "react";
 const Project = () => {
   const { projectId } = useParams();
+  const [projectDetails, setprojectDetails] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/projects/getProjectDetails")
+      .then(function (response) {
+        setprojectDetails(response.data);
+      });
+  }, []);
+  console.log(projectDetails);
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [

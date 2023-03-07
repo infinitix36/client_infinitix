@@ -1,5 +1,6 @@
 import NavBar from "../components/Navbar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import axios from "axios";
 import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
@@ -7,6 +8,16 @@ import { Link } from "react-router-dom";
 import SideBar from "../components/Sidebar";
 
 const Dashboard = () => {
+  const [projectDetails, setprojectDetails] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/projects/getProjectDetails")
+      .then(function (response) {
+        setprojectDetails(response.data);
+      });
+  }, []);
+  console.log(projectDetails);
+  
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -43,7 +54,7 @@ const Dashboard = () => {
                 className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
                 style={{ overflowX: "auto" }}
               >
-                {ProjectDetails.map((e) => {
+                {projectDetails.map((e) => {
                   return (
                     <div className="col-md-3">
                       <div
@@ -59,7 +70,7 @@ const Dashboard = () => {
                             className="rounded-circle"
                             style={{ width: "40px" }}
                           ></img>
-                          <p>{e.projectDescription}</p>
+                          <p>{}</p>
                         </div>
                         <div className="card-footer">
                           <Link

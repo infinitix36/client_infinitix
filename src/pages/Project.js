@@ -17,6 +17,10 @@ const Project = () => {
       });
   }, []);
   console.log(projectDetails);
+  if(projectDetails._id === projectId){
+    console.log("Project" + projectId );
+  }
+  console.log(projectId);
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -48,16 +52,16 @@ const Project = () => {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu
-            euismod justo. Aliquam a lorem vel libero venenatis cursus. Donec in
-            bibendum justo, eget tristique erat. Class aptent taciti sociosqu ad
-            litora torquent per conubia nostra, per inceptos himenaeos. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos. Maecenas in elit mi. Praesent viverra nisi eu
-            turpis porta, ut iaculis mauris ultricies. Phasellus vestibulum
-            augue in tincidunt pretium. Integer ipsum risus, pretium et ante et,
-            mollis tempor lectus. Ut faucibus malesuada mi, vitae mollis ligula.
-            Suspendisse maximus pellentesque vestibulum. Mauris{" "}
+           
+           
+            {projectDetails.map((e)=>{
+              return (
+                (e?._id === projectId)
+                ? 
+                <div>{e.description}</div>: null
+              
+              )
+            })}
           </div>
           <div className="col-md-6">
             <h3>contributors</h3>

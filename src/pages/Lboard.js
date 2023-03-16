@@ -79,6 +79,8 @@ function Lboard() {
       >
         <SideBar />
       </div>
+      <div className="container">
+        <br></br><br></br>
       <div className="container mt-5">
         {" "}
         <br></br>{" "}
@@ -93,6 +95,7 @@ function Lboard() {
       <br />
       <br />
       {data.map(renderdata)}
+    </div>
     </div>
   );
 }

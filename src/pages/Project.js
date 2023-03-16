@@ -17,8 +17,8 @@ const Project = () => {
       });
   }, []);
   console.log(projectDetails);
-  if(projectDetails._id === projectId){
-    console.log("Project" + projectId );
+  if (projectDetails._id === projectId) {
+    console.log("Project" + projectId);
   }
   console.log(projectId);
   const [userData, setUserData] = useState({
@@ -52,25 +52,20 @@ const Project = () => {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
-           
-           
-            {projectDetails.map((e)=>{
-              return (
-                (e?._id === projectId)
-                ? 
-                <div>{e.description}</div>: null
-              
-              )
+            {projectDetails.map((e) => {
+              return e?._id === projectId ? <div>{e.description}</div> : null;
             })}
           </div>
           <div className="col-md-6">
+
+            
             <h3>contributors</h3>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
                   <th scope="col">Handle</th>
                 </tr>
               </thead>

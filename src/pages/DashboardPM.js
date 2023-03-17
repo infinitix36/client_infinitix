@@ -1,7 +1,13 @@
+import { Link } from "react-router-dom";
+import BarChart from "../components/chart/BarChart";
+import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
-import { UserData } from "../components/chart/Data";
-import BarChart from "../components/chart/BarChart";
+import Dough from "../components/chart/Dough";
+import {BsFillPlusCircleFill} from "react-icons/bs";
+import Table from "./Table";
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import SideBar from "../components/Sidebar";
 
 const DashboardPM = () => {
   const [userData, setUserData] = useState({
@@ -22,199 +28,98 @@ const DashboardPM = () => {
       },
     ],
   });
+
+  const now1 = 35;
+  const now2 = 82;
+  const now3 = 57;
+
   return (
     <div>
       <NavBar />
+      <div
+        className="side-bar"
+        style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
+      >
+        <SideBar />
+      </div>
       <div className="container">
         <div className="row mt-5">
-          <div className="col-md-10">
-            <div class="card-group">
-              <div class="card">
+          <div className="col-md-3">
+            Add Projects
+            <br />
+            <br />
+            <div>
+              <Link to="/project/createProject"><i class="bi bi-plus-circle"></i></Link> Create New Project{" "}
+            </div>{" "}
+          </div>
+          <div className="col-md-3">
+            <div class="card text-bg-info mb-3" style={{ maxWidth: "18rem" }}>
+              <div class="card-header">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                  class="card-img-top"
-                  alt="Hollywood Sign on The Hill"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
+                  src="https://marketplacecontent.zoom.us/%2FnptAB68BTdO6Jrc_A6ROUA%2FDdIgA0x-QJKBkUaxQR_Q5A%2Fapp%2FtKVbP0NiSve_Mul31LfEEw%2FpHAZ_eIvRJi7OmEEMDq6QA.png"
+                  style={{ width: "2rem", height: "2rem" }}
+                  class="card-title"
+                ></img>
               </div>
-              <div class="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
-                  class="card-img-top"
-                  alt="Palm Springs Road"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This card has supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-              <div class="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp"
-                  class="card-img-top"
-                  alt="Los Angeles Skyscrapers"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This card has even longer
-                    content than the first to show that equal height action.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
+              <div class="card-body">
+                <h5 class="card-title">Info card title</h5>
+                <ProgressBar striped variant="success" now={now1} label={`${now1}%`} />
               </div>
             </div>
           </div>
-          <div className="col-md-2"></div>
+          <div className="col-md-3">
+            <div
+              class="card text-bg-warning mb-3"
+              style={{ maxWidth: "18rem" }}
+            >
+              <div class="card-header">
+                <img
+                  src="https://imageio.forbes.com/specials-images/imageserve/5cd9d263169cc600095f2398/0x0.jpg?format=jpg&crop=1200,1200,x0,y0,safe&height=87&width=87"
+                  style={{ width: "2rem", height: "2rem" }}
+                  class="card-title"
+                ></img>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Warning card title</h5>
+                <ProgressBar striped variant="danger" now={now2} label={`${now2}%`}/>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div
+              class="card text-bg-success mb-3"
+              style={{ maxWidth: "18rem" }}
+            >
+              <div class="card-header">
+                <img
+                  src="https://i.pinimg.com/originals/2c/b1/a5/2cb1a59484ed73766fd11474667ace8a.jpg"
+                  style={{ width: "2rem", height: "2rem" }}
+                  class="card-title"
+                ></img>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Success card title</h5>
+                <ProgressBar striped variant="info" now={now3} label={`${now3}%`} />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-10">
-            <table class="table align-middle mb-0 bg-white">
-              <thead class="bg-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Title</th>
-                  <th>Status</th>
-                  <th>Position</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                        class="rounded-circle"
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">john.doe@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Software engineer</p>
-                    <p class="text-muted mb-0">IT department</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-success rounded-pill d-inline">
-                      Active
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-sm btn-rounded"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">Alex Ray</p>
-                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Consultant</p>
-                    <p class="text-muted mb-0">Finance</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-primary rounded-pill d-inline">
-                      Onboarding
-                    </span>
-                  </td>
-                  <td>Junior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">Kate Hunington</p>
-                        <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Designer</p>
-                    <p class="text-muted mb-0">UI/UX</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-warning rounded-pill d-inline">
-                      Awaiting
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class=" col-md-2"></div>
+          <Table />
         </div>
-        <div class="row mt-5">
-          <div class="col-md-10">
+        <br></br>
+        <br></br>
+
+        <div className="row mt-5">
+          <div className="col-md-6">
             {" "}
             Chart{" "}
             <div>
-              <BarChart chartData={userData}/>
+              <BarChart chartData={userData} />
             </div>
+          </div>
+          <div className="col-md-6">
+            <Dough />
           </div>
         </div>
       </div>

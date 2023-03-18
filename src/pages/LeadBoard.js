@@ -10,7 +10,6 @@ import Pagination from "../components/Leaderboard/Pagination";
 import Search from "../components/Leaderboard/Search"
 import "./../css/LeadBoard.css"
 
-const base_url = process.env.REACT_APP_API_URL;
 
 function LeadBoard() {
 	const [obj, setObj] = useState({});
@@ -19,21 +18,21 @@ function LeadBoard() {
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState("");
 
-	useEffect(() => {
-		const getAllDetails = async () => {
-			try {
-				const url = `${base_url}?page=${page}&sort=${sort.sort},${
-					sort.order
-				}&role=${filterJobRole.toString()}&search=${search}`;
-				const { data } = await axios.get(url);
-				setObj(data);
-			} catch (err) {
-				console.log(err);
-			}
-		};
+	// useEffect(() => {
+	// 	const getAllDetails = async () => {
+	// 		try {
+	// 			const url = `${base_url}?page=${page}&sort=${sort.sort},${
+	// 				sort.order
+	// 			}&role=${filterJobRole.toString()}&search=${search}`;
+	// 			const { data } = await axios.get(url);
+	// 			setObj(data);
+	// 		} catch (err) {
+	// 			console.log(err);
+	// 		}
+	// 	};
 
-		getAllDetails();
-	}, [sort, filterJobRole, page, search]);
+	// 	getAllDetails();
+	// }, [sort, filterJobRole, page, search]);
 
 	return (
         <div>
@@ -57,7 +56,7 @@ function LeadBoard() {
 							page={page}
 							limit={obj.limit ? obj.limit : 0}
 							total={obj.total ? obj.total : 0}
-							setPage={(page) => setPage(page)}
+							setPage={(page) => setPage(page)} 
 						/>
 					</div>
 					

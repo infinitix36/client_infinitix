@@ -1,15 +1,61 @@
 import styles from "./styles.module.css";
+import React, { useState, useEffect } from "react"
+import axios from "axios";
 
-const JobRole = ({ jobRoles, filterJobRole, setFilterJobRole }) => {
-	const onChange = ({ currentTarget: input }) => {
-		if (input.checked) {
-			const state = [...filterJobRole, input.value];
-			setFilterJobRole(state);
-		} else {
-			const state = filterJobRole.filter((val) => val !== input.value);
-			setFilterJobRole(state);
-		}
-	};
+const JobRole = () => {
+
+	const [userDetails, setUserDetails] = useState([]);
+	const [filterType, setFilterType] = useState("");
+	
+	useEffect(() => {
+	  let apiEndpoint = "";
+	
+	  if (filterType === "getQA") {
+		apiEndpoint = "http://localhost:8000/users/getQA/alphabet";
+	  } else if (filterType === "getBA") {
+		apiEndpoint = "http://localhost:8000/users/getBA/alphabet";
+	  } else if (filterType === "getTechlead") {
+		apiEndpoint = "http://localhost:8000/users/getTechlead/alphabet";
+	  }
+	  
+	  axios.get(apiEndpoint).then((response) => {
+		setUserDetails(response.data);
+		console.log(userDetails);
+	  });
+	}, [filterType]);
+	
+	function handleRadioChange(event) {
+		setFilterType(event.target.value);
+	  }
+  	
+
+//   useEffect(() => {
+// 	fetch(`https://api.github.com/users/${userInput}`)
+// 	  .then((res) => res.json())
+// 	  .then(
+// 		(result) => {
+// 		  console.log(result);
+// 		  setAvatarURL(result.avatar_url);
+// 		},
+// 		(error) => {
+// 		  console.log(error);
+// 		}
+// 	  );
+//   }, []);
+
+  console.log(userDetails);
+
+
+
+	// const onChange = ({ currentTarget: input }) => {
+	// 	if (input.checked) {
+	// 		const state = [...filterJobRole, input.value];
+	// 		setFilterJobRole(state);
+	// 	} else {
+	// 		const state = filterJobRole.filter((val) => val !== input.value);
+	// 		setFilterJobRole(state);
+	// 	}
+	// };
 
 	return (
 		<div className={styles.container}>
@@ -23,22 +69,31 @@ const JobRole = ({ jobRoles, filterJobRole, setFilterJobRole }) => {
 			<div class="form-check">
 				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></input>
 				<label class="form-check-label" for="flexRadioDefault2">
-					Tech-Lead
-  				</label>
-		</div><br/>
-		<div class="form-check">
-				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
-				<label class="form-check-label" for="flexRadioDefault1">
-    				Developer
+					QA
   				</label>
 			</div><br/>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></input>
-				<label class="form-check-label" for="flexRadioDefault2">
-					Tech-Lead
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"></input>
+				<label class="form-check-label" for="flexRadioDefault3">
+    				Techlead
   				</label>
-		</div>
-		<br/>
+			</div><br/>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4"></input>
+				<label class="form-check-label" for="flexRadioDefault4">
+					BA
+  				</label>
+			</div>
+			<br/>
+
+
+			<ul>
+				{userDetails.map((user) => (
+				<li key={user.id}>{user.fname}</li>
+				))}
+			</ul>
+
+
 			{/* <div className={styles.jobRole_container}>
 				{jobRoles.map((jobRole) => (
 					<div className={styles.jobRole} key={jobRole}>

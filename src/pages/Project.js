@@ -16,11 +16,11 @@ const Project = () => {
         setprojectDetails(response.data);
       });
   }, []);
+
   console.log(projectDetails);
-  if (projectDetails._id === projectId) {
-    console.log("Project" + projectId);
-  }
+
   console.log(projectId);
+
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -57,9 +57,11 @@ const Project = () => {
             })}
           </div>
           <div className="col-md-6">
+            <h3>
+              contributors
+              
+            </h3>
 
-            
-            <h3>contributors</h3>
             <table class="table">
               <thead>
                 <tr>

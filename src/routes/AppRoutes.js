@@ -15,6 +15,8 @@ import Profile from "../pages/Profile";
 import TodoList from "../pages/TodoList";
 import FurtherAddProjects from "../pages/FurtherAddProjects";
 import ProjectPM from "../pages/ProjectPM";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -51,6 +53,10 @@ const AppRoutes = () => {
         <Route exact path="/Todolist" element={<TodoList/>} />
         <Route exact path="/DashboardQA" element={<DashboardQA />} />
         <Route exact path="/projectpm" element={<ProjectPM/>} />
+        <Route exact path="/login" element={<Login/>} />
+        <Route exact path="/register" element={<Register/>} />
+
+
       </Routes>
     </BrowserRouter>
   );

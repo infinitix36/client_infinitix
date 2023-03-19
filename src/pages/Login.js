@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import jwt from "jwt-decode";
 import "../App.css";
@@ -12,10 +12,13 @@ const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://yourapi.com/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/authentication/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
       const token = response.data.token;
       const decodedToken = jwt.decode(token);
       // Do something with the token, such as store it in local storage or a cookie
@@ -59,9 +62,11 @@ const Login = () => {
         </div>
 
         <div className="d-flex justify-content-center">
-        <Link to="/register">
-          <button className="green-button me-3 mt-3">Create new account</button>
-        </Link>
+          <Link to="/register">
+            <button className="green-button me-3 mt-3">
+              Create new account
+            </button>
+          </Link>
         </div>
       </form>
     </div>

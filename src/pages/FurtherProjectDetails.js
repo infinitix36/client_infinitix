@@ -21,7 +21,7 @@ const FurtherProjectDetails = () => {
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
   const [contributors, setContributors] = useState();
-
+console.log(contributors);
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {

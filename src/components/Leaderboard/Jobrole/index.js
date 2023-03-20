@@ -26,7 +26,7 @@ const JobRole = () => {
 	
 	function handleRadioChange(event) {
 		setFilterType(event.target.value);
-	  }
+	}
   	
 
 //   useEffect(() => {
@@ -47,15 +47,15 @@ const JobRole = () => {
 
 
 
-	// const onChange = ({ currentTarget: input }) => {
-	// 	if (input.checked) {
-	// 		const state = [...filterJobRole, input.value];
-	// 		setFilterJobRole(state);
-	// 	} else {
-	// 		const state = filterJobRole.filter((val) => val !== input.value);
-	// 		setFilterJobRole(state);
-	// 	}
-	// };
+	const onChange = ({ currentTarget: input }) => {
+		if (input.checked) {
+			const state = [...filterJobRole, input.value];
+			setFilterJobRole(state);
+		} else {
+			const state = filterJobRole.filter((val) => val !== input.value);
+			setFilterJobRole(state);
+		}
+	};
 
 	return (
 		<div className={styles.container}>

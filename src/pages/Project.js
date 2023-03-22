@@ -16,11 +16,33 @@ const Project = () => {
         setprojectDetails(response.data);
       });
   }, []);
+
   console.log(projectDetails);
-  if (projectDetails._id === projectId) {
-    console.log("Project" + projectId);
-  }
+
   console.log(projectId);
+
+  // const project = projectDetails.find((p) => p._id === projectId);
+  // console.log(project);
+
+  const project = projectDetails.find((p) => p._id === projectId);
+  const projectDescription = project ? project.description : "";
+  let contributors = [];
+  if (project) {
+    contributors = project.contributors;
+  }
+ 
+  console.log(contributors);
+
+  // if (project) {
+  //   const contributors = project.contributors.map((contributor) => {
+  //     return {
+  //       label: contributor.label,
+  //       value: contributor.value,
+  //     };
+  //   });
+
+  //   console.log(contributors); // This will log the array of contributor labels and values
+  // }
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -52,31 +74,35 @@ const Project = () => {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
-            {projectDetails.map((e) => {
+            {projectDescription}
+
+            {/* {projectDetails.map((e) => {
               return e?._id === projectId ? <div>{e.description}</div> : null;
-            })}
+            })} */}
           </div>
           <div className="col-md-6">
-
-            
             <h3>contributors</h3>
+
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">Handle</th>
+                  <th scope="col"> Name</th>
+                  
+                  <th scope="col">label</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
+                {contributors.map((e,index)=>{
+                  return ( <tr>
+                    <th scope="row">{index +1}</th>
+                    <td>  {e.label} </td>
+                    <td>{e.value}</td>
+                    
+                  </tr>)
+                })}
+                
+                {/* <tr>
                   <th scope="row">2</th>
                   <td>Jacob</td>
                   <td>Thornton</td>
@@ -87,7 +113,7 @@ const Project = () => {
                   <td>Larry</td>
                   <td>the Bird</td>
                   <td>@twitter</td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
@@ -134,6 +160,10 @@ const Project = () => {
         </div>
         <br></br>
         <br></br>
+       
+        {/* {contributors?.map((e)=>{
+        return ( <div>{e.label}</div>)
+       })} */}
       </div>
     </div>
   );

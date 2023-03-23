@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import swal from "sweetalert";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 const CreateProject = () => {
@@ -29,6 +29,9 @@ const CreateProject = () => {
       .post("http://localhost:8000/projects/addBasicProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
+        swal("Project Created", {
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);

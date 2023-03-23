@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
@@ -38,6 +39,9 @@ console.log(contributors);
       .post("http://localhost:8000/projects/addExtraProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
+        swal("Project Details added successfully", {
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);

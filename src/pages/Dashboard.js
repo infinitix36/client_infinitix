@@ -74,7 +74,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/" + e._id}
+                            to={"/project/" + e._id+"/"+e.projectName}
                             className="btn btn-outline-primary form-control"
                           >
                             Open

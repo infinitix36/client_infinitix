@@ -33,7 +33,7 @@ const AppRoutes = () => {
           path="/furtheraddprojects"
           element={<FurtherAddProjects />}
         />
-        <Route exact path="/project/:projectId" element={<Project />} />
+        <Route exact path="/project/:projectId/:projectName" element={<Project />} />
         <Route exact path="/project/furtherproject/:_id" element={<FurtherProjectDetails />} />
         <Route
           exact

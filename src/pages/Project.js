@@ -9,6 +9,7 @@ import { useState } from "react";
 import ProjectCommitList from "../components/ProjectCommitList";
 const Project = () => {
   const { projectId } = useParams();
+  const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
   useEffect(() => {
     axios
@@ -121,7 +122,7 @@ const Project = () => {
           </div>
         </div>
         <div className="row mt-5">
-        <ProjectCommitList  owner="dreamshack1999" repo="eprs" />
+        <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
           <div className="col-md-6">
             <div class="card">
               <div class="card-header">Featured</div>

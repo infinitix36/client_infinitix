@@ -69,7 +69,7 @@ const NavBar = () => {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link className="dropdown-item" to="#">
+                    <Link className="dropdown-item" to="/profile/mathesh">
                       Account
                     </Link>
                   </li>
@@ -78,7 +78,7 @@ const NavBar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li >
-                    <Link to="/" onClick={logout}>Logout</Link>
+                    <Link className="dropdown-item" to="/" onClick={logout}>Logout</Link>
                     
                   </li>
                 </ul>

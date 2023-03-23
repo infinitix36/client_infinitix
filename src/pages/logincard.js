@@ -20,7 +20,7 @@ const Login = () => {
         alert(res.data.message);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         if (res?.data?.status === true) {
-          navigate("/home");
+          navigate("/dashboard");
         }
       })
       .catch((error) => {

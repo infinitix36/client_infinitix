@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Nav.css";
+import { Navigate, useNavigate } from "react-router-dom";
+
 const NavBar = () => {
+  const logout = ()=>{
+        localStorage.removeItem("token");
+        Navigate("/")
+    }
   return (
     <React.Fragment>
       <nav
@@ -71,10 +77,9 @@ const NavBar = () => {
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Logout
-                    </Link>
+                  <li >
+                    <Link to="/" onClick={logout}>Logout</Link>
+                    
                   </li>
                 </ul>
               </li>

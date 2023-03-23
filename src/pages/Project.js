@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import ProjectCommitList from "../components/ProjectCommitList";
+import ProjectCommitChart from "../components/ProjectCommitChart";
 const Project = () => {
   const { projectId } = useParams();
   const { projectName } = useParams();
@@ -70,7 +71,7 @@ const Project = () => {
         className="side-bar"
         style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
       >
-        <SideBar />
+        {/* <SideBar /> */}
       </div>
       <h1>This project ID is = {projectId}</h1>
       
@@ -122,26 +123,19 @@ const Project = () => {
           </div>
         </div>
         <div className="row mt-5">
-        <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
+       
           <div className="col-md-6">
             <div class="card">
-              <div class="card-header">Featured</div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
+            <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
             </div>
           </div>
           <div className="col-md-6">
-            {" "}
+            <ProjectCommitChart owner="dreamshack1999" repo={projectName}/>
+            {/* {" "}
             Chart{" "}
             <div>
               <BarChart chartData={userData} />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="row mt-5">

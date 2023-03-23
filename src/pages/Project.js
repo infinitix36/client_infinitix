@@ -6,6 +6,7 @@ import SideBar from "../components/Sidebar";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import ProjectCommitList from "../components/ProjectCommitList";
 const Project = () => {
   const { projectId } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
@@ -71,6 +72,7 @@ const Project = () => {
         <SideBar />
       </div>
       <h1>This project ID is = {projectId}</h1>
+      
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
@@ -119,6 +121,7 @@ const Project = () => {
           </div>
         </div>
         <div className="row mt-5">
+        <ProjectCommitList  owner="dreamshack1999" repo="eprs" />
           <div className="col-md-6">
             <div class="card">
               <div class="card-header">Featured</div>

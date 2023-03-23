@@ -242,6 +242,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <Link
+                            to={"/profile/john" }
+                            className="btn btn-outline-primary form-control"
+                          >
+                            profile
+                          </Link>
+
     </div>
   );
 };

@@ -1,17 +1,17 @@
 import NavBar from "../components/Navbar";
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 const Profile = () => {
-  const { lname } = useParams();
-  
-  const [rating, setRating] = useState(0)
+  const { fname } = useParams();
+
+  const [rating, setRating] = useState(0);
   const handleRating = (rate: number) => {
-    setRating(rate)
+    setRating(rate);
 
     // other logic
-  }
+  };
   console.log(rating);
   // Optinal callback functions
   // const onPointerEnter = () => console.log('Enter')
@@ -22,8 +22,7 @@ const Profile = () => {
     e.preventDefault();
     const postData = {
       rating: rating,
-      lname: "lee",
-
+      fname: fname,
     };
     axios
       .post("http://localhost:8000/users/addRate", postData)
@@ -41,21 +40,20 @@ const Profile = () => {
       <br></br>
       <br></br>
       <form onSubmit={submitProjectData}>
-      <Rating
-        onClick={handleRating}
-        // onPointerEnter={onPointerEnter}
-        // onPointerLeave={onPointerLeave}
-        // onPointerMove={onPointerMove}
-        /* Available Props */
-      />
-      <input
-                    className="m-2 btn btn-dark text-white form-control"
-                    type="submit"
-                    value="Submit Details"
-                  ></input>
+        <Rating
+          onClick={handleRating}
+          // onPointerEnter={onPointerEnter}
+          // onPointerLeave={onPointerLeave}
+          // onPointerMove={onPointerMove}
+          /* Available Props */
+        />
+
+        <input
+          className="m-2 btn btn-dark text-white form-control"
+          type="submit"
+          value="Submit Details"
+        ></input>
       </form>
-
-
     </div>
   );
 };

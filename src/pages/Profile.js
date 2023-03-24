@@ -4,10 +4,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 const Profile = () => {
-  const { fname } = useParams();
+  const { id } = useParams();
 
   const [rating, setRating] = useState(0);
-  const handleRating = (rate: number) => {
+  const handleRating = (rate:number) => {
     setRating(rate);
 
     // other logic
@@ -22,7 +22,7 @@ const Profile = () => {
     e.preventDefault();
     const postData = {
       rating: rating,
-      fname: fname,
+      id: id,
     };
     axios
       .post("http://localhost:8000/users/addRate", postData)

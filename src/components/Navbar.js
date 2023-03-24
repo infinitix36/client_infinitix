@@ -44,6 +44,11 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item rounded">
+                <Link className="nav-link active" to="/allmembers">
+                  <i className="bi bi-code-square me-2"></i> All Members
+                </Link>
+              </li>
+              <li className="nav-item rounded">
                 <Link className="nav-link active" to="/stats">
                   <i className="bi bi-telephone-fill me-2"></i>Stats
                 </Link>

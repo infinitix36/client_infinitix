@@ -33,7 +33,7 @@ console.log(contributorsData);
         to={"/profile/" + contributor._id}
         className="btn btn-outline-primary form-control"
       >
-        View Profile
+        View Profile page
       </Link></li>
       ))}
     </ul>

@@ -7,13 +7,19 @@ import swal from "sweetalert";
 const Profile = () => {
   const { id } = useParams();
 
-  const [rating, setRating] = useState(0);
-  const handleRating = (rate:number) => {
-    setRating(rate);
+  const [rating1, setRating1] = useState(0);
+  const [rating2, setRating2] = useState(0);
+  const handle1 = (rate: number) => {
+    setRating1(rate);
 
     // other logic
   };
-  console.log(rating);
+  const handle2 = (rate: number) => {
+    setRating2(rate);
+
+    // other logic
+  };
+  console.log(rating1);
   // Optinal callback functions
   // const onPointerEnter = () => console.log('Enter')
   // const onPointerLeave = () => console.log('Leave')
@@ -22,7 +28,8 @@ const Profile = () => {
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
-      rating: rating,
+      rating1: rating1,
+      rating2: rating2,
       id: id,
     };
     axios
@@ -44,14 +51,26 @@ const Profile = () => {
       <br></br>
       <br></br>
       <form onSubmit={submitProjectData}>
+        <h3>Technical skill</h3>
         <Rating
-          onClick={handleRating}
+          onClick={handle1}
+          iconsCount={10}
+          // onPointerEnter={onPointerEnter}
+          // onPointerLeave={onPointerLeave}
+          // onPointerMove={onPointerMove}
+          /* Available Props */
+        />{" "}
+        <br />
+        <h3>Communication skill</h3>
+        <Rating
+          onClick={handle2}
+          
+          iconsCount={10}
           // onPointerEnter={onPointerEnter}
           // onPointerLeave={onPointerLeave}
           // onPointerMove={onPointerMove}
           /* Available Props */
         />
-
         <input
           className="m-2 btn btn-dark text-white form-control"
           type="submit"

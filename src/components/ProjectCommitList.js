@@ -5,7 +5,7 @@ const ProjectCommitList = ({ owner, repo }) => {
   const [contributorCommits, setContributorCommits] = useState([]);
 
   useEffect(() => {
-    const authToken = "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";
+    const authToken = "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";
     const contributorsUrl = `https://api.github.com/repos/${owner}/${repo}/contributors`;
 
     axios.get(contributorsUrl, {

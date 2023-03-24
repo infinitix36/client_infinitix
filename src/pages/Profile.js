@@ -3,6 +3,7 @@ import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import swal from "sweetalert";
 const Profile = () => {
   const { id } = useParams();
 
@@ -27,7 +28,10 @@ const Profile = () => {
     axios
       .post("http://localhost:8000/users/addRate", postData)
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        swal("Rated success", {
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);

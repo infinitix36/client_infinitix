@@ -19,6 +19,10 @@ import Login from "../pages/logincard";
 import Register from "../pages/registercard";
 import Home from "../pages/Home";
 import RequireAuth from "../utils/RequireAuth";
+import Admin from "../pages/Admin";
+import VerifyUser from "../pages/VerifyUser";
+import Announcement from "../pages/Announcement";
+import AssignProjectManager from "../pages/AssignProjectManager";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -62,6 +66,11 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} />
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/verifyuser" element={<VerifyUser/>} />
+          <Route path="/announcement" element={<Announcement/>} />
+          <Route path="/assignprojectmanager" element={<AssignProjectManager/>} />
+
 
 
       </Routes>

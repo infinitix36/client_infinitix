@@ -5,7 +5,51 @@ import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
 function ProfileOverview(props) {
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+import { Rating } from "react-simple-star-rating";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import swal from "sweetalert";
+const Profile = () => {
+  const { id } = useParams();
 
+  const [rating1, setRating1] = useState(0);
+  const [rating2, setRating2] = useState(0);
+  const handle1 = (rate: number) => {
+    setRating1(rate);
+
+    // other logic
+  };
+  const handle2 = (rate: number) => {
+    setRating2(rate);
+
+    // other logic
+  };
+  console.log(rating1);
+  // Optinal callback functions
+  // const onPointerEnter = () => console.log('Enter')
+  // const onPointerLeave = () => console.log('Leave')
+  // const onPointerMove = (value: number, index: number) => console.log(value, index)
+
+  const submitProjectData = (e) => {
+    e.preventDefault();
+    const postData = {
+      rating1: rating1,
+      rating2: rating2,
+      id: id,
+    };
+    axios
+      .post("http://localhost:8000/users/addRate", postData)
+      .then((res) => {
+        // alert(res.data.message);
+        swal("Rated success", {
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
       <NavBar/>

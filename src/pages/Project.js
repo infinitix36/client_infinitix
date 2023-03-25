@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import ProjectCommitList from "../components/ProjectCommitList";
 import ProjectCommitChart from "../components/ProjectCommitChart";
+
 const Project = () => {
   const { projectId } = useParams();
   const { projectName } = useParams();
@@ -126,6 +127,7 @@ const Project = () => {
        
           <div className="col-md-6">
             <div class="card">
+              
             <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
             </div>
           </div>

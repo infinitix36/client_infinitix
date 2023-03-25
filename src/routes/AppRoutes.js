@@ -31,6 +31,8 @@ const AppRoutes = () => {
         <Route exact path="/stats" element={<List />} />
         <Route exact path="/lboard" element={<Lboard />} />
         <Route exact path="/allprojects" element={<AllProjects />} />
+        <Route exact path="/profile" element={<Profile />} />
+
         <Route
           exact
           path="/furtheraddprojects"

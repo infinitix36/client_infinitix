@@ -52,6 +52,7 @@ function ContributorCommitMessagesChart({ owner, repo }) {
         <div className="card-header">
           <h2 className="h6 card-title">Contributors vs Commit Count</h2>
         </div>
+        
         <div className="card-body">
           <Bar data={chartData} options={chartOptions} />
         </div>

@@ -3,6 +3,7 @@
 import "../App.css";
 import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
+
 function ProfileOverview(props) {
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
 import { Rating } from "react-simple-star-rating";

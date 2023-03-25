@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 import { Form, Button, Card } from "react-bootstrap";
 
 const Register = () => {
@@ -32,7 +33,10 @@ const Register = () => {
     axios
       .post("http://localhost:8000/authentication/register", postData)
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        swal("Account Registered", {
+          icon: "success",
+        });
       })
       .catch((error) => {
         alert("error");

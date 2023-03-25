@@ -26,6 +26,7 @@ import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
 
 import AllMembers from "../pages/AllMembers";
+import PendingUserApproval from "../pages/PendingUserApproval";
 
 const AppRoutes = () => {
   return (
@@ -79,6 +80,7 @@ const AppRoutes = () => {
           <Route path="/assignprojectmanager" element={<AssignProjectManager/>} />
 
           <Route path="/allmembers" element={<AllMembers />} />
+          <Route path="/pending" element={<PendingUserApproval />} />
           {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
 
 

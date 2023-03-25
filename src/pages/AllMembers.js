@@ -22,10 +22,7 @@ console.log(contributorsData);
       <NavBar />
 
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    \
     <div className="container">
     <ul>
       {contributorsData.map((contributor) => (

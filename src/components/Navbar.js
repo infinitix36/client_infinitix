@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <React.Fragment>
       <nav
-        className="navbar navbar-expand-lg navbar-dark fixed-top"
+        className="navbar navbar-expand-lg navbar-dark fixed-top sticky-top"
         style={{ backgroundColor: "rgb(59,73,104)" }}
       >
         <div className="container-fluid">

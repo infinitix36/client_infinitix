@@ -27,8 +27,7 @@ const AllProjects = () => {
       </div>
 
       <div className="container mt-5">
-        {" "}
-        <br></br>{" "}
+       
       </div>
       <div className="container mt-5 ">
         <div className="container-fluid ">

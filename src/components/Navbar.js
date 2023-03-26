@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Nav.css";
+import { Navigate, useNavigate } from "react-router-dom";
+
 const NavBar = () => {
+  const logout = ()=>{
+        localStorage.removeItem("token");
+        Navigate("/")
+    }
   return (
     <React.Fragment>
       <nav
@@ -38,8 +44,13 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item rounded">
+                <Link className="nav-link active" to="/allmembers">
+                  <i className="bi bi-code-square me-2"></i> All Members
+                </Link>
+              </li>
+              <li className="nav-item rounded">
                 <Link className="nav-link active" to="/lboard">
-                  <i className="bi bi-telephone-fill me-2"></i>Stats
+                    <i className="bi bi-telephone-fill me-2"></i>Stats
                 </Link>
               </li>
               <li className="nav-item rounded">
@@ -63,7 +74,7 @@ const NavBar = () => {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link className="dropdown-item" to="#">
+                    <Link className="dropdown-item" to="/profile/mathesh">
                       Account
                     </Link>
                   </li>
@@ -71,10 +82,9 @@ const NavBar = () => {
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Logout
-                    </Link>
+                  <li >
+                    <Link className="dropdown-item" to="/" onClick={logout}>Logout</Link>
+                    
                   </li>
                 </ul>
               </li>

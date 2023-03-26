@@ -6,9 +6,12 @@ import SideBar from "../components/Sidebar";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import ProjectCommitList from "../components/ProjectCommitList";
+import ProjectCommitChart from "../components/ProjectCommitChart";
 
 const Project = () => {
   const { projectId } = useParams();
+  const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
 
   useEffect(() => {
@@ -20,11 +23,36 @@ const Project = () => {
   }, []);
 
   console.log(projectDetails);
+
   if(projectDetails._id === projectId){
     console.log("Project" + projectId );
   }
 
+
   console.log(projectId);
+
+  // const project = projectDetails.find((p) => p._id === projectId);
+  // console.log(project);
+
+  const project = projectDetails.find((p) => p._id === projectId);
+  const projectDescription = project ? project.description : "";
+  let contributors = [];
+  if (project) {
+    contributors = project.contributors;
+  }
+ 
+  console.log(contributors);
+
+  // if (project) {
+  //   const contributors = project.contributors.map((contributor) => {
+  //     return {
+  //       label: contributor.label,
+  //       value: contributor.value,
+  //     };
+  //   });
+
+  //   console.log(contributors); // This will log the array of contributor labels and values
+  // }
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -51,42 +79,42 @@ const Project = () => {
         className="side-bar"
         style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
       >
-        <SideBar />
+        {/* <SideBar /> */}
       </div>
       <h1>This project ID is = {projectId}</h1>
+      
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
-           
-           
-            {projectDetails.map((e)=>{
-              return (
-                (e?._id === projectId)
-                ? 
-                <div>{e.description}</div>: null
-              
-              )
-            })}
+            {projectDescription}
+
+            {/* {projectDetails.map((e) => {
+              return e?._id === projectId ? <div>{e.description}</div> : null;
+            })} */}
           </div>
           <div className="col-md-6">
             <h3>contributors</h3>
+
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
+                  <th scope="col"> Name</th>
+                  
+                  <th scope="col">label</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
+                {contributors.map((e,index)=>{
+                  return ( <tr>
+                    <th scope="row">{index +1}</th>
+                    <td>  {e.label} </td>
+                    <td>{e.value}</td>
+                    
+                  </tr>)
+                })}
+                
+                {/* <tr>
                   <th scope="row">2</th>
                   <td>Jacob</td>
                   <td>Thornton</td>
@@ -97,31 +125,25 @@ const Project = () => {
                   <td>Larry</td>
                   <td>the Bird</td>
                   <td>@twitter</td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
         </div>
         <div className="row mt-5">
+       
           <div className="col-md-6">
             <div class="card">
-              <div class="card-header">Featured</div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
+            <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
             </div>
           </div>
           <div className="col-md-6">
-            {" "}
+            <ProjectCommitChart owner="dreamshack1999" repo={projectName}/>
+            {/* {" "}
             Chart{" "}
             <div>
               <BarChart chartData={userData} />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="row mt-5">
@@ -144,6 +166,10 @@ const Project = () => {
         </div>
         <br></br>
         <br></br>
+       
+        {/* {contributors?.map((e)=>{
+        return ( <div>{e.label}</div>)
+       })} */}
       </div>
     </div>
   );

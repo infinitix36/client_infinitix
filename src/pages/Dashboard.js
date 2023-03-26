@@ -6,9 +6,11 @@ import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
 import SideBar from "../components/Sidebar";
+import jwt_decode from "jwt-decode";
 
 const Dashboard = () => {
   const [projectDetails, setprojectDetails] = useState([]);
+  
   useEffect(() => {
     axios
       .get("http://localhost:8000/projects/getProjectDetails")
@@ -74,7 +76,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/" + e._id}
+                            to={"/project/" + e._id+"/"+e.projectName}
                             className="btn btn-outline-primary form-control"
                           >
                             Open
@@ -242,6 +244,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <Link
+                            to={"/profile/john" }
+                            className="btn btn-outline-primary form-control"
+                          >
+                            profile
+                          </Link>
+
     </div>
   );
 };

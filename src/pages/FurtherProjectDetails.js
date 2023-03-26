@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
@@ -21,7 +22,7 @@ const FurtherProjectDetails = () => {
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
   const [contributors, setContributors] = useState();
-
+console.log(contributors);
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -38,6 +39,9 @@ const FurtherProjectDetails = () => {
       .post("http://localhost:8000/projects/addExtraProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
+        swal("Project Details added successfully", {
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);

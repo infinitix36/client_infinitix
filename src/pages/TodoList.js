@@ -102,7 +102,7 @@ const TodoList = () => {
   return (
     <div>
       <NavBar />
-      <div className="container">
+      <div className="container ">
         {/* <div
           className="side-bar"
           style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
@@ -111,13 +111,9 @@ const TodoList = () => {
         </div> */}
       </div>
       <div>
-        <h1>
-          hi
-          <br />
-          <br />
-        </h1>
+       
 
-        <div className="todos">
+        <div className="todos mt-5">
           <div class="container">
             <h4 className="bg-dark text-white p-2 rounded">To-Do List</h4>
 

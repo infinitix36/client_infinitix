@@ -43,12 +43,12 @@ const Dashboard = () => {
       <NavBar />
 
       <div className="container">
-        <div
+        {/* <div
           className="side-bar"
           style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
         >
           <SideBar />
-        </div>
+        </div> */}
         <div className="row mt-5">
           <div className="col-md-10 overflow-auto">
             <div className="container-fluid">

@@ -4,6 +4,7 @@ import SideBar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 const AllProjects = () => {
   const [projectDetails, setprojectDetails] = useState([]);
 
@@ -26,9 +27,7 @@ const AllProjects = () => {
         <SideBar />
       </div>
 
-      <div className="container mt-5">
-       
-      </div>
+      <div className="container mt-5"></div>
       <div className="container mt-5 ">
         <div className="container-fluid ">
           <div className="row">
@@ -41,14 +40,6 @@ const AllProjects = () => {
                   >
                     <div className="card-header">
                       <h5 className="card-title">{e.projectName}</h5>
-                    </div>
-                    <div className="card-body">
-                      <img
-                        src={e.projectLogo}
-                        className="rounded-circle"
-                        style={{ width: "40px" }}
-                      ></img>
-                      <p>{}</p>
                     </div>
                     <div className="card-footer">
                       <Link

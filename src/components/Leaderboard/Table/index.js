@@ -3,50 +3,81 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 
 const Table = () => {
+	const [userDetails, setUserDetails] = useState([]);
+	const [filterType, setFilterType] = useState("getQA");
+	const [userRating, setUserRating] = useState([]);
 	
-	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>
-				<p className={styles.img_tab}>Profile Picture</p>
-				<p className={styles.fname_tab}>F_Name</p>
-				<p className={styles.count_tab}>Commits</p>
-				<p className={styles.rating_tab}>Rating</p>
-			</div>
-			{/* <div className={styles.container_list}>
-				<h1 className={styles.heading_list}>Filter By JobRole</h1><br/>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
-					<label class="form-check-label" for="flexRadioDefault1">
-						Developer
-					</label>
-				</div><br/>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></input>
-					<label class="form-check-label" for="flexRadioDefault2">
-						QA
-					</label>
-				</div><br/>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"></input>
-					<label class="form-check-label" for="flexRadioDefault3">
-						Techlead
-					</label>
-				</div><br/>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4"></input>
-					<label class="form-check-label" for="flexRadioDefault4">
-						BA
-					</label>
-				</div>
-			</div> */}
-			{/* <ul>
-				{userDetails.map((user) => (
-				<li key={user.id}>{user.fname}</li>
-				))}
-			</ul> */}
-    	</div>
+	useEffect(() => {
+	  let apiEndpoint = "";
+	
+	  if (filterType === "getQA") {
+		apiEndpoint = "http://localhost:8000/users/getQA/alphabet";
+	  } else if (filterType === "getBA") {
+		apiEndpoint = "http://localhost:8000/users/getBA/alphabet";
+	  } else if (filterType === "getTechlead") {
+		apiEndpoint = "http://localhost:8000/users/getTechlead/alphabet";
+	  }
 	  
+	  axios.get(apiEndpoint).then((response) => {
+		let users = response.data
+		console.log(users)
+		let newUsers = []
+		const myHeaders = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': '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'
+		});
+		for(const user of users) {
+			if (user.username) {
+				fetch(`https://api.github.com/users/${user.username}`, {
+					method: 'GET',
+					headers: myHeaders,
+				  })
+				.then(response=>response.json().then(data=>{
+					newUsers.push({...user, avatar: data.avatar_url})
+					setUserDetails(newUsers)
+					console.log(newUsers);
+				}))
+			} else {
+				newUsers.push({...user, avatar: "https://avatars.githubusercontent.com/u/111459302?v=4"})
+					setUserDetails(newUsers)
+					console.log(newUsers);
+			}
+		 }
+		
+	  });
+	}, [filterType]);
+
+
+	useEffect(() => {
+		axios
+		  .get("http://localhost:8000/users/getRating")
+		  .then(function (response) {
+			setUserRating(response.data);
+		  });
+	  }, []);
 	
+	  console.log(userRating);
+
+	return (
+		<table className="table">
+        <thead className={styles.container}>
+          <tr>
+            <th className={styles.img_tab}>Profile Picture</th>
+            <th className={styles.fname_tab}>F_Name</th>
+            <th className={styles.count_tab}>Commits</th>
+            <th className={styles.rating_tab}>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userDetails.map((user) => (
+            <tr key={user.id}>
+              <td><img src={user.avatar} alt="Avatar" className={styles.avatar} /></td>
+              <td>{user.fname}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>	  
+
 	);
 };
 

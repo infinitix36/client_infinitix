@@ -6,7 +6,7 @@ import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
 import SideBar from "../components/Sidebar";
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 
 const Dashboard = () => {
   const [projectDetails, setprojectDetails] = useState([]);

@@ -12,11 +12,13 @@ import "./../css/LeadBoard.css"
 
 
 function LeadBoard() {
-	const [obj, setObj] = useState({});
+	//const [obj, setObj] = useState({});
 	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
 	const [filterJobRole, setFilterJobRole] = useState([]);
-	const [page, setPage] = useState(1);
+	//const [page, setPage] = useState(1);
 	const [search, setSearch] = useState("");
+	const [page, setPage] = useState(1);
+  	const obj = { limit: 10, total: 50 };
 
 	// useEffect(() => {
 	// 	const getAllDetails = async () => {
@@ -47,7 +49,7 @@ function LeadBoard() {
                 </div>
 				<div className="full-head">
 					<img src="./images/logo.png" alt="logo" className="logo" />
-					<Search setSearch={(search) => setSearch(search)} />
+					<Search/>
 				</div>
 				<div className="full-body">
 					<div className="table_container">
@@ -56,16 +58,17 @@ function LeadBoard() {
 							page={page}
 							limit={obj.limit ? obj.limit : 0}
 							total={obj.total ? obj.total : 0}
-							setPage={(page) => setPage(page)} 
+							setPage={(page) => setPage(page)}
 						/>
+						{/* <p>Current page: {page}</p> */}
 					</div>
 					
 					<div className="filter_container">
 						<Sort sort={sort} setSort={(sort) => setSort(sort)} />
 						<JobRole
-							filterJobRole={filterJobRole}
-							jobRoles={obj.jobRoles ? obj.jobRoles : []}
-							setFilterJobRole={(jobRole) => setFilterJobRole(jobRole)}
+							// filterJobRole={filterJobRole}
+							// jobRoles={obj.jobRoles ? obj.jobRoles : []}
+							// setFilterJobRole={(jobRole) => setFilterJobRole(jobRole)}
 						/>
 					</div>
 				</div>

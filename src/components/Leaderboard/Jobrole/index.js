@@ -4,29 +4,44 @@ import axios from "axios";
 
 const JobRole = () => {
 
-	const [userDetails, setUserDetails] = useState([]);
-	const [filterType, setFilterType] = useState("");
+	// const [userDetails, setUserDetails] = useState([]);
+	// const [filterType, setFilterType] = useState("getQA");
 	
-	useEffect(() => {
-	  let apiEndpoint = "";
+	// useEffect(() => {
+	//   let apiEndpoint = "";
 	
-	  if (filterType === "getQA") {
-		apiEndpoint = "http://localhost:8000/users/getQA/alphabet";
-	  } else if (filterType === "getBA") {
-		apiEndpoint = "http://localhost:8000/users/getBA/alphabet";
-	  } else if (filterType === "getTechlead") {
-		apiEndpoint = "http://localhost:8000/users/getTechlead/alphabet";
-	  }
+	//   if (filterType === "getQA") {
+	// 	apiEndpoint = "http://localhost:8000/users/getQA/alphabet";
+	//   } else if (filterType === "getBA") {
+	// 	apiEndpoint = "http://localhost:8000/users/getBA/alphabet";
+	//   } else if (filterType === "getTechlead") {
+	// 	apiEndpoint = "http://localhost:8000/users/getTechlead/alphabet";
+	//   }
 	  
-	  axios.get(apiEndpoint).then((response) => {
-		setUserDetails(response.data);
-		console.log(userDetails);
-	  });
-	}, [filterType]);
+	//   axios.get(apiEndpoint).then((response) => {
+	// 	let users = response.data
+	// 	let newUsers = []
+	// 	const myHeaders = new Headers({
+	// 		'Content-Type': 'application/json',
+	// 		'Authorization': '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'
+	// 	});
+	// 	for(const user of users) {
+	// 		fetch(`https://api.github.com/users/${user.username}`, {
+	// 			method: 'GET',
+	// 			headers: myHeaders,
+	// 		  })
+	// 		.then(response=>response.json().then(data=>{
+	// 			newUsers.push({...user, avatar: data.avatar_url})
+	// 			setUserDetails(newUsers)
+	// 		}))
+	// 	 }
+		
+	//   });
+	// }, [filterType]);
 	
-	function handleRadioChange(event) {
-		setFilterType(event.target.value);
-	}
+	// function handleRadioChange(event) {
+	// 	setFilterType(event.target.value);
+	// }
   	
 
 //   useEffect(() => {
@@ -43,7 +58,7 @@ const JobRole = () => {
 // 	  );
 //   }, []);
 
-  console.log(userDetails);
+//   console.log(userDetails);
 
 
 
@@ -86,12 +101,12 @@ const JobRole = () => {
 			</div>
 			<br/>
 
-
+{/* 
 			<ul>
 				{userDetails.map((user) => (
 				<li key={user.id}>{user.fname}</li>
 				))}
-			</ul>
+			</ul> */}
 
 
 			{/* <div className={styles.jobRole_container}>

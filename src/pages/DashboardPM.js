@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
@@ -6,8 +6,9 @@ import { useState } from "react";
 import Dough from "../components/chart/Dough";
 import {BsFillPlusCircleFill} from "react-icons/bs";
 import Table from "./Table";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+//import ProgressBar from 'react-bootstrap/ProgressBar';
 import SideBar from "../components/Sidebar";
+import ProjectProgress from "./ProjectProgress";
 
 const DashboardPM = () => {
   const [userData, setUserData] = useState({
@@ -29,9 +30,9 @@ const DashboardPM = () => {
     ],
   });
 
-  const now1 = 35;
-  const now2 = 82;
-  const now3 = 57;
+  // const now1 = 35;
+  // const now2 = 82;
+  // const now3 = 57;
 
   return (
     <div>
@@ -43,7 +44,8 @@ const DashboardPM = () => {
         <SideBar />
       </div>
       <div className="container">
-        <div className="row mt-5">
+        <ProjectProgress />
+        {/* <div className="row mt-5">
           <div className="col-md-3">
             Add Projects
             <br />
@@ -103,7 +105,7 @@ const DashboardPM = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="row mt-5">
           <Table />
         </div>

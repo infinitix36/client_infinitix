@@ -6,18 +6,7 @@ const FeedBack = ({ projectId }) => {
   const [feedBack, setFeedBack] = useState([]);
   const [feedBackId,setFeedBackId] = useState();
 
-  useEffect(() => {
-    axios
-      .get(
-        "http://localhost:8000/projects/getFeedback/640748a7bfe3ac265c4127f8"
-      )
-      .then(function (response) {
-        setFeedBack(response.data[0].feedBacks);
-      
-        
-      });
-  }, []);
-  console.log(feedBack);
+ 
  
 
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
@@ -45,36 +34,50 @@ const FeedBack = ({ projectId }) => {
       });
   };
 
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:8000/projects/getFeedback/640748a7bfe3ac265c4127f8"
+      )
+      .then(function (response) {
+        setFeedBack(response.data[0].feedBacks);
+      
+        
+      });
+  }, [addFeedBack]);
+  console.log(feedBack);
   return (
     <div>
       <div className="container mt-5 mb-5">
-        <form onSubmit={addFeedBack}>
-          <div className="row mt-2 justify-content-md-center">
-            <div className="col-md-4">
-              <input
-                required={true}
-                type="text"
-                className="form-control"
-                placeholder="Add feedback"
-                aria-label="Add feedback"
-                aria-describedby="button-addon2"
-                value={feedback}
-                onChange={(e) => {
-                  setAddFeedBack(e.target.value);
-                }}
-              />
-            </div>
-            <div className="col-md-1">
-              <button
-                className="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </form>
+      <form onSubmit={addFeedBack} className="mt-3">
+  <div className="row justify-content-center">
+    <div className="col-md-8 col-lg-6">
+      <div className="input-group">
+        <input
+          required={true}
+          type="text"
+          className="form-control"
+          placeholder="Add feedback"
+          aria-label="Add feedback"
+          aria-describedby="button-addon2"
+          value={feedback}
+          onChange={(e) => {
+            setAddFeedBack(e.target.value);
+          }}
+        />
+        <button
+          className="btn btn-primary"
+          type="submit"
+          id="button-addon2"
+        >
+          Comment
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
         <div>
         <table className="table">
   <thead className="thead-light">

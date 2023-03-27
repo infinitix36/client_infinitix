@@ -78,7 +78,7 @@ const FeedBack = ({ projectId }) => {
 </form>
 
 
-        <div>
+        <div className="container mt-5">
         <table className="table">
   <thead className="thead-light">
     <tr>

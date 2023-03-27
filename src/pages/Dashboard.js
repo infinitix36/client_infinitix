@@ -1,5 +1,5 @@
 import NavBar from "../components/Navbar";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
@@ -7,10 +7,28 @@ import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
 import SideBar from "../components/Sidebar";
 import jwt_decode from "jwt-decode";
+import PieChartComponent from "../components/PieChartComponent";
 
 const Dashboard = () => {
   const [projectDetails, setprojectDetails] = useState([]);
-  
+  const [taken, setTaken] = useState([]);
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const userId = data._id;
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/users/leave/${userId}`)
+      .then(function (response) {
+        setTaken(response.data[0]);
+      });
+  }, []);
+  console.log(taken.taken);
+  const leaveTaken = parseFloat(taken.taken);
+  const notLeaveTaken =  1-leaveTaken;
+
+  const pieData = [
+    { name: 'Taken', value: leaveTaken * 100 },
+    { name: 'Not Taken', value: notLeaveTaken * 100 },
+  ];
   useEffect(() => {
     axios
       .get("http://localhost:8000/projects/getProjectDetails")
@@ -18,8 +36,8 @@ const Dashboard = () => {
         setprojectDetails(response.data);
       });
   }, []);
-  console.log(projectDetails);
-  
+  // console.log(projectDetails);
+
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -76,7 +94,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/" + e._id+"/"+e.projectName}
+                            to={"/project/" + e._id + "/" + e.projectName}
                             className="btn btn-outline-primary form-control"
                           >
                             Open
@@ -243,14 +261,15 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        <PieChartComponent data={pieData}/>
       </div>
       <Link
-                            to={"/profile/john" }
-                            className="btn btn-outline-primary form-control"
-                          >
-                            profile
-                          </Link>
-
+        to={"/profile/john"}
+        className="btn btn-outline-primary form-control"
+      >
+        profile
+      </Link>
     </div>
   );
 };

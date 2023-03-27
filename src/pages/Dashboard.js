@@ -254,14 +254,14 @@ const Dashboard = () => {
         </div>
         <div className="row mt-5">
           <div class="col-md-10">
-            {" "}
+            {/* {" "}
             Chart{" "}
             <div>
               <BarChart chartData={userData} />
-            </div>
+            </div> */}
           </div>
         </div>
-
+            <h3>Leave %</h3>
         <PieChartComponent data={pieData}/>
       </div>
       <Link
@@ -270,6 +270,8 @@ const Dashboard = () => {
       >
         profile
       </Link>
+
+      <div className="container mt-5 mb-5">Project feedback under My Lead</div>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
 const CreateProject = () => {
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const [techLeadData, setTechLeadData] = useState([]);
   useEffect(() => {
     axios
@@ -16,6 +18,8 @@ const CreateProject = () => {
   const [technology, setTechnology] = useState();
   const [deadLine, setDeadLine] = useState();
   const [techLead, setTechLead] = useState();
+  const projectManager = data?._id;
+  console.log(projectManager);
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -24,6 +28,7 @@ const CreateProject = () => {
       technology: technology,
       deadline: deadLine,
       techlead: techLead,
+      projectManager:projectManager,
     };
     axios
       .post("http://localhost:8000/projects/addBasicProjDetails", postData)

@@ -27,9 +27,14 @@ const VerifyUser = ()=>{
 
         {isApprovedUser.map((e)=>{
             return (
-              
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
+                <li key={e._id}>{e.fname}</li>,
                 <li key={e._id}>{e.fname}</li>
-                
             )
         })}
       </>

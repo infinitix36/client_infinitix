@@ -26,7 +26,7 @@ const TodoList = () => {
   // const maxDate = `${currentYear + 1}-12-31`;
   // const minDate = `${currentYear}-${currentYear.getMonth + 1}-${
   //   currentYear.getDate - 1
-  // };
+  // }`;
 
   const addTask = (e) => {
     e.preventDefault();
@@ -69,17 +69,12 @@ const TodoList = () => {
         }
       })
       .catch((error) => {
-        swal("Sorry !", "BackEnd Error ! Try again Later !!!!", "info");
+        swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
       });
   };
 
-
-  const deleteTask = (taskID) => (e) => {
-    e.preventDefault();
-
   const deleteTask = (taskID) => (event) => {
     event.preventDefault();
-
     const postData = {
       todoid: todoID,
       taskid: taskID,
@@ -100,27 +95,22 @@ const TodoList = () => {
       });
   };
 
-
-  // const deleteTask = (taskID) => (e) => {
-
   //   const postData = {
-  //
+  //     todoid: todoID,
   //     taskid: taskID,
   //   };
-
   //   axios
-  //     .delete(`http://localhost:8000/todo/deleteTask/${todoID}/${taskID}`)
+  //     .delete("http://localhost:8000/todo/markasdone", postData)
   //     .then((res) => {
   //       if (res.data.status === true) {
-  //         swal("Task Deleted!", res.data.message, "success");
+  //         swal("Good job!", res.data.message, "success");
   //         setResetList(resetList + 1);
   //       } else {
-  //         console.log(res.data.message);
-  //         swal("Error !", res.data.message, "danger");
+  //         swal("Wrror !", res.data.message, "danger");
   //       }
   //     })
   //     .catch((error) => {
-  //       console.log(error);
+  //       swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
   //     });
   // };
 
@@ -191,7 +181,7 @@ const TodoList = () => {
               {todoList?.map((item) => {
                 if (item?.taskStatus === false) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
@@ -218,9 +208,6 @@ const TodoList = () => {
                       </div>
                       <div className="col-md-1">
                         <button
-
-                          type="button"
-
                           className="btn btn-outline-danger"
                           onClick={deleteTask(item.taskid)}
                         >
@@ -239,7 +226,7 @@ const TodoList = () => {
               {todoList?.map((item) => {
                 if (item?.taskStatus === true) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
@@ -256,14 +243,6 @@ const TodoList = () => {
                           value={item.dueDate}
                         />
                       </div>
-                      <div className="col-md-1">
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={deleteTask(item.taskid)}
-                        >
-                          Delete
-                        </button>
-                      </div>
                     </div>
                   );
                 }
@@ -274,6 +253,5 @@ const TodoList = () => {
       </div>
     </div>
   );
-}};
-
+};
 export default TodoList;

@@ -17,27 +17,32 @@ const Register = () => {
 
   const submitFurtherDetails = (e) => {
     e.preventDefault();
-    const postData = {
-      userRoleName: userRoleName,
-      fname: fname,
-      lname: lname,
-      email: email,
-      phone: phone,
-      orangeHrLink: orangeHrLink,
-      GitHubUsername: GitHubUsername,
-      userJiraLink: userJiraLink,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-    axios
-      .post("http://localhost:8000/authentication/register", postData)
-      .then((res) => {
-        alert(res.data.message);
-      })
-      .catch((error) => {
-        alert("error");
-        console.log(error);
-      });
+    if (password !== confirmPassword) {
+      alert("Error: Passwords do not match!");
+    } else {
+      const postData = {
+        userRoleName: userRoleName,
+        fname: fname,
+        lname: lname,
+        email: email,
+        phone: phone,
+        orangeHrLink: orangeHrLink,
+        GitHubUsername: GitHubUsername,
+        userJiraLink: userJiraLink,
+        password: password,
+        confirmPassword: confirmPassword,
+      };
+
+      axios
+        .post("http://localhost:8000/authentication/register", postData)
+        .then((res) => {
+          alert(res.data.message);
+        })
+        .catch((error) => {
+          alert("error");
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -87,6 +92,9 @@ const Register = () => {
                     <option value="developer">Developer</option>
                     <option value="BA">BA</option>
                     <option value="QA">QA</option>
+                    <option value="QA">Project Manager</option>
+                    <option value="QA">Tech Lead</option>
+                    {/* admin - login */}
                   </Form.Select>
                 </Form.Group>
               </div>
@@ -222,9 +230,4 @@ const Register = () => {
   );
 };
 
-
-
 export default Register;
-
-
-

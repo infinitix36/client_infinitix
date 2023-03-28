@@ -19,7 +19,7 @@ const Login = () => {
       .then((res) => {
         alert(res.data.message);
         localStorage.setItem("token", JSON.stringify(res.data.token));
-        if (res?.data?.status === true) {
+        if (res.data.status === true) {
           navigate("/dashboard");
         }
       })

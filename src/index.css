@@ -25,9 +25,10 @@ code {
 } */
 
 /* Track */
-/* ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #000000;
-}  */
+
+}  
 
 /* Handle */
  /* ::-webkit-scrollbar-thumb {
@@ -38,3 +39,4 @@ code {
  /* ::-webkit-scrollbar-thumb:hover {
   background:rgb(0, 255, 145) ;
 }  */
+

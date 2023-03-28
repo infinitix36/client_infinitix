@@ -12,29 +12,15 @@ import "./../css/LeadBoard.css"
 
 
 function LeadBoard() {
-	//const [obj, setObj] = useState({});
+	
 	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
 	const [filterJobRole, setFilterJobRole] = useState([]);
-	//const [page, setPage] = useState(1);
+	
 	const [search, setSearch] = useState("");
 	const [page, setPage] = useState(1);
   	const obj = { limit: 10, total: 50 };
 
-	// useEffect(() => {
-	// 	const getAllDetails = async () => {
-	// 		try {
-	// 			const url = `${base_url}?page=${page}&sort=${sort.sort},${
-	// 				sort.order
-	// 			}&role=${filterJobRole.toString()}&search=${search}`;
-	// 			const { data } = await axios.get(url);
-	// 			setObj(data);
-	// 		} catch (err) {
-	// 			console.log(err);
-	// 		}
-	// 	};
-
-	// 	getAllDetails();
-	// }, [sort, filterJobRole, page, search]);
+	
 
 	return (
         <div>
@@ -64,11 +50,9 @@ function LeadBoard() {
 					</div>
 					
 					<div className="filter_container">
-						<Sort sort={sort} setSort={(sort) => setSort(sort)} />
+					<Sort sort={sort} setSort={setSort} />
 						<JobRole
-							// filterJobRole={filterJobRole}
-							// jobRoles={obj.jobRoles ? obj.jobRoles : []}
-							// setFilterJobRole={(jobRole) => setFilterJobRole(jobRole)}
+						
 						/>
 					</div>
 				</div>

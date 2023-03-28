@@ -12,7 +12,7 @@ const Search = () => {
 	const search = (data) => {
 		return data.filter(
 			(item) =>
-				keys.some(key => item[key].toLowerCase().includes(query))
+				key.some(key => item[key].toLowerCase().includes(query))
 		);
 	};
 

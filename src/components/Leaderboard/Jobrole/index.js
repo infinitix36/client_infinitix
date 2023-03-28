@@ -5,7 +5,7 @@ import axios from "axios";
 const JobRole = () => {
 
 	// const [userDetails, setUserDetails] = useState([]);
-	// const [filterType, setFilterType] = useState("getQA");
+	const [filterType, setFilterType] = useState("getQA");
 	
 	// useEffect(() => {
 	//   let apiEndpoint = "";
@@ -39,9 +39,9 @@ const JobRole = () => {
 	//   });
 	// }, [filterType]);
 	
-	// function handleRadioChange(event) {
-	// 	setFilterType(event.target.value);
-	// }
+	function handleRadioChange(event) {
+		setFilterType(event.target.value);
+	}
   	
 
 //   useEffect(() => {

@@ -18,7 +18,7 @@ const Register = () => {
 
   const submitFurtherDetails = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
+
     if (password !== confirmPassword) {
       alert("Error: Passwords do not match!");
     } else {
@@ -45,32 +45,7 @@ const Register = () => {
           console.log(error);
         });
     }
-=======
-    const postData = {
-      userRoleName: userRoleName,
-      fname: fname,
-      lname: lname,
-      email: email,
-      phone: phone,
-      orangeHrLink: orangeHrLink,
-      GitHubUsername: GitHubUsername,
-      userJiraLink: userJiraLink,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-    axios
-      .post("http://localhost:8000/authentication/register", postData)
-      .then((res) => {
-        // alert(res.data.message);
-        swal("Account Registered", {
-          icon: "success",
-        });
-      })
-      .catch((error) => {
-        alert("error");
-        console.log(error);
-      });
->>>>>>> af7e1f72dec9cbcb0233adb44438527072b3576c
+
   };
 
   return (
@@ -120,8 +95,8 @@ const Register = () => {
                     <option value="developer">Developer</option>
                     <option value="BA">BA</option>
                     <option value="QA">QA</option>
-                    <option value="QA">Project Manager</option>
-                    <option value="QA">Tech Lead</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Tech Lead">Tech Lead</option>
                     {/* admin - login */}
                   </Form.Select>
                 </Form.Group>

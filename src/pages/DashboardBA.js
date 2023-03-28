@@ -27,10 +27,14 @@ const DashboardBA = () => {
   return (
     <div>
       <NavBar />
+
+
+      
       <div className="container">
         <div className="row mt-5">
-          <div className="col-md-10 overflow-auto">
-            <div className="container-fluid">
+          <div className="col-md-5 overflow-auto">
+
+            {/* <div className="container-fluid"> */}
               <div
                 className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
                 style={{ overflowX: "auto" }}
@@ -63,10 +67,15 @@ const DashboardBA = () => {
                   );
                 })}
               </div>
+
+              
             </div>
           </div>
           <div className="col-md-2"></div>
         </div>
+
+
+
         <div className="row mt-5">
           <div className="col-md-10">
             <table className="table align-middle mb-0 bg-white ">
@@ -201,7 +210,7 @@ const DashboardBA = () => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

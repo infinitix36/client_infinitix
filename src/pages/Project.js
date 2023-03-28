@@ -3,6 +3,7 @@ import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
+
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -10,11 +11,18 @@ import ProjectCommitList from "../components/ProjectCommitList";
 import ProjectCommitChart from "../components/ProjectCommitChart";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
+import FeedBack from "../components/FeedBack";
 
 const Project = () => {
+ 
   const { projectId } = useParams();
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
+
+
+
+  
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/projects/getProjectDetails")
@@ -150,22 +158,7 @@ const Project = () => {
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-12">
-            <div class="card text-left">
-              <div class="card-header">Featured</div>
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <Link to="#" class="btn btn-primary">
-                  Go somewhere
-                </Link>
-              </div>
-              <div class="card-footer text-muted">2 days ago</div>
-            </div>
-          </div>
+          
         </div>
         <br></br>
         <br></br>
@@ -173,6 +166,8 @@ const Project = () => {
         {/* {contributors?.map((e)=>{
         return ( <div>{e.label}</div>)
        })} */}
+
+          <FeedBack projectId="640748a7bfe3ac265c4127f8"/>
       </div>
     </div>
   );

@@ -79,12 +79,9 @@ function Lboard() {
       >
         <SideBar />
       </div>
-      <div className="container">
-        <br></br><br></br>
-      <div className="container mt-5">
-        {" "}
-        <br></br>{" "}
-      </div>
+      <div className="row mt-5">
+        
+      
 
       <Link to="/list">
         <i class="bi bi-caret-left-fill"></i>

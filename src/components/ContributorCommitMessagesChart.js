@@ -40,6 +40,7 @@ function ContributorCommitMessagesChart({ owner, repo }) {
           ticks: {
             beginAtZero: true,
             precision: 0,
+            
           },
         },
       ],
@@ -55,6 +56,13 @@ function ContributorCommitMessagesChart({ owner, repo }) {
         
         <div className="card-body">
           <Bar data={chartData} options={chartOptions} />
+        </div>
+        
+        <div className="card-footer text-muted">
+          Data fetched from{' '}
+          <a href={`https://github.com/${owner}/${repo}/commits`} target="_blank" rel="noopener noreferrer">
+            GitHub API
+          </a>
         </div>
       </div>
     </div>

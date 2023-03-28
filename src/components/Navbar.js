@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <React.Fragment>
       <nav
-        className="navbar navbar-expand-lg navbar-dark fixed-top"
+        className="navbar navbar-expand-lg navbar-dark fixed-top sticky-top"
         style={{ backgroundColor: "rgb(59,73,104)" }}
       >
         <div className="container-fluid">
@@ -43,11 +43,11 @@ const NavBar = () => {
                   <i className="bi bi-code-square me-2"></i> All Projects
                 </Link>
               </li>
-              <li className="nav-item rounded">
+              {/* <li className="nav-item rounded">
                 <Link className="nav-link active" to="/allmembers">
                   <i className="bi bi-code-square me-2"></i> All Members
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/stats">
                   <i className="bi bi-telephone-fill me-2"></i>Stats
@@ -78,7 +78,15 @@ const NavBar = () => {
                       Account
                     </Link>
                   </li>
+                  
                   {/* <li><Link className="dropdown-item" to="#">Another action</Link></li> */}
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li >
+                    <Link className="dropdown-item" to="/allmembers" >All Members</Link>
+                    
+                  </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
@@ -86,6 +94,7 @@ const NavBar = () => {
                     <Link className="dropdown-item" to="/" onClick={logout}>Logout</Link>
                     
                   </li>
+                  
                 </ul>
               </li>
             </ul>

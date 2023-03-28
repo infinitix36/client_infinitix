@@ -24,37 +24,29 @@ import Admin from "../pages/Admin";
 import VerifyUser from "../pages/VerifyUser";
 import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
-<<<<<<< HEAD
-import App from "../App";
 
-
-=======
 
 import AllMembers from "../pages/AllMembers";
->>>>>>> af7e1f72dec9cbcb0233adb44438527072b3576c
+
+
+import PendingUserApproval from "../pages/PendingUserApproval";
+
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Project></Project>} /> */}
-<<<<<<< HEAD
+
         <Route exact path="/project" element={<RequireAuth><Project></Project></RequireAuth>} />
         <Route exact path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
         <Route exact path="/dashboardpm" element={<RequireAuth><DashboardPM /></RequireAuth>} />
         <Route exact path="/stats" element={<RequireAuth><List /></RequireAuth>} />
         <Route exact path="/lboard" element={<RequireAuth><Lboard /></RequireAuth>} />
         <Route exact path="/allprojects" element={<RequireAuth><AllProjects /></RequireAuth>} />
-=======
-        <Route exact path="/project" element={<Project></Project>} />
-        <Route exact path="/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>} />
-        <Route exact path="/dashboardpm" element={<DashboardPM />} />
-        <Route exact path="/stats" element={<List />} />
-        <Route exact path="/lboard" element={<Lboard />} />
-        <Route exact path="/allprojects" element={<AllProjects />} />
+      
         <Route exact path="/profile" element={<Profile />} />
 
->>>>>>> af7e1f72dec9cbcb0233adb44438527072b3576c
         <Route
           exact
           path="/furtheraddprojects"
@@ -73,7 +65,7 @@ const AppRoutes = () => {
           element={<RequireAuth><FurtherProjectDetails /></RequireAuth>}
         />
 
-<<<<<<< HEAD
+
         <Route exact path="/DashboardBA" element={<RequireAuth><DashboardBA /></RequireAuth>} />
         <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA/></RequireAuth>} />
         <Route exact path="/DashboardDEV" element={<RequireAuth><DashboardDEV /></RequireAuth>} />
@@ -81,15 +73,7 @@ const AppRoutes = () => {
         <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
         <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
         <Route exact path="/projectpm" element={<RequireAuth><ProjectPM/></RequireAuth>} />
-=======
-        <Route exact path="/DashboardBA" element={<DashboardBA />} />
-        <Route exact path="/DashboardQA" element={<DashboardQA/>} />
-        <Route exact path="/DashboardDEV" element={<DashboardDEV />} />
-        <Route exact path="/profile/:id" element={<Profile />} />
-        <Route exact path="/Todolist" element={<TodoList/>} />
-        <Route exact path="/DashboardQA" element={<DashboardQA />} />
-        <Route exact path="/projectpm" element={<ProjectPM/>} />
->>>>>>> af7e1f72dec9cbcb0233adb44438527072b3576c
+
         <Route exact path="/login" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />
 
@@ -105,6 +89,7 @@ const AppRoutes = () => {
      
 
           <Route path="/allmembers" element={<AllMembers />} />
+          <Route path="/pending" element={<PendingUserApproval />} />
           {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
 
 

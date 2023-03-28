@@ -20,7 +20,7 @@ const FurtherAddProjects = () => {
 
   return (
     <div>
-      {/* <NavBar></NavBar> */}
+      <NavBar></NavBar>
       {incompleteDetProj.map((e) => {
         return (
           <Link

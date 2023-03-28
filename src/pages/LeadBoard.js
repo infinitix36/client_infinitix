@@ -14,13 +14,19 @@ import "./../css/LeadBoard.css"
 function LeadBoard() {
 	
 	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
+	const [selectedJobRole, setSelectedJobRole] = useState("");
 	const [filterJobRole, setFilterJobRole] = useState([]);
 	
 	const [search, setSearch] = useState("");
 	const [page, setPage] = useState(1);
   	const obj = { limit: 10, total: 50 };
 
-	
+	// Do something with the selectedJobRole changed
+	useEffect(()=>{
+		if(selectedJobRole !==""){
+			
+		}
+	}, [selectedJobRole])
 
 	return (
         <div>
@@ -39,7 +45,7 @@ function LeadBoard() {
 				</div>
 				<div className="full-body">
 					<div className="table_container">
-						<Table details={obj.details ? obj.details : []} />
+						<Table userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
 						<Pagination
 							page={page}
 							limit={obj.limit ? obj.limit : 0}
@@ -51,9 +57,7 @@ function LeadBoard() {
 					
 					<div className="filter_container">
 					<Sort sort={sort} setSort={setSort} />
-						<JobRole
-						
-						/>
+						<JobRole jobRole={setSelectedJobRole}/>
 					</div>
 				</div>
 			</div>

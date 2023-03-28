@@ -20,12 +20,12 @@ const AllProjects = () => {
   return (
     <div>
       <NavBar />
-      <div
+      {/* <div
         className="side-bar"
         style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
       >
         <SideBar />
-      </div>
+      </div> */}
 
       <div className="container mt-5"></div>
       <div className="container mt-5 ">

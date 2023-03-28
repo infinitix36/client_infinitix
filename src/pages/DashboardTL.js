@@ -11,6 +11,7 @@ import PieChartComponent from "../components/PieChartComponent";
 
 const DashboardTL = () => {
   const [projectDetails, setprojectDetails] = useState([]);
+  const [myProjects, setMyProjects] = useState([]);
   const [taken, setTaken] = useState([]);
   const [feedbacks, setFeedbacks] = useState({});
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
@@ -46,7 +47,14 @@ const DashboardTL = () => {
         setprojectDetails(response.data);
       });
   }, []);
-  // console.log(projectDetails);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/projects/getProjectDetailsTL/${data._id}`)
+      .then(function (response) {
+        setMyProjects(response.data);
+      });
+  }, []);
+  console.log(myProjects);
 
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
@@ -281,11 +289,30 @@ const DashboardTL = () => {
         profile
       </Link>
 
-      <div className="container mt-5 mb-5">
-        Project feedback under My Lead
-       
-        
-      </div>
+      <div className="container mt-5 mb-5">Project feedback under My Lead</div>
+      <h3 className="row justify-content-center">project under my lead</h3>
+      <div className="container mt-5"> {myProjects.map((e) => {
+              return (
+                <div className="col-12 mt-3">
+                  <div
+                    className="card"
+                    style={{ backgroundColor: "rgb(223,255,213)" }}
+                  >
+                    <div className="card-header">
+                      <h5 className="card-title">{e.projectName}</h5>
+                    </div>
+                    <div className="card-footer">
+                      <Link
+                        to={"/project/" + e._id + "/" + e.projectName}
+                        className="btn btn-outline-primary form-control"
+                      >
+                        Open
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}</div>
     </div>
   );
 };

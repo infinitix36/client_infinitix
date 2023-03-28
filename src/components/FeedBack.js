@@ -44,7 +44,7 @@ const FeedBack = ({ projectId }) => {
       
         
       });
-  }, [addFeedBack]);
+  }, []);
   console.log(feedBack);
   return (
     <div>

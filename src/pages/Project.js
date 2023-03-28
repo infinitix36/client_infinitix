@@ -14,27 +14,22 @@ import ContributorCommitMessagesChart from "../components/ContributorCommitMessa
 import FeedBack from "../components/FeedBack";
 
 const Project = () => {
- 
   const { projectId } = useParams();
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
-
-
-
-  
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
+       
       });
   }, []);
 
   console.log(projectDetails);
 
-  console.log(projectId);
-
+ 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);
 
@@ -157,9 +152,7 @@ const Project = () => {
             </div> */}
           </div>
         </div>
-        <div className="row mt-5">
-          
-        </div>
+        <div className="row mt-5"></div>
         <br></br>
         <br></br>
 
@@ -167,7 +160,7 @@ const Project = () => {
         return ( <div>{e.label}</div>)
        })} */}
 
-          <FeedBack projectId="640748a7bfe3ac265c4127f8"/>
+        <FeedBack projectId="640748a7bfe3ac265c4127f8" />
       </div>
     </div>
   );

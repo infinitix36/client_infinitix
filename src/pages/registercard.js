@@ -96,7 +96,7 @@ const Register = () => {
                     <option value="BA">BA</option>
                     <option value="QA">QA</option>
                     <option value="Project Manager">Project Manager</option>
-                    <option value="Tech Lead">Tech Lead</option>
+                    <option value="Techlead">Techlead</option>
                     {/* admin - login */}
                   </Form.Select>
                 </Form.Group>

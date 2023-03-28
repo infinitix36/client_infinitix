@@ -12,7 +12,6 @@ import DashboardDEV from "../pages/DashboardDEV";
 import Profile from "../pages/Profile";
 import TodoList from "../pages/TodoList";
 import FurtherAddProjects from "../pages/FurtherAddProjects";
-import ProjectPM from "../pages/ProjectPM";
 import Login from "../pages/logincard";
 import Register from "../pages/registercard";
 import Home from "../pages/Home";
@@ -41,7 +40,7 @@ const AppRoutes = () => {
         <Route exact path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
         <Route exact path="/dashboardpm" element={<RequireAuth><DashboardPM /></RequireAuth>} />
         
-        <Route exact path="/lboard" element={<LeadBoard />} />
+        <Route exact path="/lboard" element={<RequireAuth><LeadBoard /></RequireAuth>} />
         <Route exact path="/allprojects" element={<RequireAuth><AllProjects /></RequireAuth>} />
       
         <Route exact path="/profile" element={<Profile />} />
@@ -71,7 +70,7 @@ const AppRoutes = () => {
         <Route exact path="/profile/:fname" element={<RequireAuth><Profile /></RequireAuth>} />
         <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
         <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
-        <Route exact path="/projectpm" element={<RequireAuth><ProjectPM/></RequireAuth>} />
+        <Route exact path="/dashboardpm" element={<RequireAuth><DashboardPM/></RequireAuth>} />
 
         <Route exact path="/login" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />

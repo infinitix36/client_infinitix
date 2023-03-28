@@ -8,6 +8,9 @@ import axios from "axios";
 import { useState } from "react";
 import ProjectCommitList from "../components/ProjectCommitList";
 import ProjectCommitChart from "../components/ProjectCommitChart";
+import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
+import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
+
 const Project = () => {
   const { projectId } = useParams();
   const { projectName } = useParams();
@@ -33,7 +36,7 @@ const Project = () => {
   if (project) {
     contributors = project.contributors;
   }
- 
+
   console.log(contributors);
 
   // if (project) {
@@ -74,7 +77,7 @@ const Project = () => {
         {/* <SideBar /> */}
       </div>
       <h1>This project ID is = {projectId}</h1>
-      
+
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
@@ -92,20 +95,21 @@ const Project = () => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col"> Name</th>
-                  
+
                   <th scope="col">label</th>
                 </tr>
               </thead>
               <tbody>
-                {contributors.map((e,index)=>{
-                  return ( <tr>
-                    <th scope="row">{index +1}</th>
-                    <td>  {e.label} </td>
-                    <td>{e.value}</td>
-                    
-                  </tr>)
+                {contributors.map((e, index) => {
+                  return (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td> {e.label} </td>
+                      <td>{e.value}</td>
+                    </tr>
+                  );
                 })}
-                
+
                 {/* <tr>
                   <th scope="row">2</th>
                   <td>Jacob</td>
@@ -123,14 +127,21 @@ const Project = () => {
           </div>
         </div>
         <div className="row mt-5">
-       
           <div className="col-md-6">
             <div class="card">
-            <ProjectCommitList  owner="dreamshack1999" repo={projectName} />
+              {/* <ProjectCommitList  owner="dreamshack1999" repo={projectName} /> */}
+              <ContributorCommitMessages
+                owner="dreamshack1999"
+                repo={projectName}
+              />
             </div>
           </div>
           <div className="col-md-6">
-            <ProjectCommitChart owner="dreamshack1999" repo={projectName}/>
+            {/* <ProjectCommitChart owner="dreamshack1999" repo={projectName}/> */}
+            <ContributorCommitMessagesChart
+              owner="dreamshack1999"
+              repo={projectName}
+            />
             {/* {" "}
             Chart{" "}
             <div>
@@ -158,7 +169,7 @@ const Project = () => {
         </div>
         <br></br>
         <br></br>
-       
+
         {/* {contributors?.map((e)=>{
         return ( <div>{e.label}</div>)
        })} */}

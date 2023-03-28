@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Login = () => {
@@ -17,7 +18,10 @@ const Login = () => {
     axios
       .post("http://localhost:8000/authentication/login", postData)
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        swal("Login success", {
+          icon: "success",
+        });
         localStorage.setItem("token", JSON.stringify(res.data.token));
         if (res.data.status === true) {
           navigate("/dashboard");

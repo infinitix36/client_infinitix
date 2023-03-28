@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
-import Table from "../components/Leaderboard/Table";
+import TableSort from "../components/Leaderboard/TableSort";
 import Sort from "../components/Leaderboard/Sort";
 import JobRole from "../components/Leaderboard/Jobrole";
 import Pagination from "../components/Leaderboard/Pagination";
@@ -45,7 +45,7 @@ function LeadBoard() {
 				</div>
 				<div className="full-body">
 					<div className="table_container">
-						<Table userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
+						<TableSort userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
 						<Pagination
 							page={page}
 							limit={obj.limit ? obj.limit : 0}

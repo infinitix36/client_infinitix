@@ -4,8 +4,6 @@ import AllProjects from "../pages/AllProjects";
 import Dashboard from "../pages/Dashboard";
 import DashboardPM from "../pages/DashboardPM";
 import Project from "../pages/Project";
-import List from "../pages/List";
-import Lboard from "../pages/Lboard";
 import CreateProject from "../pages/CreateProject";
 import FurtherProjectDetails from "../pages/FurtherProjectDetails";
 import DashboardBA from "../pages/DashboardBA";
@@ -30,6 +28,7 @@ import AllMembers from "../pages/AllMembers";
 
 
 import PendingUserApproval from "../pages/PendingUserApproval";
+import LeadBoard from "../pages/LeadBoard";
 
 
 const AppRoutes = () => {
@@ -41,8 +40,8 @@ const AppRoutes = () => {
         <Route exact path="/project" element={<RequireAuth><Project></Project></RequireAuth>} />
         <Route exact path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
         <Route exact path="/dashboardpm" element={<RequireAuth><DashboardPM /></RequireAuth>} />
-        <Route exact path="/stats" element={<RequireAuth><List /></RequireAuth>} />
-        <Route exact path="/lboard" element={<RequireAuth><Lboard /></RequireAuth>} />
+        
+        <Route exact path="/lboard" element={<LeadBoard />} />
         <Route exact path="/allprojects" element={<RequireAuth><AllProjects /></RequireAuth>} />
       
         <Route exact path="/profile" element={<Profile />} />
@@ -87,7 +86,6 @@ const AppRoutes = () => {
           <Route path="/announcement" element={<RequireAuth><Announcement/> </RequireAuth>} />
           <Route path="/assignprojectmanager" element={<RequireAuth><AssignProjectManager/></RequireAuth>} />
      
-
           <Route path="/allmembers" element={<AllMembers />} />
           <Route path="/pending" element={<PendingUserApproval />} />
           {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}

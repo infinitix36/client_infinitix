@@ -23,7 +23,7 @@ const Login = () => {
           icon: "success",
         });
         localStorage.setItem("token", JSON.stringify(res.data.token));
-        if (res?.data?.status === true) {
+        if (res.data.status === true) {
           navigate("/dashboard");
         }
       })

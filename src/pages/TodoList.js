@@ -65,7 +65,7 @@ const TodoList = () => {
           swal("Good job!", res.data.message, "success");
           setResetList(resetList + 1);
         } else {
-          swal("Wrror !", res.data.message, "danger");
+          swal("Error !", res.data.message, "danger");
         }
       })
       .catch((error) => {
@@ -73,9 +73,28 @@ const TodoList = () => {
       });
   };
 
+  const deleteTask = (taskID) => (event) => {
+    event.preventDefault();
+    const postData = {
+      todoid: todoID,
+      taskid: taskID,
+    };
+    axios
+      .post("http://localhost:8000/todo/deleteTask", postData)
+      .then((res) => {
+        if (res.data.status === true) {
+          swal("Task Deleted!", res.data.message, "success");
+          setResetList(resetList + 1);
+        } else {
+          console.log(res.data.message);
+          swal("Error !", res.data.message, "danger");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  // const deleteTask = (taskID) => {
- 
   //   const postData = {
   //     todoid: todoID,
   //     taskid: taskID,
@@ -95,10 +114,6 @@ const TodoList = () => {
   //     });
   // };
 
-
-
-
-
   return (
     <div>
       <NavBar />
@@ -111,8 +126,6 @@ const TodoList = () => {
         </div> */}
       </div>
       <div>
-       
-
         <div className="todos mt-5">
           <div class="container">
             <h4 className="bg-dark text-white p-2 rounded">To-Do List</h4>
@@ -194,7 +207,10 @@ const TodoList = () => {
                         </button>
                       </div>
                       <div className="col-md-1">
-                        <button className="btn btn-outline-danger" /*onClick={deleteTask(item.taskid)}*/>
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={deleteTask(item.taskid)}
+                        >
                           Delete
                         </button>
                       </div>

@@ -4,10 +4,10 @@ import "../css/Nav.css";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const logout = ()=>{
-        localStorage.removeItem("token");
-        Navigate("/")
-    }
+  const logout = () => {
+    localStorage.removeItem("token");
+    Navigate("/");
+  };
   return (
     <React.Fragment>
       <nav
@@ -43,18 +43,18 @@ const NavBar = () => {
                   <i className="bi bi-code-square me-2"></i> All Projects
                 </Link>
               </li>
-              <li className="nav-item rounded">
+              {/* <li className="nav-item rounded">
                 <Link className="nav-link active" to="/allmembers">
                   <i className="bi bi-code-square me-2"></i> All Members
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item rounded">
-                <Link className="nav-link active" to="/stats">
+                <Link className="nav-link active" to="/lboard">
                   <i className="bi bi-telephone-fill me-2"></i>Stats
                 </Link>
               </li>
               <li className="nav-item rounded">
-                <Link className="nav-link active" to="/todolist">
+                <Link className="nav-link active" to="/Todolist">
                   <i className="bi bi-telephone-fill me-2"></i>Todo
                 </Link>
               </li>
@@ -78,13 +78,23 @@ const NavBar = () => {
                       Account
                     </Link>
                   </li>
+
                   {/* <li><Link className="dropdown-item" to="#">Another action</Link></li> */}
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li >
-                    <Link className="dropdown-item" to="/" onClick={logout}>Logout</Link>
-                    
+                  <li>
+                    <Link className="dropdown-item" to="/allmembers">
+                      All Members
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/" onClick={logout}>
+                      Logout
+                    </Link>
                   </li>
                 </ul>
               </li>

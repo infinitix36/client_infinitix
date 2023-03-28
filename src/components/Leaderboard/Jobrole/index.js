@@ -1,47 +1,46 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
- const jobRoles = ["Developer", "QA", "Techlead", "BA"];
- const JobRole = ({jobRole}) => {
-  const [selectedJobRole, setSelectedJobRole] = useState("");
-   const handleRadioChange = (event) => {
-    setSelectedJobRole(event.target.value);
-	jobRole(event.target.value)
+
+const userRoleNames = ["Developer", "QA", "Techlead", "BA"];
+
+const JobRole = ({ userRoleName }) => {
+  const [selectedUserRoleName, setSelectedUserRoleName] = useState("");
+  const handleRadioChange = (event) => {
+    setSelectedUserRoleName(event.target.value);
+    userRoleName(event.target.value);
   };
 
-  const handleClearFilter = ()=>{
-	setSelectedJobRole("")
-	jobRole("")
-  }
-   return (
+  const handleClearFilter = () => {
+    setSelectedUserRoleName("");
+    userRoleName("");
+  };
+  return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Filter By Job Role</h1>
-      {jobRoles.map((jobRole) => (
-        <div key={jobRole} className="form-check">
+      {userRoleNames.map((userRoleName) => (
+        <div key={userRoleName} className="form-check">
           <input
             className="form-check-input"
             type="radio"
-            name="jobRole"
-            value={jobRole}
-            checked={selectedJobRole === jobRole}
+            name="userRoleName"
+            value={userRoleName}
+            checked={selectedUserRoleName === userRoleName}
             onChange={handleRadioChange}
-            id={`jobRole${jobRole}`}
+            id={`userRoleName${userRoleName}`}
           />
-          <label
-            className="form-check-label"
-            htmlFor={`jobRole${jobRole}`}
-          >
-            {jobRole}
+          <label className="form-check-label" htmlFor={`userRoleName${userRoleName}`}>
+            {userRoleName}
           </label>
         </div>
       ))}
       <hr />
-      {selectedJobRole && (
+      {selectedUserRoleName && (
         <div>
-          <p>Selected Job Role: {selectedJobRole}</p>
-		  <button onClick={handleClearFilter}>Clear Filter</button>
+          <p>Selected Job Role: {selectedUserRoleName}</p>
+          <button onClick={handleClearFilter}>Clear Filter</button>
         </div>
       )}
     </div>
   );
 };
- export default JobRole;
+export default JobRole;

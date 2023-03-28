@@ -1,15 +1,21 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
 
-const Sort = ({ sort, setSort }) => {
+const Sort = ({ setSortBy, setSortOrder }) => {
+
+	const [sortOrder, _setSortOrder] = useState('asc')
 	const onSelectChange = ({ currentTarget: input }) => {
-		setSort({ sort: input.value, order: sort.order });
+		setSortBy(input.value);
+		setSortOrder(sortOrder);
 	};
 
 	const onArrowChange = () => {
-		if (sort.order === "asc") {
-			setSort({ sort: sort.sort, order: "desc" });
+		if (sortOrder === "asc") {
+			_setSortOrder("desc");
+			setSortOrder(sortOrder);
 		} else {
-			setSort({ sort: sort.sort, order: "asc" });
+			_setSortOrder("asc");
+			setSortOrder(sortOrder);
 		}
 	};
 
@@ -19,7 +25,7 @@ const Sort = ({ sort, setSort }) => {
 			<select
 				onChange={onSelectChange}
 				className={styles.select}
-				defaultValue={sort.sort}
+				defaultValue={sortOrder}
 			>
 				<option value="fname">FName</option>
 				<option value="rating">Rating</option>

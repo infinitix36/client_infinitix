@@ -16,6 +16,10 @@ function LeadBoard() {
 	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
 	const [selectedJobRole, setSelectedJobRole] = useState("");
 	const [filterJobRole, setFilterJobRole] = useState([]);
+
+	const [sortBy, setSortBy] = useState('')
+	const [sortOrder, setSortOrder] = useState('')
+
 	
 	const [search, setSearch] = useState("");
 	const [page, setPage] = useState(1);
@@ -27,6 +31,14 @@ function LeadBoard() {
 			
 		}
 	}, [selectedJobRole])
+
+	useEffect(()=>{
+		
+	}, [sortBy])
+
+	useEffect(()=>{
+		
+	}, [sortOrder])
 
 	return (
         <div>
@@ -45,7 +57,7 @@ function LeadBoard() {
 				</div>
 				<div className="full-body">
 					<div className="table_container">
-						<TableSort userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
+						<TableSort sortBy = {sortBy} sortOrder={sortOrder} userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
 						<Pagination
 							page={page}
 							limit={obj.limit ? obj.limit : 0}
@@ -56,7 +68,7 @@ function LeadBoard() {
 					</div>
 					
 					<div className="filter_container">
-					<Sort sort={sort} setSort={setSort} />
+					<Sort setSortBy={setSortBy} setSortOrder={setSortOrder} />
 						<JobRole jobRole={setSelectedJobRole}/>
 					</div>
 				</div>

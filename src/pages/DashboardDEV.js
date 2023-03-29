@@ -30,7 +30,7 @@ const DashboardDEV = () => {
     <div>
       <NavBar />
       <div className="container">
-        <div className="row mt-5">
+        <div className=" mt-5">
         <div className="p-0">
           <div className="side-bar"
             style={{position: "fixed",left: "0",top: "64px",bottom: "0",}}
@@ -38,56 +38,59 @@ const DashboardDEV = () => {
             <SideBar />
           </div>
         </div>
-          <div className="col-md-10 overflow-auto">
+        <div className="overflow-auto p-0"
+           style={{ position: "absolute", left: "94px" }}>
             <div className="container-fluid">
-              <div
-                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
-                style={{ overflowX: "auto" }}
-              >
-                {ProjectDetails.map((e) => {
-                  return (
-                    <div className="col-md-3">
-                      <div className="card" style={{ backgroundColor: "rgb(223,255,213)" }}>
-                        <div className="card-header">
-                          <h5 className="card-title">{e.projectName}</h5>
-                        </div>
-                        <div className="card-body">
-                          <img
-                            src={e.projectLogo}
-                            className="rounded-circle"
-                            style={{ width: "40px" }}
-                          ></img>
-                          <p>{e.projectDescription}</p>
-                        </div>
-                        <div className="card-footer">
-                          <Link
-                            to={"/project/"+e.projectId}
-                            className="btn btn-outline-primary form-control"
-                          >
-                            Open
-                          </Link>
-                        </div>
+            {/* <div className="col-md-9"> */}
+            <div
+              className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+              style={{ overflowX: "auto" }}
+            >
+              {ProjectDetails.map((e, ind) => {
+                return (
+                  <div className="col-md-2" key={ind} >
+                    <div className="card" style={{ backgroundColor: "rgb(223,255,213)" }}>
+                      <div className="card-header">
+                        <h5 className="card-title">{e.projectName}</h5>
+                      </div>
+                      <div className="card-body">
+                        <img
+                          src={e.projectLogo}
+                          className="rounded-circle"
+                          style={{ width: "40px" }}
+                        ></img>
+                        <p>{e.projectDescription}</p>
+                      </div>
+                      <div className="card-footer">
+                        <Link
+                          to={"/project/" + e.projectId}
+                          className="btn btn-outline-primary w-100"
+                        >
+                          Open
+                        </Link>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
+            </div>
+          {/* </div> */}
           </div>
           <div className="col-md-2"></div>
         </div>
         <div className="row mt-5">
           <div className="col-md-10">
-          <div class="table-responsive-sm">
-            <table className="table align-middle mb-0  ">
-              <thead className="text-light text-center">
-                <tr>
-                  <th>Name</th>
-                  <th>Title</th>
-                  <th>Status</th>
-                  <th>Position</th>
-                  <th>Actions</th>
-                </tr>
+            <div class="table-responsive-sm">
+              <table className="table align-middle mb-0  ">
+                <thead className="text-light text-center">
+                  <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Position</th>
+                    <th>Actions</th>
+                  </tr>
               </thead>
               <tbody>
                 <tr>
@@ -213,9 +216,10 @@ const DashboardDEV = () => {
             <Dough/>
           </div>
           </div>
+          </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

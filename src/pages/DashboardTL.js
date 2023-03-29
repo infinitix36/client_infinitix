@@ -2,13 +2,11 @@ import NavBar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { UserData } from "../components/chart/Data";
-import BarChart from "../components/chart/BarChart";
-import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
-import SideBar from "../components/Sidebar";
+
 import jwt_decode from "jwt-decode";
 import PieChartComponent from "../components/PieChartComponent";
-
+/** */
 const DashboardTL = () => {
   const [projectDetails, setprojectDetails] = useState([]);
   const [myProjects, setMyProjects] = useState([]);
@@ -16,6 +14,7 @@ const DashboardTL = () => {
   const [feedbacks, setFeedbacks] = useState({});
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const userId = data._id;
+  // orangeHR leave fetch
   useEffect(() => {
     axios
       .get(`http://localhost:8000/users/leave/${userId}`)
@@ -24,6 +23,7 @@ const DashboardTL = () => {
       });
   }, []);
   console.log(taken.taken);
+  // we get as string so convert to float
   const leaveTaken = parseFloat(taken.taken);
   const notLeaveTaken = 1 - leaveTaken;
 
@@ -40,6 +40,8 @@ const DashboardTL = () => {
       });
   }, []);
   console.log(feedbacks);
+
+  //  Get project details.
   useEffect(() => {
     axios
       .get("http://localhost:8000/projects/getProjectDetails")
@@ -55,7 +57,7 @@ const DashboardTL = () => {
       });
   }, []);
   console.log(myProjects);
-
+//for testing purpurse
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -92,6 +94,7 @@ const DashboardTL = () => {
                 className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
                 style={{ overflowX: "auto" }}
               >
+                {/* map for project details and link */}
                 {projectDetails.map((e) => {
                   return (
                     <div className="col-md-3">
@@ -127,6 +130,7 @@ const DashboardTL = () => {
           </div>
           <div className="col-md-2">
             <div className="mt-5">
+              {/* project which do not fill by Techlead but fill by project manager */}
               <Link
                 to="/furtheraddprojects"
                 className="btn btn-outline-primary form-control"
@@ -135,6 +139,7 @@ const DashboardTL = () => {
               </Link>
             </div>
             <div className="mt-5">
+              {/* create project for project manager */}
               <Link
                 to="/project/createproject"
                 className="btn btn-outline-primary form-control"
@@ -145,6 +150,7 @@ const DashboardTL = () => {
           </div>
         </div>
         <div className="row mt-5">
+          {/* testing purpose */}
           <div className="col-md-10">
             <div class="table-responsive-sm">
               <table className="table align-middle mb-0  ">
@@ -280,6 +286,7 @@ const DashboardTL = () => {
           </div>
         </div>
         <h3>Leave %</h3>
+        {/* pie chart component for orangeHR chart */}
         <PieChartComponent data={pieData} />
       </div>
       <Link
@@ -289,30 +296,35 @@ const DashboardTL = () => {
         profile
       </Link>
 
-      <div className="container mt-5 mb-5">Project feedback under My Lead</div>
+      <div className="container mt-5 mb-5"></div>
       <h3 className="row justify-content-center">project under my lead</h3>
-      <div className="container mt-5"> {myProjects.map((e) => {
-              return (
-                <div className="col-12 mt-3">
-                  <div
-                    className="card"
-                    style={{ backgroundColor: "rgb(223,255,213)" }}
-                  >
-                    <div className="card-header">
-                      <h5 className="card-title">{e.projectName}</h5>
-                    </div>
-                    <div className="card-footer">
-                      <Link
-                        to={"/project/" + e._id + "/" + e.projectName}
-                        className="btn btn-outline-primary form-control"
-                      >
-                        Open
-                      </Link>
-                    </div>
-                  </div>
+      <div className="container mt-5">
+        {" "}
+        {/* projects under the tech lead */}
+        {myProjects.map((e) => {
+          return (
+            <div className="col-12 mt-3">
+              <div
+                className="card"
+                style={{ backgroundColor: "rgb(223,255,213)" }}
+              >
+                <div className="card-header">
+                  <h5 className="card-title">{e.projectName}</h5>
                 </div>
-              );
-            })}</div>
+                <div className="card-footer"> 
+                  {/* link for specifi project page here i sent project id and name by params */}
+                  <Link
+                    to={"/project/" + e._id + "/" + e.projectName}
+                    className="btn btn-outline-primary form-control"
+                  >
+                    Open
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

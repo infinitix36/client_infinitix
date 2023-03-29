@@ -8,6 +8,7 @@ import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
   const { _id } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
+  //get all QA BA PM for add contributors
   useEffect(() => {
     axios
       .get("http://localhost:8000/users/getContributors")
@@ -23,6 +24,8 @@ const FurtherProjectDetails = () => {
   const [jiraLink, setJira] = useState();
   const [contributors, setContributors] = useState();
 console.log(contributors);
+
+// submit the extra projects details
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -88,6 +91,7 @@ console.log(contributors);
                 </div>
               </div>
               <div className="row m-2">
+              {/* clientPhone */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
@@ -102,6 +106,7 @@ console.log(contributors);
                     <label for="clientPhone">clientPhone</label>
                   </div>
                 </div>
+                {/* gitHubLink */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
@@ -130,6 +135,7 @@ console.log(contributors);
                     <label for="jiraLink">jiraLink</label>
                   </div>
                 </div>
+                {/* select contibutors */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <Select

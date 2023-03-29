@@ -27,7 +27,7 @@ const AllMembers = () => {
             <li className="list-group-item d-flex justify-content-between align-items-center">
               {contributor.fname}
               <Link
-                to={"/profile/" + contributor._id}
+                to={"/profiles/" + contributor._id}
                 className="btn btn-primary"
               >
                 View Profile

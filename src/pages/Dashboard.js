@@ -14,8 +14,6 @@ import Admin from "./Admin";
 import DashboardPM from "./DashboardPM";
 import DashboardTL from "./DashboardTL";
 
-
-
 import jwt_decode from "jwt-decode";
 import PieChartComponent from "../components/PieChartComponent";
 
@@ -33,11 +31,11 @@ const Dashboard = () => {
   }, []);
   console.log(taken.taken);
   const leaveTaken = parseFloat(taken.taken);
-  const notLeaveTaken =  1-leaveTaken;
+  const notLeaveTaken = 1 - leaveTaken;
 
   const pieData = [
-    { name: 'Taken', value: leaveTaken * 100 },
-    { name: 'Not Taken', value: notLeaveTaken * 100 },
+    { name: "Taken", value: leaveTaken * 100 },
+    { name: "Not Taken", value: notLeaveTaken * 100 },
   ];
   useEffect(() => {
     axios
@@ -47,7 +45,6 @@ const Dashboard = () => {
       });
   }, []);
   console.log(projectDetails);
-
 
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
@@ -68,7 +65,6 @@ const Dashboard = () => {
     ],
   });
 
-
   const userRoleName = jwt_decode(JSON.parse(localStorage.getItem("token")))
     ?.userData?.userRoleName;
   return !userRoleName ? (
@@ -83,13 +79,9 @@ const Dashboard = () => {
     <Admin></Admin>
   ) : userRoleName === "Project Manager" ? (
     <DashboardPM></DashboardPM>
-  ) : userRoleName === "Tech Lead" ? (
+  ) : userRoleName === "Techlead" ? (
     <DashboardTL />
-  ) 
-  : null;
-
-  
-
+  ) : null;
 };
 
 export default Dashboard;

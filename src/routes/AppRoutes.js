@@ -29,6 +29,7 @@ import AllMembers from "../pages/AllMembers";
 
 import PendingUserApproval from "../pages/PendingUserApproval";
 import LeadBoard from "../pages/LeadBoard";
+import ProfileRate from "../pages/ProfileRate";
 
 
 const AppRoutes = () => {
@@ -45,6 +46,9 @@ const AppRoutes = () => {
         <Route exact path="/allprojects" element={<RequireAuth><AllProjects /></RequireAuth>} />
       
         <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profiles/:id" element={<ProfileRate />} />
+        
+
 
         <Route
           exact
@@ -88,6 +92,7 @@ const AppRoutes = () => {
      
           <Route path="/allmembers" element={<AllMembers />} />
           <Route path="/pending" element={<PendingUserApproval />} />
+
           {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
 
 

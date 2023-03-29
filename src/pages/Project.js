@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";

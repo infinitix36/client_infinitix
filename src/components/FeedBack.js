@@ -20,6 +20,7 @@ const FeedBack = ({ projectId }) => {
       feedbyName: data.fname,
     };
 
+
     axios
       .post("http://localhost:8000/project/addFeed", postData)
       .then((res) => {

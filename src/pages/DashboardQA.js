@@ -1,8 +1,9 @@
 import NavBar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const DashboardQA = () => {
@@ -52,7 +53,7 @@ const DashboardQA = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/"+e.projectId}
+                            to={"/project/" + e.projectId}
                             className="btn btn-outline-primary form-control"
                           >
                             Open
@@ -65,7 +66,17 @@ const DashboardQA = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-2"></div>
+          <div className="col-md-5">
+            {" "}
+            <div className="mt-5">
+              <Link
+                to="/projectsQA"
+                className="btn btn-outline-primary form-control"
+              >
+                My Projects
+              </Link>
+            </div>
+          </div>
         </div>
         <div className="row mt-5">
           <div className="col-md-10">

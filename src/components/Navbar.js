@@ -1,13 +1,34 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Nav.css";
 import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
 
 const NavBar = () => {
   const logout = () => {
     localStorage.removeItem("token");
     Navigate("/");
   };
+
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const username = data.GitHubUsername;
+  const [avatarUrl, setAvatarUrl] = useState("");
+
+  useEffect(() => {
+    fetch(`//api.github.com/users/${username}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAvatarUrl(data.avatar_url);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [username]);
   return (
     <React.Fragment>
       <nav
@@ -67,8 +88,26 @@ const NavBar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="bi bi-person-fill me-2"></i>Profile
+                  {avatarUrl && (
+                    <img
+                      src={avatarUrl}
+                      alt={`${username}'s avatar`}
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        border: "2px solid white",
+                        marginRight: "10px",
+                        boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
+                      }}
+                    />
+                  )}
+                  <span>
+                    <i className=""></i>Profile
+                  </span>
                 </Link>
+
                 <ul
                   className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="navbarDropdown"

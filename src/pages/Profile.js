@@ -3,34 +3,59 @@
 import "../App.css";
 import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
+import React, { useEffect, useState } from "react";
 
 function Profile(props) {
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const username = data.GitHubUsername;
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-
+  useEffect(() => {
+    fetch(`//api.github.com/users/${username}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAvatarUrl(data.avatar_url);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [username]);
+  console.log(data);
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <div className="row justify-content-center ">
         <div className="card ">
           <div className="card-body">
-            <h3 className="text-center">
-            Profile
-          </h3>
+            <h3 className="text-center">Profile</h3>
           </div>
         </div>
         <div className="col-md-8">
           <div
             className="card mt-5 crud shadow-lg p-3 mb-5 mt-5 bg-body rounded "
-          // style={{ backgroundColor: "rgb(199,227,244)" }}
+            // style={{ backgroundColor: "rgb(199,227,244)" }}
           >
             <div className="col d-flex justify-content-center mt-3">
-              <img
-                src={data?.userImage}
-                className="rounded-circle"
-                alt="Cinque Terre"
-                style={{ height: "120px", width: "120px" }}
-              />
+              {avatarUrl && (
+                <img
+                  src={avatarUrl}
+                  alt={`${username}'s avatar`}
+                  style={{
+                    width: "125px",
+                    height: "125px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "4px solid white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                  }}
+                />
+              )}
+             
             </div>
             <div className="card-body">
               <form>
@@ -41,7 +66,7 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='text'
+                      type="text"
                       className="form-control a2"
                       id="inputFirstName"
                       value={data?.fname}
@@ -58,13 +83,12 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='text'
+                      type="text"
                       className="form-control a2"
                       id="userRoleName"
                       value={data?.userRoleName}
                       disabled={true}
                     />
-                    
                   </div>
                 </div>
                 <div className="row mt-2 justify-content-center">
@@ -74,7 +98,7 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='text'
+                      type="text"
                       className="form-control a2"
                       id="GitHubUsername"
                       value={data?.GitHubUsername}
@@ -90,7 +114,7 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='url'
+                      type="url"
                       className="form-control a2"
                       id="orangeHrLink"
                       value={data?.orangeHrLink}
@@ -121,7 +145,7 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='tel'
+                      type="tel"
                       className="form-control a2"
                       id="phoneNo"
                       value={data?.phone}
@@ -136,7 +160,7 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type='url'
+                      type="url"
                       className="form-control a2"
                       id="userJiraLink"
                       value={data?.userJiraLink}

@@ -33,7 +33,7 @@ const NavBar = () => {
     <React.Fragment>
       <nav
         className="navbar navbar-expand-lg navbar-dark fixed-top sticky-top"
-        style={{ backgroundColor: "rgb(59,73,104)" }}
+        style={{ backgroundColor: "#2D033B" }}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/"></Link>
@@ -110,10 +110,20 @@ const NavBar = () => {
 
                 <ul
                   className="dropdown-menu dropdown-menu-end"
+                  style={{ backgroundColor: "#2D033B" }}
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link className="dropdown-item" to="/profile/mathesh">
+                    <Link
+                      className="dropdown-item"
+                      to="/profile/mathesh"
+                      style={{
+                        color: "white",
+                        padding: "0.5rem 1rem",
+                        fontSize: "1rem",
+                        lineHeight: "1.5",
+                      }}
+                    >
                       Account
                     </Link>
                   </li>
@@ -123,7 +133,16 @@ const NavBar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/allmembers">
+                    <Link
+                      className="dropdown-item"
+                      to="/allmembers"
+                      style={{
+                        color: "white",
+                        padding: "0.5rem 1rem",
+                        fontSize: "1rem",
+                        lineHeight: "1.5",
+                      }}
+                    >
                       All Members
                     </Link>
                   </li>
@@ -131,7 +150,12 @@ const NavBar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/" onClick={logout}>
+                    <Link className="dropdown-item" to="/" onClick={logout}  style={{
+                        color: "white",
+                        padding: "0.5rem 1rem",
+                        fontSize: "1rem",
+                        lineHeight: "1.5",
+                      }}>
                       Logout
                     </Link>
                   </li>

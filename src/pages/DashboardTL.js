@@ -87,7 +87,7 @@ const DashboardTL = () => {
         >
           <SideBar />
         </div> */}
-        <div className="row mt-5">
+        <div className="row mt-5" style={{background:"#2D033B", borderRadius: "10px"}}>
           <div className="col-md-10 overflow-auto">
             <div className="container-fluid">
               <div

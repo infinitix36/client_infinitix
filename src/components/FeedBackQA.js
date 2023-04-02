@@ -18,7 +18,7 @@ const FeedBackQA = ({ projectId }) => {
     };
 
     axios
-      .post("http://localhost:8000/project/addFeedQA", postData)
+      .post(process.env.REACT_APP_API_URL+"/project/addFeedQA", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -33,7 +33,7 @@ const FeedBackQA = ({ projectId }) => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:8000/projects/getFeedbackQA/640748a7bfe3ac265c4127f8"
+        process.env.REACT_APP_API_URL+"/projects/getFeedbackQA/640748a7bfe3ac265c4127f8"
       )
       .then(function (response) {
         setFeedBack(response.data[0].feedBacksQA);

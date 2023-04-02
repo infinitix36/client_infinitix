@@ -22,7 +22,7 @@ const FeedBack = ({ projectId }) => {
 
 
     axios
-      .post("http://localhost:8000/project/addFeed", postData)
+      .post(process.env.REACT_APP_API_URL+"/project/addFeed", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -38,7 +38,7 @@ const FeedBack = ({ projectId }) => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:8000/projects/getFeedback/640748a7bfe3ac265c4127f8"
+        process.env.REACT_APP_API_URL+"/projects/getFeedback/640748a7bfe3ac265c4127f8"
       )
       .then(function (response) {
         setFeedBack(response.data[0].feedBacks);

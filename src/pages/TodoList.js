@@ -14,7 +14,7 @@ const TodoList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/todo/showusertodo/641c62494d6f0b66c98a5c35")
+      .get(process.env.REACT_APP_API_URL+"/todo/showusertodo/641c62494d6f0b66c98a5c35")
       .then(function (response) {
         setToDoID(response.data[0]._id);
         setTodoList(response.data[0].tasks);
@@ -37,7 +37,7 @@ const TodoList = () => {
     };
 
     axios
-      .post("http://localhost:8000/todo/addtask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/addtask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -59,7 +59,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/markasdone", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -80,7 +80,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/deleteTask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/deleteTask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Task Deleted!", res.data.message, "success");
@@ -100,7 +100,7 @@ const TodoList = () => {
   //     taskid: taskID,
   //   };
   //   axios
-  //     .delete("http://localhost:8000/todo/markasdone", postData)
+  //     .delete(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
   //     .then((res) => {
   //       if (res.data.status === true) {
   //         swal("Good job!", res.data.message, "success");

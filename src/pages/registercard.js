@@ -36,7 +36,7 @@ const Register = () => {
       };
 
       axios
-        .post("http://localhost:8000/authentication/register", postData)
+        .post(process.env.REACT_APP_API_URL+"/authentication/register", postData)
         .then((res) => {
           alert(res.data.message);
         })

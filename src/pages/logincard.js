@@ -16,7 +16,7 @@ const Login = () => {
       password: password,
     };
     axios
-      .post("http://localhost:8000/authentication/login", postData)
+      .post(process.env.REACT_APP_API_URL+"/authentication/login", postData)
       .then((res) => {
         // alert(res.data.message);
         Swal.fire({

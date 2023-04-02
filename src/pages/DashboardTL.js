@@ -17,7 +17,7 @@ const DashboardTL = () => {
   // orangeHR leave fetch
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/users/leave/${userId}`)
+      .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
       .then(function (response) {
         setTaken(response.data[0]);
       });
@@ -34,7 +34,7 @@ const DashboardTL = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/projects/getFeedback/${userId}`)
+      .get(process.env.REACT_APP_API_URL+`/projects/getFeedback/${userId}`)
       .then(function (response) {
         setFeedbacks(response.data);
       });
@@ -44,20 +44,20 @@ const DashboardTL = () => {
   //  Get project details.
   useEffect(() => {
     axios
-      .get("http://localhost:8000/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/projects/getProjectDetailsTL/${data._id}`)
+      .get(process.env.REACT_APP_API_URL+`/projects/getProjectDetailsTL/${data._id}`)
       .then(function (response) {
         setMyProjects(response.data);
       });
   }, []);
   console.log(myProjects);
-//for testing purpurse
+  //for testing purpurse
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -87,243 +87,260 @@ const DashboardTL = () => {
         >
           <SideBar />
         </div> */}
-        <div className="row mt-5" style={{background:"#2D033B", borderRadius: "10px"}}>
-          <div className="col-md-10 overflow-auto">
-            <div className="container-fluid">
-              <div
-                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
-                style={{ overflowX: "auto" }}
-              >
-                {/* map for project details and link */}
-                {projectDetails.map((e) => {
-                  return (
-                    <div className="col-md-3">
-                      <div
-                        className="card"
-                        style={{ backgroundColor: "rgb(223,255,213)" }}
-                      >
-                        <div className="card-header">
-                          <h5 className="card-title">{e.projectName}</h5>
-                        </div>
-                        <div className="card-body">
-                          <img
-                            src={e.projectLogo}
-                            className="rounded-circle"
-                            style={{ width: "40px" }}
-                          ></img>
-                          <p>{}</p>
-                        </div>
-                        <div className="card-footer">
-                          <Link
-                            to={"/project/" + e._id + "/" + e.projectName}
-                            className="btn btn-outline-primary form-control"
-                          >
-                            Open
-                          </Link>
+        <div
+          className="container"
+          style={{ background: "#2D033B", borderRadius: "10px" }}
+        >
+          <div
+            className="row mt-5"
+            style={{ background: "#2D033B", borderRadius: "10px" }}
+          >
+            <div className="col-md-12 overflow-auto">
+              <div className="container-fluid">
+                <div
+                  className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                  style={{ overflowX: "auto" }}
+                >
+                  {/* map for project details and link */}
+                  {projectDetails.map((e) => {
+                    return (
+                      <div className="col-md-3">
+                        <div className="card" style={{ background: "#B8E8FC" }}>
+                          <div className="card-header">
+                            <h5 className="card-title">{e.projectName}</h5>
+                          </div>
+                          <div className="card-body">
+                            <img
+                              src={e.projectLogo}
+                              className="rounded-circle"
+                              style={{ width: "40px" }}
+                            ></img>
+                            <p>{}</p>
+                          </div>
+                          <div className="card-footer">
+                            <Link
+                              to={"/project/" + e._id + "/" + e.projectName}
+                              className="btn btn-outline-primary form-control"
+                            >
+                              Open
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-2">
-            <div className="mt-5">
-              {/* project which do not fill by Techlead but fill by project manager */}
-              <Link
-                to="/furtheraddprojects"
-                className="btn btn-outline-primary form-control"
-              >
-                Incomplete project details
-              </Link>
-            </div>
-            <div className="mt-5">
-              {/* create project for project manager */}
-              <Link
-                to="/project/createproject"
-                className="btn btn-outline-primary form-control"
-              >
-                Create project
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="row mt-5">
-          {/* testing purpose */}
-          <div className="col-md-10">
-            <div class="table-responsive-sm">
-              <table className="table align-middle mb-0  ">
-                <thead className="text-light text-center">
-                  <tr>
-                    <th>Name</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Position</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img
-                          src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                          alt=""
-                          style={{ width: "45px", height: "45px" }}
-                          className="rounded-circle"
-                        />
-                        <div className="ms-3">
-                          <p className="fw-bold mb-1">John Doe</p>
-                          <p className="text-muted mb-0">john.doe@gmail.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p className="fw-normal mb-1">Software engineer</p>
-                      <p className="text-muted mb-0">IT department</p>
-                    </td>
-                    <td>
-                      <span className="badge badge-success rounded-pill d-inline">
-                        Active
-                      </span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-link btn-sm btn-rounded"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img
-                          src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                          className="rounded-circle"
-                          alt=""
-                          style={{ width: "45px", height: "45px" }}
-                        />
-                        <div className="ms-3">
-                          <p className="fw-bold mb-1">Alex Ray</p>
-                          <p className="text-muted mb-0">alex.ray@gmail.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p className="fw-normal mb-1">Consultant</p>
-                      <p className="text-muted mb-0">Finance</p>
-                    </td>
-                    <td>
-                      <span className="badge badge-primary rounded-pill d-inline">
-                        Onboarding
-                      </span>
-                    </td>
-                    <td>Junior</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img
-                          src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                          className="rounded-circle"
-                          alt=""
-                          style={{ width: "45px", height: "45px" }}
-                        />
-                        <div className="ms-3">
-                          <p className="fw-bold mb-1">Kate Hunington</p>
-                          <p className="text-muted mb-0">
-                            kate.hunington@gmail.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p className="fw-normal mb-1">Designer</p>
-                      <p className="text-muted mb-0">UI/UX</p>
-                    </td>
-                    <td>
-                      <span className="badge badge-warning rounded-pill d-inline">
-                        Awaiting
-                      </span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className=" col-md-2"></div>
-        </div>
-        <div className="row mt-5">
-          <div class="col-md-10">
-            {/* {" "}
-            Chart{" "}
-            <div>
-              <BarChart chartData={userData} />
-            </div> */}
-          </div>
-        </div>
-        <h3>Leave %</h3>
-        {/* pie chart component for orangeHR chart */}
-        <PieChartComponent data={pieData} />
-      </div>
-      <Link
-        to={"/profile/john"}
-        className="btn btn-outline-primary form-control"
-      >
-        profile
-      </Link>
-
-      <div className="container mt-5 mb-5"></div>
-      <h3 className="row justify-content-center">project under my lead</h3>
-      <div className="container mt-5">
-        {" "}
-        {/* projects under the tech lead */}
-        {myProjects.map((e) => {
-          return (
-            <div className="col-12 mt-3">
-              <div
-                className="card"
-                style={{ backgroundColor: "rgb(223,255,213)" }}
-              >
-                <div className="card-header">
-                  <h5 className="card-title">{e.projectName}</h5>
-                </div>
-                <div className="card-footer"> 
-                  {/* link for specifi project page here i sent project id and name by params */}
+            <div className="row">
+              <div className="col-md-6">
+                <div className="mt-5">
+                  {/* project which do not fill by Techlead but fill by project manager */}
                   <Link
-                    to={"/project/" + e._id + "/" + e.projectName}
-                    className="btn btn-outline-primary form-control"
+                    to="/furtheraddprojects"
+                    className="btn btn-outline-secondary form-control"
                   >
-                    Open
+                    Incomplete project details
+                  </Link>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mt-5">
+                  {/* create project for project manager */}
+                  <Link
+                    to="/project/createproject"
+                    className="btn btn-outline-secondary form-control"
+                  >
+                    Create project
                   </Link>
                 </div>
               </div>
             </div>
-          );
-        })}
+          </div>
+          <div className="row mt-5">
+            {/* testing purpose */}
+            <div className="col-md-12">
+              <div class="table-responsive-sm">
+                <table className="table align-middle mb-0  ">
+                  <thead className="text-light text-center">
+                    <tr>
+                      <th>Name</th>
+                      <th>Title</th>
+                      <th>Status</th>
+                      <th>Position</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <img
+                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                            alt=""
+                            style={{ width: "45px", height: "45px" }}
+                            className="rounded-circle"
+                          />
+                          <div className="ms-3">
+                            <p className="fw-bold mb-1">John Doe</p>
+                            <p className="text-muted mb-0">
+                              john.doe@gmail.com
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p className="fw-normal mb-1">Software engineer</p>
+                        <p className="text-muted mb-0">IT department</p>
+                      </td>
+                      <td>
+                        <span className="badge badge-success rounded-pill d-inline">
+                          Active
+                        </span>
+                      </td>
+                      <td>Senior</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-link btn-sm btn-rounded"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <img
+                            src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+                            className="rounded-circle"
+                            alt=""
+                            style={{ width: "45px", height: "45px" }}
+                          />
+                          <div className="ms-3">
+                            <p className="fw-bold mb-1">Alex Ray</p>
+                            <p className="text-muted mb-0">
+                              alex.ray@gmail.com
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p className="fw-normal mb-1">Consultant</p>
+                        <p className="text-muted mb-0">Finance</p>
+                      </td>
+                      <td>
+                        <span className="badge badge-primary rounded-pill d-inline">
+                          Onboarding
+                        </span>
+                      </td>
+                      <td>Junior</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-link btn-rounded btn-sm fw-bold"
+                          data-mdb-ripple-color="dark"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <img
+                            src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                            className="rounded-circle"
+                            alt=""
+                            style={{ width: "45px", height: "45px" }}
+                          />
+                          <div className="ms-3">
+                            <p className="fw-bold mb-1">Kate Hunington</p>
+                            <p className="text-muted mb-0">
+                              kate.hunington@gmail.com
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p className="fw-normal mb-1">Designer</p>
+                        <p className="text-muted mb-0">UI/UX</p>
+                      </td>
+                      <td>
+                        <span className="badge badge-warning rounded-pill d-inline">
+                          Awaiting
+                        </span>
+                      </td>
+                      <td>Senior</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-link btn-rounded btn-sm fw-bold"
+                          data-mdb-ripple-color="dark"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div className=" col-md-2"></div>
+          </div>
+          <div className="row mt-5">
+            <div class="col-md-10">
+              {/* {" "}
+            Chart{" "}
+            <div>
+              <BarChart chartData={userData} />
+            </div> */}
+            </div>
+          </div>
+
+          {/* pie chart component for orangeHR chart */}
+          <div className="row">
+            <div className="col-md-6">
+              <PieChartComponent data={pieData} />
+            </div>
+          </div>
+        </div>
+        <Link
+          to={"/profile/john"}
+          className="btn btn-outline-primary form-control"
+        >
+          profile
+        </Link>
+
+        <div className="container mt-5 mb-5"></div>
+        <h3 className="row justify-content-center">project under my lead</h3>
+        <div className="container mt-5">
+          {" "}
+          {/* projects under the tech lead */}
+          {myProjects.map((e) => {
+            return (
+              <div className="col-12 mt-3">
+                <div
+                  className="card"
+                  style={{ backgroundColor: "rgb(223,255,213)" }}
+                >
+                  <div className="card-header">
+                    <h5 className="card-title">{e.projectName}</h5>
+                  </div>
+                  <div className="card-footer">
+                    {/* link for specifi project page here i sent project id and name by params */}
+                    <Link
+                      to={"/project/" + e._id + "/" + e.projectName}
+                      className="btn btn-outline-primary form-control"
+                    >
+                      Open
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const AllMembers = () => {
   const [contributorsData, setContributorsData] = useState([]);
 // get all members 
   useEffect(() => {
-    axios.get("http://localhost:8000/users/getMembers")
+    axios.get(process.env.REACT_APP_API_URL+"/users/getMembers")
       .then(function (response) {
         setContributorsData(response.data);
       });

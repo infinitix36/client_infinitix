@@ -11,7 +11,7 @@ const FurtherProjectDetails = () => {
   //get all QA BA PM for add contributors
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/getContributors")
+      .get(process.env.REACT_APP_API_URL+"/users/getContributors")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -39,7 +39,7 @@ console.log(contributors);
       contributors: contributors,
     };
     axios
-      .post("http://localhost:8000/projects/addExtraProjDetails", postData)
+      .post(process.env.REACT_APP_API_URL+"/projects/addExtraProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
         swal("Project Details added successfully", {

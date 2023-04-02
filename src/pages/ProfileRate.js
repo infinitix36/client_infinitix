@@ -33,7 +33,7 @@ const ProfileRate = () => {
       id: id,
     };
     axios
-      .post("http://localhost:8000/users/addRate", postData)
+      .post(process.env.REACT_APP_API_URL+"/users/addRate", postData)
       .then((res) => {
         // alert(res.data.message);
         swal("Rated success", {

@@ -8,7 +8,7 @@ const FurtherAddProjects = () => {
   // get incomplete projects
   useEffect(() => {
     axios
-      .get("http://localhost:8000/projects/getIncompleteProjectDetails")
+      .get(process.env.REACT_APP_API_URL+"/projects/getIncompleteProjectDetails")
       .then(function (response) {
         setIncompleteDetProj(response.data);
       });

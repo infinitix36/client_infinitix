@@ -1,4 +1,4 @@
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
@@ -12,6 +12,7 @@ import ProjectCommitChart from "../components/ProjectCommitChart";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
 import FeedBack from "../components/FeedBack";
+import JiraTable from "../components/JiraTable";
 
 const Project = () => {
   const { projectId } = useParams();
@@ -20,16 +21,14 @@ const Project = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
-       
       });
   }, []);
 
   console.log(projectDetails);
 
- 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);
 
@@ -161,6 +160,9 @@ const Project = () => {
        })} */}
 
         <FeedBack projectId="640748a7bfe3ac265c4127f8" />
+      </div>
+      <div className="container mt-3 mb-5">
+        <JiraTable projectName={projectName} />
       </div>
     </div>
   );

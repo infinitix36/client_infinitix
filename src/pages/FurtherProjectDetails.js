@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
@@ -42,9 +42,13 @@ console.log(contributors);
       .post(process.env.REACT_APP_API_URL+"/projects/addExtraProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
-        swal("Project Details added successfully", {
-          icon: "success",
-        });
+        Swal.fire({
+          title: 'success',
+          text: 'Project Details added successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool'
+        })
+        
       })
       .catch((error) => {
         console.log(error);

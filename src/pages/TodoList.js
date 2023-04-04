@@ -6,9 +6,9 @@ import swal from "sweetalert";
 
 const TodoList = () => {
   console.log("Component Rendered !");
-  const [task, setTask] = useState();
+  const [task, setTask] = useState(); 
   const [todoList, setTodoList] = useState(); //only containing todos
-  const [todoID, setToDoID] = useState();
+  const [todoID, setToDoID] = useState(); // contains to ID
   const [due, setDue] = useState();
   const [resetList, setResetList] = useState(0);
 
@@ -73,13 +73,8 @@ const TodoList = () => {
       });
   };
 
-
   const deleteTask = (taskID) => (e) => {
     e.preventDefault();
-
-  const deleteTask = (taskID) => (event) => {
-    event.preventDefault();
-
     const postData = {
       todoid: todoID,
       taskid: taskID,
@@ -100,14 +95,7 @@ const TodoList = () => {
       });
   };
 
-
   // const deleteTask = (taskID) => (e) => {
-
-  //   const postData = {
-  //     todoid: todoID,
-  //     taskid: taskID,
-  //   };
-
   //   axios
   //     .delete(`http://localhost:8000/todo/deleteTask/${todoID}/${taskID}`)
   //     .then((res) => {
@@ -126,8 +114,9 @@ const TodoList = () => {
 
   return (
     <div>
+
       <NavBar />
-      <div className="container ">
+      <div className="container">
         {/* <div
           className="side-bar"
           style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
@@ -136,7 +125,13 @@ const TodoList = () => {
         </div> */}
       </div>
       <div>
-        <div className="todos mt-5">
+       
+         
+          <br />
+          <br />
+       
+
+        <div className="todos">
           <div class="container">
             <h4 className="bg-dark text-white p-2 rounded">To-Do List</h4>
 
@@ -149,9 +144,8 @@ const TodoList = () => {
                       type="text"
                       class="form-control"
                       placeholder="Add a new task"
-                      aria-label="Add a new task"
-                      aria-describedby="button-addon2"
                       value={task}
+                      //when user changes the value of task it update the value of the task 
                       onChange={(e) => {
                         setTask(e.target.value);
                       }}
@@ -182,12 +176,13 @@ const TodoList = () => {
                 </div>
               </form>
             </div>
-            <h6>
+            <h4>
               <br></br>To be Done
-            </h6>
+            </h4>
             <hr />
 
             <div>
+              {/* to iterate over the array  */}
               {todoList?.map((item) => {
                 if (item?.taskStatus === false) {
                   return (
@@ -218,9 +213,7 @@ const TodoList = () => {
                       </div>
                       <div className="col-md-1">
                         <button
-
                           type="button"
-
                           className="btn btn-outline-danger"
                           onClick={deleteTask(item.taskid)}
                         >
@@ -233,7 +226,7 @@ const TodoList = () => {
               })}
             </div>
 
-            <h6 className="mt-4">Completed</h6>
+            <h4 className="mt-4">Completed</h4>
             <hr />
             <div>
               {todoList?.map((item) => {
@@ -246,6 +239,7 @@ const TodoList = () => {
                           type="text"
                           disabled
                           value={item.taskName}
+                          style={{ textDecoration: 'line-through' }}
                         />
                       </div>
                       <div className="col-md-3">
@@ -254,6 +248,7 @@ const TodoList = () => {
                           type="text"
                           disabled
                           value={item.dueDate}
+                          style={{ textDecoration: 'line-through' }}
                         />
                       </div>
                       <div className="col-md-1">
@@ -276,3 +271,4 @@ const TodoList = () => {
   );
 };
 export default TodoList;
+           

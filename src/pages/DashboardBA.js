@@ -4,6 +4,8 @@ import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
+import Progressb from "../components/Progress";
+/** */
 
 const DashboardBA = () => {
   const [userData, setUserData] = useState({
@@ -27,36 +29,40 @@ const DashboardBA = () => {
   return (
     <div>
       <NavBar />
-
-
-      
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-md-5 overflow-auto">
-
-            {/* <div className="container-fluid"> */}
+      <div className="container ">
+        <div className="row mt-5 justify-content-md-center ">
+          <div className="col-md-10 ">
+            <div className="container-fluid ">
               <div
-                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                className="row flex-row flex-nowrap mt-4 pb-4 pt-2 "
                 style={{ overflowX: "auto" }}
               >
                 {ProjectDetails.map((e) => {
                   return (
+                    // width of a single card is 3
                     <div className="col-md-3">
                       <div className="card">
-                        <div className="card-header">
+                        {/* Card heading */}
+                        <div className="card-header  text-white bg-dark">
                           <h5 className="card-title">{e.projectName}</h5>
                         </div>
+
                         <div className="card-body">
+                          {/* image logo */}
                           <img
                             src={e.projectLogo}
                             className="rounded-circle"
                             style={{ width: "40px" }}
                           ></img>
+
+                          {/* Project description  */}
                           <p>{e.projectDescription}</p>
                         </div>
+
+                        {/* link to project details */}
                         <div className="card-footer">
                           <Link
-                            to={"/project/"+e.projectId}
+                            to={"/project/" + e.projectId}
                             className="btn btn-outline-primary form-control"
                           >
                             Open
@@ -67,19 +73,15 @@ const DashboardBA = () => {
                   );
                 })}
               </div>
-
-              
             </div>
           </div>
-          <div className="col-md-2"></div>
+          {/* <div className="col-md-2"></div> */}
         </div>
 
-
-
         <div className="row mt-5">
-          <div className="col-md-10">
+          <div className="col-md-12">
             <table className="table align-middle mb-0 bg-white ">
-              <thead className="bg-light">
+              <thead className="bg-dark text-white">
                 <tr>
                   <th>Name</th>
                   <th>Title</th>
@@ -198,10 +200,20 @@ const DashboardBA = () => {
               </tbody>
             </table>
           </div>
-          <div className=" col-md-2"></div>
+          {/* <div className=" col-md-2"></div> */}
         </div>
-        <div className="row mt-5">
-          <div class="col-md-10">
+
+        {/* progress bar */}
+        <div className="mt-5 p-2">
+          <Progressb />
+          <Progressb />
+          <Progressb />
+          <Progressb />
+        </div>
+
+        {/* Bar Chart */}
+        <div className="row mt-5 w-50">
+          <div class="col-md-10 ">
             {" "}
             Chart{" "}
             <div>
@@ -210,7 +222,8 @@ const DashboardBA = () => {
           </div>
         </div>
       </div>
-    // </div>
+      //{" "}
+    </div>
   );
 };
 

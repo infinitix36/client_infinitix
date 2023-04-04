@@ -14,7 +14,7 @@ const TodoList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/todo/showusertodo/641c62494d6f0b66c98a5c35")
+      .get(process.env.REACT_APP_API_URL+"/todo/showusertodo/641c62494d6f0b66c98a5c35")
       .then(function (response) {
         setToDoID(response.data[0]._id);
         setTodoList(response.data[0].tasks);
@@ -26,7 +26,7 @@ const TodoList = () => {
   // const maxDate = `${currentYear + 1}-12-31`;
   // const minDate = `${currentYear}-${currentYear.getMonth + 1}-${
   //   currentYear.getDate - 1
-  // };
+  // }`;
 
   const addTask = (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const TodoList = () => {
     };
 
     axios
-      .post("http://localhost:8000/todo/addtask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/addtask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -59,7 +59,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/markasdone", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -69,18 +69,20 @@ const TodoList = () => {
         }
       })
       .catch((error) => {
-        swal("Sorry !", "BackEnd Error ! Try again Later !!!!", "info");
+        swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
       });
   };
 
-  const deleteTask = (taskID) => (e) => {
-    e.preventDefault();
+
+  const deleteTask = (taskID) => (event) => {
+    event.preventDefault();
+
     const postData = {
       todoid: todoID,
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/deleteTask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/deleteTask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Task Deleted!", res.data.message, "success");
@@ -95,20 +97,26 @@ const TodoList = () => {
       });
   };
 
+
   // const deleteTask = (taskID) => (e) => {
+
+  //   const postData = {
+  //     todoid: todoID,
+  //     taskid: taskID,
+  //   };
+
   //   axios
-  //     .delete(`http://localhost:8000/todo/deleteTask/${todoID}/${taskID}`)
+  //     .delete(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
   //     .then((res) => {
   //       if (res.data.status === true) {
-  //         swal("Task Deleted!", res.data.message, "success");
+  //         swal("Good job!", res.data.message, "success");
   //         setResetList(resetList + 1);
   //       } else {
-  //         console.log(res.data.message);
-  //         swal("Error !", res.data.message, "danger");
+  //         swal("Wrror !", res.data.message, "danger");
   //       }
   //     })
   //     .catch((error) => {
-  //       console.log(error);
+  //       swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
   //     });
   // };
 
@@ -186,7 +194,7 @@ const TodoList = () => {
               {todoList?.map((item) => {
                 if (item?.taskStatus === false) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
@@ -213,7 +221,9 @@ const TodoList = () => {
                       </div>
                       <div className="col-md-1">
                         <button
+
                           type="button"
+
                           className="btn btn-outline-danger"
                           onClick={deleteTask(item.taskid)}
                         >
@@ -232,7 +242,7 @@ const TodoList = () => {
               {todoList?.map((item) => {
                 if (item?.taskStatus === true) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
@@ -250,14 +260,6 @@ const TodoList = () => {
                           value={item.dueDate}
                           style={{ textDecoration: 'line-through' }}
                         />
-                      </div>
-                      <div className="col-md-1">
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={deleteTask(item.taskid)}
-                        >
-                          Delete
-                        </button>
                       </div>
                     </div>
                   );

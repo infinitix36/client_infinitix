@@ -8,9 +8,10 @@ import { Link } from "react-router-dom";
 const AllProjects = () => {
   const [projectDetails, setprojectDetails] = useState([]);
 
+  // get project details
   useEffect(() => {
     axios
-      .get("http://localhost:8000/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
@@ -20,17 +21,18 @@ const AllProjects = () => {
   return (
     <div>
       <NavBar />
-      <div
+      {/* <div
         className="side-bar"
         style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
       >
         <SideBar />
-      </div>
+      </div> */}
 
       <div className="container mt-5"></div>
       <div className="container mt-5 ">
         <div className="container-fluid ">
           <div className="row">
+            {/* map for project details */}
             {projectDetails.map((e) => {
               return (
                 <div className="col-12 mt-3">

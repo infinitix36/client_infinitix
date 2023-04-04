@@ -41,6 +41,7 @@ const DashboardQA = () => {
 
                 {ProjectDetails.map((e) => {
                   return (
+
                    <div className="col-md-3"> 
                    <div className="card">
 
@@ -70,6 +71,7 @@ const DashboardQA = () => {
                        >
                          Open
                        </Link>
+
                         </div>
                       </div>
                     </div>

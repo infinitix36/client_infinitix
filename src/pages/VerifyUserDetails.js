@@ -10,7 +10,7 @@ const VerifyUser = ()=>{
     const [isApprovedUser, setIsApprovedUser] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/usersToApproved")
+      .get(process.env.REACT_APP_API_URL+"/users/usersToApproved")
       .then(function (response) {
         setIsApprovedUser(response.data);
       });

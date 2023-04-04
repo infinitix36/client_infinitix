@@ -3,64 +3,90 @@
 import "../App.css";
 import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
+import React, { useEffect, useState } from "react";
 
-function ProfileOverview(props) {
+function Profile(props) {
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const username = data.GitHubUsername;
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-
+  useEffect(() => {
+    fetch(`//api.github.com/users/${username}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAvatarUrl(data.avatar_url);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [username]);
+  console.log(data);
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <div className="row justify-content-center ">
         <div className="card ">
           <div className="card-body">
-            <h3 className="text-center">
-            Profile overview
-          </h3>
+            <h3 className="text-center">Profile</h3>
           </div>
         </div>
         <div className="col-md-8">
           <div
             className="card mt-5 crud shadow-lg p-3 mb-5 mt-5 bg-body rounded "
-          // style={{ backgroundColor: "rgb(199,227,244)" }}
+            // style={{ backgroundColor: "rgb(199,227,244)" }}
           >
             <div className="col d-flex justify-content-center mt-3">
-              <img
-                src={data?.userImage}
-                className="rounded-circle"
-                alt="Cinque Terre"
-                style={{ height: "120px", width: "120px" }}
-              />
+              {avatarUrl && (
+                <img
+                  src={avatarUrl}
+                  alt={`${username}'s avatar`}
+                  style={{
+                    width: "125px",
+                    height: "125px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "4px solid white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                  }}
+                />
+              )}
+             
             </div>
             <div className="card-body">
               <form>
                 <div className="row justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
-                    <label for="inputFirst name">Name</label>
+                    <label for="inputFirstName">Name</label>
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="email"
+                      type="text"
                       className="form-control a2"
-                      id="inputEmail4"
+                      id="inputFirstName"
                       value={data?.fname}
                       disabled={true}
                     />
+                    {console.log(data?.fname)}
                   </div>
                 </div>
 
                 <div className="row mt-2 justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
-                    <label for="inputlname">Jobtitle</label>
+                    <label for="userRoleName">userRoleName</label>
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="lname"
+                      type="text"
                       className="form-control a2"
-                      id="inputlname"
-                      value={data?.jobPosition}
+                      id="userRoleName"
+                      value={data?.userRoleName}
                       disabled={true}
                     />
                   </div>
@@ -68,14 +94,46 @@ function ProfileOverview(props) {
                 <div className="row mt-2 justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
-                    <label for="inputEmail4">Department</label>
+                    <label for="GitHubUsername">GitHubUsername</label>
+                  </div>
+                  <div className="form-group col-md-5">
+                    <input
+                      type="text"
+                      className="form-control a2"
+                      id="GitHubUsername"
+                      value={data?.GitHubUsername}
+                      disabled={true}
+                    />
+                    {console.log(data?.GitHubUsername)}
+                  </div>
+                </div>
+                <div className="row mt-2 justify-content-center">
+                  <div className="col-md-2"></div>
+                  <div className="form-group col-md-3">
+                    <label for="orangeHrLink">orangeHrLink</label>
+                  </div>
+                  <div className="form-group col-md-5">
+                    <input
+                      type="url"
+                      className="form-control a2"
+                      id="orangeHrLink"
+                      value={data?.orangeHrLink}
+                      disabled={true}
+                    />
+                    {console.log(data?.orangeHrLink)}
+                  </div>
+                </div>
+                <div className="row mt-2 justify-content-center">
+                  <div className="col-md-2"></div>
+                  <div className="form-group col-md-3">
+                    <label for="Email">Email</label>
                   </div>
                   <div className="form-group col-md-5">
                     <input
                       type="email"
                       className="form-control a2"
-                      id="inputEmail4"
-                      value={data?.department}
+                      id="Email"
+                      value={data?.email}
                       disabled={true}
                     />
                   </div>
@@ -83,29 +141,14 @@ function ProfileOverview(props) {
                 <div className="row mt-2 justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
-                    <label for="inputEmail4">User Role</label>
-                  </div>
-                  <div className="form-group col-md-5">
-                    {/* <input
-                      type="email"
-                      className="form-control a2"
-                      id="inputEmail4"
-                      value={data?.userRoleId._id}
-                      disabled={true}
-                    /> */}
-                  </div>
-                </div>
-                <div className="row mt-2 justify-content-center">
-                  <div className="col-md-2"></div>
-                  <div className="form-group col-md-3">
-                    <label for="inputEmail4">Email </label>
+                    <label for="phoneNo">Phone No</label>
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="email"
+                      type="tel"
                       className="form-control a2"
-                      id="inputEmail4"
-                      value={data?.emailAddress}
+                      id="phoneNo"
+                      value={data?.phone}
                       disabled={true}
                     />
                   </div>
@@ -113,29 +156,14 @@ function ProfileOverview(props) {
                 <div className="row mt-2 justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
-                    <label for="inputEmail4">Phone No</label>
+                    <label for="userJiraLink">UserJiraLink </label>
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="email"
+                      type="url"
                       className="form-control a2"
-                      id="inputEmail4"
-                      value={data?.phoneNumber}
-                      disabled={true}
-                    />
-                  </div>
-                </div>
-                <div className="row mt-2 justify-content-center">
-                  <div className="col-md-2"></div>
-                  <div className="form-group col-md-3">
-                    <label for="inputEmail4">Date Of Birth </label>
-                  </div>
-                  <div className="form-group col-md-5">
-                    <input
-                      type="email"
-                      className="form-control a2"
-                      id="inputEmail4"
-                      value={data?.dob}
+                      id="userJiraLink"
+                      value={data?.userJiraLink}
                       disabled={true}
                     />
                   </div>
@@ -162,4 +190,4 @@ function ProfileOverview(props) {
   );
 }
 
-export default ProfileOverview;
+export default Profile;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+import Swal from 'sweetalert2'
 import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Login = () => {
@@ -16,12 +16,15 @@ const Login = () => {
       password: password,
     };
     axios
-      .post("http://localhost:8000/authentication/login", postData)
+      .post(process.env.REACT_APP_API_URL+"/authentication/login", postData)
       .then((res) => {
         // alert(res.data.message);
-        swal("Login success", {
-          icon: "success",
-        });
+        Swal.fire({
+          title: 'success',
+          text: 'Do you want to continue',
+          icon: 'success',
+          confirmButtonText: 'Cool'
+        })
         localStorage.setItem("token", JSON.stringify(res.data.token));
         if (res.data.status === true) {
           navigate("/dashboard");

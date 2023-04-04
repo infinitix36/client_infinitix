@@ -36,7 +36,7 @@ const Register = () => {
       };
 
       axios
-        .post("http://localhost:8000/authentication/register", postData)
+        .post(process.env.REACT_APP_API_URL+"/authentication/register", postData)
         .then((res) => {
           alert(res.data.message);
         })
@@ -45,7 +45,6 @@ const Register = () => {
           console.log(error);
         });
     }
-
   };
 
   return (
@@ -95,8 +94,8 @@ const Register = () => {
                     <option value="developer">Developer</option>
                     <option value="BA">BA</option>
                     <option value="QA">QA</option>
-                    <option value="Project Manager">Project Manager</option>
-                    <option value="Tech Lead">Tech Lead</option>
+                    <option value="ProjectManager">Project Manager</option>
+                    <option value="Techlead">Tech Lead</option>
                     {/* admin - login */}
                   </Form.Select>
                 </Form.Group>

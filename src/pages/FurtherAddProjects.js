@@ -27,7 +27,7 @@ const FurtherAddProjects = () => {
             to={"/project/furtherproject/" + e._id}
             className="btn btn-outline-primary form-control mt-2"
           >
-            <li key={e._id}>{e._id + e.projectName}</li>
+            <li key={e._id}>{ e.projectName}</li>
           </Link>
         );
       })}

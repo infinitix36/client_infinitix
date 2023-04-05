@@ -94,7 +94,7 @@ const DashboardTL = () => {
         >
           <div
             className="row mt-5"
-            style={{ background: "#2D033B", borderRadius: "10px" }}
+            style={{ background: "white", borderRadius: "10px" }}
           >
             <div className="col-md-12 overflow-auto">
               <div className="container-fluid">

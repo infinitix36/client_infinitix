@@ -33,7 +33,9 @@ const ProfileRate = () => {
       id: id,
     };
     axios
+
       .post(process.env.REACT_APP_API_URL+"/users/addRate", postData)
+
       .then((res) => {
         // alert(res.data.message);
         swal("Rated success", {

@@ -28,36 +28,50 @@ const DashboardQA = () => {
   return (
     <div>
       <NavBar />
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-md-10 overflow-auto">
-            <div className="container-fluid">
+      <div className="container ">
+        <div className="row mt-5 justify-content-md-center ">
+          <div className="col-md-10 ">
+
+            <div className="container-fluid ">
+
               <div
-                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
-                style={{ overflowX: "auto" }}
+              className="row flex-row flex-nowrap mt-4 pb-4 pt-2 "
+              style={{ overflowX: "auto" }}
               >
+
                 {ProjectDetails.map((e) => {
                   return (
-                    <div className="col-md-3">
-                      <div className="card">
-                        <div className="card-header">
-                          <h5 className="card-title">{e.projectName}</h5>
-                        </div>
-                        <div className="card-body">
-                          <img
-                            src={e.projectLogo}
-                            className="rounded-circle"
-                            style={{ width: "40px" }}
-                          ></img>
-                          <p>{e.projectDescription}</p>
-                        </div>
-                        <div className="card-footer">
-                          <Link
-                            to={"/project/" + e.projectId}
-                            className="btn btn-outline-primary form-control"
-                          >
-                            Open
-                          </Link>
+
+                   <div className="col-md-3"> 
+                   <div className="card">
+
+                     {/* Card heading */}
+                     <div className="card-header  text-white bg-info">
+                       <h5 className="card-title">{e.projectName}</h5>
+                     </div>
+
+
+                     <div className="card-body">
+                       {/* image logo */}
+                       <img
+                         src={e.projectLogo}
+                         className="rounded-circle"
+                         style={{ width: "40px" }}
+                       ></img>
+
+                       {/* Project description  */}
+                       <p>{e.projectDescription}</p>
+                     </div>
+
+                    {/* link to project details */}
+                     <div className="card-footer">
+                       <Link
+                         to={"/project/"+e.projectId}
+                         className="btn btn-outline-primary form-control"
+                       >
+                         Open
+                       </Link>
+
                         </div>
                       </div>
                     </div>

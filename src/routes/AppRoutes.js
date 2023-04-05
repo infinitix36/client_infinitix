@@ -26,16 +26,19 @@ import AssignProjectManager from "../pages/AssignProjectManager";
 import AllMembers from "../pages/AllMembers";
 
 import PendingUserApproval from "../pages/PendingUserApproval";
+
 import LeadBoard from "../pages/LeadBoard";
 import ProfileRate from "../pages/ProfileRate";
 import ProjectsQA from "../pages/ProjectsQA";
 import ProjectCommentQA from "../pages/ProjectCommentQA";
+
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Project></Project>} /> */}
+
 
         <Route
           exact
@@ -77,6 +80,7 @@ const AppRoutes = () => {
 
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/profiles/:id" element={<ProfileRate />} />
+
 
         <Route
           exact
@@ -187,6 +191,7 @@ const AppRoutes = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
 
+
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -231,6 +236,7 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
+
 
         <Route path="/allmembers" element={<AllMembers />} />
         <Route path="/pending" element={<PendingUserApproval />} />

@@ -11,7 +11,9 @@ const ProjectsQA = () => {
     const userId = data._id;
     useEffect(() => {
       axios
+
         .get(process.env.REACT_APP_API_URL+`/projects/getProjectDetails/${userId}`)
+
         .then(function (response) {
           setMyProjects(response.data);
         });

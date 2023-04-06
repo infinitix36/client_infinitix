@@ -25,7 +25,7 @@ function LeadBoard() {
 	const [page, setPage] = useState(1);
   	const obj = { limit: 10, total: 50 };
 
-	// Do something with the selectedJobRole changed
+	
 	useEffect(()=>{
 		if(selectedJobRole !==""){
 			

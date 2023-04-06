@@ -3,6 +3,8 @@ import swal from "sweetalert";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
+
+
 const CreateProject = () => {
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const [techLeadData, setTechLeadData] = useState([]);
@@ -13,6 +15,7 @@ const CreateProject = () => {
         setTechLeadData(response.data);
       });
   }, []);
+
   const [projectName, setProjectName] = useState();
   const [description, setDescription] = useState();
   const [technology, setTechnology] = useState();
@@ -20,9 +23,11 @@ const CreateProject = () => {
   const [techLead, setTechLead] = useState();
   const projectManager = data?._id;
   console.log(projectManager);
+
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
+      //keys are assigned with form input values
       projectName: projectName,
       description: description,
       technology: technology,
@@ -30,6 +35,9 @@ const CreateProject = () => {
       techlead: techLead,
       projectManager:projectManager,
     };
+
+
+    // Send the data when the form is submitted
     axios
       .post("http://localhost:8000/projects/addBasicProjDetails", postData)
       .then((res) => {
@@ -42,6 +50,7 @@ const CreateProject = () => {
         console.log(error);
       });
   };
+
   return (
     <React.Fragment>
       <div>
@@ -83,6 +92,7 @@ const CreateProject = () => {
                     </div>
                   </div>
                 </div>
+                {/* Technology */}
                 <div className="row m-2">
                   <div className="col-md-6">
                     <div className="form-floating mb-3">

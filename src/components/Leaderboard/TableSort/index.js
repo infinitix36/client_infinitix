@@ -5,8 +5,8 @@ import axios from "axios";
 
 
 const TableSort = ({userRoleName}) => {
-  const [userDetails, setUserDetails] = useState([]);
-  const [filterType, setFilterType] = useState("getQA");
+  const [userDetails, setUserDetails] = useState([]);    //for the array fetched from the API
+  const [filterType, setFilterType] = useState("");
   
   function fillTable(){
     let apiEndpoint = `http://localhost:8000/users/all?userRoleName=${userRoleName}`;
@@ -19,7 +19,7 @@ const TableSort = ({userRoleName}) => {
         "Content-Type": "application/json",
         Authorization: "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",
       });
-      if(users.length === 0){
+      if(users.length === 0){         //chk whether array is empty
         setUserDetails('')
       }
       else{

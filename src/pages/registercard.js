@@ -91,7 +91,7 @@ const Register = () => {
                     onChange={(e) => setuserRoleName(e.target.value)}
                   >
                     <option value="">Select Role</option>
-                    <option value="developer">Developer</option>
+                    <option value="Developer">Developer</option>
                     <option value="BA">BA</option>
                     <option value="QA">QA</option>
                     <option value="ProjectManager">Project Manager</option>

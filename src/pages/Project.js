@@ -7,8 +7,6 @@ import SideBar from "../components/Sidebar";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-import ProjectCommitList from "../components/ProjectCommitList";
-import ProjectCommitChart from "../components/ProjectCommitChart";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
 import FeedBack from "../components/FeedBack";

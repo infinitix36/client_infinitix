@@ -4,20 +4,21 @@ import SideBar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+const ProjectsQA = () => {
+    const [myProjects, setMyProjects] = useState([]);
+    const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+    const userId = data._id;
+    useEffect(() => {
+      axios
 
-const AllProjects = () => {
-  const [projectDetails, setprojectDetails] = useState([]);
+        .get(process.env.REACT_APP_API_URL+`/projects/getProjectDetails/${userId}`)
 
-  // get project details
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
-      .then(function (response) {
-        setprojectDetails(response.data);
-      });
-  }, []);
-  console.log(projectDetails);
-
+        .then(function (response) {
+          setMyProjects(response.data);
+        });
+    }, []);
+    console.log(myProjects);
   return (
     <div>
       <NavBar />
@@ -32,8 +33,7 @@ const AllProjects = () => {
       <div className="container mt-5 ">
         <div className="container-fluid ">
           <div className="row">
-            {/* map for project details */}
-            {projectDetails.map((e) => {
+            {myProjects.map((e) => {
               return (
                 <div className="col-12 mt-3">
                   <div
@@ -45,7 +45,7 @@ const AllProjects = () => {
                     </div>
                     <div className="card-footer">
                       <Link
-                        to={"/project/" + e._id + "/" + e.projectName}
+                        to={"/projectscommentQA/" + e._id + "/" + e.projectName}
                         className="btn btn-outline-primary form-control"
                       >
                         Open
@@ -61,4 +61,4 @@ const AllProjects = () => {
     </div>
   );
 };
-export default AllProjects;
+export default ProjectsQA;

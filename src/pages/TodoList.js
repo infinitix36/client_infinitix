@@ -6,15 +6,15 @@ import swal from "sweetalert";
 
 const TodoList = () => {
   console.log("Component Rendered !");
-  const [task, setTask] = useState();
+  const [task, setTask] = useState(); 
   const [todoList, setTodoList] = useState(); //only containing todos
-  const [todoID, setToDoID] = useState();
+  const [todoID, setToDoID] = useState(); // contains to ID
   const [due, setDue] = useState();
   const [resetList, setResetList] = useState(0);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/todo/showusertodo/641c62494d6f0b66c98a5c35")
+      .get(process.env.REACT_APP_API_URL+"/todo/showusertodo/641c62494d6f0b66c98a5c35")
       .then(function (response) {
         setToDoID(response.data[0]._id);
         setTodoList(response.data[0].tasks);
@@ -26,7 +26,7 @@ const TodoList = () => {
   // const maxDate = `${currentYear + 1}-12-31`;
   // const minDate = `${currentYear}-${currentYear.getMonth + 1}-${
   //   currentYear.getDate - 1
-  // };
+  // }`;
 
   const addTask = (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const TodoList = () => {
     };
 
     axios
-      .post("http://localhost:8000/todo/addtask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/addtask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -59,7 +59,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/markasdone", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -69,13 +69,10 @@ const TodoList = () => {
         }
       })
       .catch((error) => {
-        swal("Sorry !", "BackEnd Error ! Try again Later !!!!", "info");
+        swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
       });
   };
 
-
-  const deleteTask = (taskID) => (e) => {
-    e.preventDefault();
 
   const deleteTask = (taskID) => (event) => {
     event.preventDefault();
@@ -85,7 +82,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/deleteTask", postData)
+      .post(process.env.REACT_APP_API_URL+"/todo/deleteTask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Task Deleted!", res.data.message, "success");
@@ -104,30 +101,30 @@ const TodoList = () => {
   // const deleteTask = (taskID) => (e) => {
 
   //   const postData = {
-  //
+  //     todoid: todoID,
   //     taskid: taskID,
   //   };
 
   //   axios
-  //     .delete(`http://localhost:8000/todo/deleteTask/${todoID}/${taskID}`)
+  //     .delete(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
   //     .then((res) => {
   //       if (res.data.status === true) {
-  //         swal("Task Deleted!", res.data.message, "success");
+  //         swal("Good job!", res.data.message, "success");
   //         setResetList(resetList + 1);
   //       } else {
-  //         console.log(res.data.message);
-  //         swal("Error !", res.data.message, "danger");
+  //         swal("Wrror !", res.data.message, "danger");
   //       }
   //     })
   //     .catch((error) => {
-  //       console.log(error);
+  //       swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
   //     });
   // };
 
   return (
     <div>
+
       <NavBar />
-      <div className="container ">
+      <div className="container">
         {/* <div
           className="side-bar"
           style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
@@ -136,7 +133,13 @@ const TodoList = () => {
         </div> */}
       </div>
       <div>
-        <div className="todos mt-5">
+       
+         
+          <br />
+          <br />
+       
+
+        <div className="todos">
           <div class="container">
             <h4 className="bg-dark text-white p-2 rounded">To-Do List</h4>
 
@@ -149,9 +152,8 @@ const TodoList = () => {
                       type="text"
                       class="form-control"
                       placeholder="Add a new task"
-                      aria-label="Add a new task"
-                      aria-describedby="button-addon2"
                       value={task}
+                      //when user changes the value of task it update the value of the task 
                       onChange={(e) => {
                         setTask(e.target.value);
                       }}
@@ -182,16 +184,17 @@ const TodoList = () => {
                 </div>
               </form>
             </div>
-            <h6>
+            <h4>
               <br></br>To be Done
-            </h6>
+            </h4>
             <hr />
 
             <div>
+              {/* to iterate over the array  */}
               {todoList?.map((item) => {
                 if (item?.taskStatus === false) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
@@ -233,19 +236,20 @@ const TodoList = () => {
               })}
             </div>
 
-            <h6 className="mt-4">Completed</h6>
+            <h4 className="mt-4">Completed</h4>
             <hr />
             <div>
               {todoList?.map((item) => {
                 if (item?.taskStatus === true) {
                   return (
-                    <div className="row mt-2">
+                    <div className="row mt-2 justify-content-md-center">
                       <div className="col-md-5">
                         <input
                           className="form-control"
                           type="text"
                           disabled
                           value={item.taskName}
+                          style={{ textDecoration: 'line-through' }}
                         />
                       </div>
                       <div className="col-md-3">
@@ -254,15 +258,8 @@ const TodoList = () => {
                           type="text"
                           disabled
                           value={item.dueDate}
+                          style={{ textDecoration: 'line-through' }}
                         />
-                      </div>
-                      <div className="col-md-1">
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={deleteTask(item.taskid)}
-                        >
-                          Delete
-                        </button>
                       </div>
                     </div>
                   );
@@ -274,6 +271,6 @@ const TodoList = () => {
       </div>
     </div>
   );
-}};
-
+};
 export default TodoList;
+           

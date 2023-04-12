@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 const AllMembers = () => {
   const [contributorsData, setContributorsData] = useState([]);
-
+// get all members 
   useEffect(() => {
-    axios.get("http://localhost:8000/users/getMembers")
+    axios.get(process.env.REACT_APP_API_URL+"/users/getMembers")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -23,11 +23,12 @@ const AllMembers = () => {
       <div className="container my-5">
         <h1 className="mb-4">All Members</h1>
         <ul className="list-group">
+          {/* mapping for all members */}
           {contributorsData.map((contributor) => (
             <li className="list-group-item d-flex justify-content-between align-items-center">
               {contributor.fname}
               <Link
-                to={"/profile/" + contributor._id}
+                to={"/profiles/" + contributor._id}
                 className="btn btn-primary"
               >
                 View Profile

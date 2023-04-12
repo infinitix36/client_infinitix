@@ -45,12 +45,12 @@ function LeadBoard() {
         <NavBar /><br/><br/>
             <div className="full-wrapper">
 			<div className="full-container">
-				<div
+				{/* <div
                     className="side-bar"
                     style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
 				>
                     <SideBar />
-                </div>
+                </div> */}
 				<div className="full-head">
 					<img src="./images/logo.png" alt="logo" className="logo" />
 					<Search/>

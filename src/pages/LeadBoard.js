@@ -2,12 +2,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../components/Navbar";
-import SideBar from "../components/Sidebar";
 import TableSort from "../components/Leaderboard/TableSort";
 import Sort from "../components/Leaderboard/Sort";
 import JobRole from "../components/Leaderboard/Jobrole";
 import Pagination from "../components/Leaderboard/Pagination";
-import Search from "../components/Leaderboard/Search"
 import "./../css/LeadBoard.css"
 
 
@@ -53,7 +51,6 @@ function LeadBoard() {
                 </div> */}
 				<div className="full-head">
 					<img src="./images/logo.png" alt="logo" className="logo" />
-					<Search/>
 				</div>
 				<div className="full-body">
 					<div className="table_container">

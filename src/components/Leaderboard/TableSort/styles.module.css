@@ -58,14 +58,14 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: var(--black);
-	flex: 0.5;
+	flex: 1.0;
 }
 
 .rating_tab {
 	font-size: 16px;
 	font-weight: 600;
 	color: var(--black);
-	flex: 1;
+	flex: 1.5;
 }
 
 .detail {
@@ -153,6 +153,12 @@
 	margin-left: 20px;
 	display: inline-block;
 	vertical-align: middle;
+  }
+
+  .star{
+	width: 20px;
+	height: 20px;
+	padding-bottom: 4px;
   }
   
  

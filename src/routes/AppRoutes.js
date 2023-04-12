@@ -147,10 +147,10 @@ const AppRoutes = () => {
         />
         <Route
           exact
-          path="/projectpm"
+          path="/DashboardPM"
           element={
             <RequireAuth>
-              <ProjectPM />
+              <DashboardPM />
             </RequireAuth>
           }
         />
@@ -161,7 +161,7 @@ const AppRoutes = () => {
         <Route exact path="/profile/:fname" element={<RequireAuth><Profile /></RequireAuth>} />
         <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
         <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
-        <Route exact path="/projectpm" element={<RequireAuth><ProjectPM/></RequireAuth>} />
+        <Route exact path="/projectpm" element={<RequireAuth><DashboardPM/></RequireAuth>} />
 
 
         <Route path="/" element={<Login />} />

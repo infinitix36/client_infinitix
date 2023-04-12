@@ -43,3 +43,9 @@
 .filter_container {
 	flex: 1;
 }
+
+.head{
+	flex: 0.75;
+	padding-top: 10px;
+	color: #ff004f;
+}

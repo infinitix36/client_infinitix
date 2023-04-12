@@ -51,6 +51,7 @@ function LeadBoard() {
                 </div> */}
 				<div className="full-head">
 					<img src="./images/logo.png" alt="logo" className="logo" />
+					<h1 h1 className="head">Leader Board</h1>
 				</div>
 				<div className="full-body">
 					<div className="table_container">

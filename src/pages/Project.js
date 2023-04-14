@@ -21,29 +21,32 @@ const Project = () => {
 
   const handleSaveClick = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL +`/projects/${projectId}/description`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ description }),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `/projects/${projectId}/description`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ description }),
+        }
+      );
       const data = await response.json();
-      console.log(data);
+      setDescription(data.description); // update the description state with the new value
       setIsEditing(false);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
-  }, [handleSaveClick]);
-
-  console.log(projectDetails);
+  }, []);
 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);
@@ -92,8 +95,6 @@ const Project = () => {
     setIsEditing(true);
   };
 
- 
-
   const handleCancelClick = () => {
     setDescription(projectDescription);
     setIsEditing(false);
@@ -116,20 +117,24 @@ const Project = () => {
 
       <div className="container">
         <div className="row mt-5">
-        <div>
-      {isEditing ? (
-        <div>
-          <input type="text" value={description} onChange={handleChange} />
-          <button onClick={handleSaveClick}>Save</button>
-          <button onClick={handleCancelClick}>Cancel</button>
-        </div>
-      ) : (
-        <div>
-          <p>{projectDescription}</p>
-          <button onClick={handleEditClick}>Edit</button>
-        </div>
-      )}
-    </div>
+          <div>
+            {isEditing ? (
+              <div>
+                <input
+                  type="text"
+                  value={description}
+                  onChange={handleChange}
+                />
+                <button onClick={handleSaveClick}>Save</button>
+                <button onClick={handleCancelClick}>Cancel</button>
+              </div>
+            ) : (
+              <div>
+                <p>{projectDescription}</p>
+                <button onClick={handleEditClick}>Edit</button>
+              </div>
+            )}
+          </div>
           <div className="col-md-6">
             <h3>contributors</h3>
 

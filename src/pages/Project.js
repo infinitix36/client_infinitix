@@ -19,18 +19,18 @@ const Project = () => {
 
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSaveClick = async () => {
     try {
       const response = await fetch(process.env.REACT_APP_API_URL +`/projects/${projectId}/description`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ description }),
       });
       const data = await response.json();
       console.log(data);
+      setIsEditing(false);
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +41,7 @@ const Project = () => {
       .then(function (response) {
         setprojectDetails(response.data);
       });
-  }, []);
+  }, [handleSaveClick]);
 
   console.log(projectDetails);
 
@@ -85,6 +85,24 @@ const Project = () => {
       },
     ],
   });
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+ 
+
+  const handleCancelClick = () => {
+    setDescription(projectDescription);
+    setIsEditing(false);
+  };
+
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <div>
       <NavBar />
@@ -98,24 +116,20 @@ const Project = () => {
 
       <div className="container">
         <div className="row mt-5">
-          <div className="col-md-6">
-            {projectDescription}
-
-            {/* {projectDetails.map((e) => {
-              return e?._id === projectId ? <div>{e.description}</div> : null;
-            })} */}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Description:
-              <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <button type="submit">Save</button>
-          </form>
+        <div>
+      {isEditing ? (
+        <div>
+          <input type="text" value={description} onChange={handleChange} />
+          <button onClick={handleSaveClick}>Save</button>
+          <button onClick={handleCancelClick}>Cancel</button>
+        </div>
+      ) : (
+        <div>
+          <p>{projectDescription}</p>
+          <button onClick={handleEditClick}>Edit</button>
+        </div>
+      )}
+    </div>
           <div className="col-md-6">
             <h3>contributors</h3>
 

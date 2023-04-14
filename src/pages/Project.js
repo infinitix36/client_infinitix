@@ -125,19 +125,30 @@ const Project = () => {
                     type="text"
                     value={description}
                     onChange={handleChange}
-                    className="form-control"
+                    className="form-control mb-2"
                   />
-                  <button onClick={handleSaveClick} class="btn btn-info">
-                    Save
-                  </button>
-                  <button onClick={handleCancelClick} class="btn btn-warning">
-                    Cancel
-                  </button>
+                  <div className="btn-group" role="group">
+                    <button
+                      onClick={handleSaveClick}
+                      className="btn btn-primary"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={handleCancelClick}
+                      className="btn btn-secondary"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div>
-                  <p>{projectDescription}</p>
-                  <button onClick={handleEditClick} class="btn btn-danger">
+                  <p className="mb-2">{projectDescription}</p>
+                  <button
+                    onClick={handleEditClick}
+                    className="btn btn-outline-secondary bi bi-pen"
+                  >
                     Edit
                   </button>
                 </div>

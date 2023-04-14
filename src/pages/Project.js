@@ -117,23 +117,32 @@ const Project = () => {
 
       <div className="container">
         <div className="row mt-5">
-          <div>
-            {isEditing ? (
-              <div>
-                <input
-                  type="text"
-                  value={description}
-                  onChange={handleChange}
-                />
-                <button onClick={handleSaveClick}>Save</button>
-                <button onClick={handleCancelClick}>Cancel</button>
-              </div>
-            ) : (
-              <div>
-                <p>{projectDescription}</p>
-                <button onClick={handleEditClick}>Edit</button>
-              </div>
-            )}
+          <div className="col-md-6">
+            <div>
+              {isEditing ? (
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    value={description}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                  <button onClick={handleSaveClick} class="btn btn-info">
+                    Save
+                  </button>
+                  <button onClick={handleCancelClick} class="btn btn-warning">
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <p>{projectDescription}</p>
+                  <button onClick={handleEditClick} class="btn btn-danger">
+                    Edit
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <div className="col-md-6">
             <h3>contributors</h3>

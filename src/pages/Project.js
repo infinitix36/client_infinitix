@@ -17,6 +17,24 @@ const Project = () => {
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
 
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(process.env.REACT_APP_API_URL +`/projects/${projectId}/description`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ description }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
@@ -87,6 +105,17 @@ const Project = () => {
               return e?._id === projectId ? <div>{e.description}</div> : null;
             })} */}
           </div>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Description:
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </label>
+            <button type="submit">Save</button>
+          </form>
           <div className="col-md-6">
             <h3>contributors</h3>
 

@@ -38,13 +38,45 @@ const AppRoutes = () => {
       <Routes>
         {/* <Route exact path="/" element={<Project></Project>} /> */}
 
-        <Route exact path="/project" element={<RequireAuth><Project></Project></RequireAuth>} />
-        <Route exact path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route exact path="/dashboardpm" element={<RequireAuth><DashboardPM /></RequireAuth>} />
-        
+
+        <Route
+          exact
+          path="/project"
+          element={
+            <RequireAuth>
+              <Project></Project>
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/dashboardpm"
+          element={
+            <RequireAuth>
+              <DashboardPM />
+            </RequireAuth>
+          }
+        />
         <Route exact path="/lboard" element={<LeadBoard />} />
-        <Route exact path="/allprojects" element={<RequireAuth><AllProjects /></RequireAuth>} />
-      
+        <Route
+          exact
+          path="/allprojects"
+          element={
+            <RequireAuth>
+              <AllProjects />
+            </RequireAuth>
+          }
+        />
+
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/profiles/:id" element={<ProfileRate />} />
 
@@ -89,6 +121,7 @@ const AppRoutes = () => {
               <FurtherProjectDetails />
             </RequireAuth>
           }
+
         />
 
         <Route
@@ -167,6 +200,82 @@ const AppRoutes = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+
+        />
+
+        <Route
+          exact
+          path="/DashboardBA"
+          element={
+            <RequireAuth>
+              <DashboardBA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardDEV"
+          element={
+            <RequireAuth>
+              <DashboardDEV />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/profile/:fname"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/Todolist"
+          element={
+            <RequireAuth>
+              <TodoList />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/projectpm"
+          element={
+            <RequireAuth>
+              <ProjectPM />
+            </RequireAuth>
+          }
+        />
+
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+
+
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
 
         <Route
           path="/home"

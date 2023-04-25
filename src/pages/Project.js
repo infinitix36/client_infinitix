@@ -17,6 +17,31 @@ const Project = () => {
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
 
+
+  const [description, setDescription] = useState("");
+
+  const handleSaveClick = async () => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `/projects/${projectId}/description`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ description }),
+        }
+      );
+      const data = await response.json();
+      setDescription(data.description); // update the description state with the new value
+      setIsEditing(false);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
@@ -25,7 +50,6 @@ const Project = () => {
       });
   }, []);
 
-  console.log(projectDetails);
 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);
@@ -67,6 +91,22 @@ const Project = () => {
       },
     ],
   });
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setDescription(projectDescription);
+    setIsEditing(false);
+  };
+
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <div>
       <NavBar />
@@ -81,11 +121,42 @@ const Project = () => {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-6">
-            {projectDescription}
-
-            {/* {projectDetails.map((e) => {
-              return e?._id === projectId ? <div>{e.description}</div> : null;
-            })} */}
+            <div>
+              {isEditing ? (
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    value={description}
+                    onChange={handleChange}
+                    className="form-control mb-2"
+                  />
+                  <div className="btn-group" role="group">
+                    <button
+                      onClick={handleSaveClick}
+                      className="btn btn-primary"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={handleCancelClick}
+                      className="btn btn-secondary"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className="mb-2">{projectDescription}</p>
+                  <button
+                    onClick={handleEditClick}
+                    className="btn btn-outline-secondary bi bi-pen"
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <div className="col-md-6">
             <h3>contributors</h3>

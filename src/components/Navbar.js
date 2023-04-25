@@ -71,7 +71,7 @@ const NavBar = () => {
               </li> */}
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/lboard">
-                  <i className="bi bi-telephone-fill me-2"></i>Stats
+                <i class="bi bi-graph-up-arrow"></i>   Stats
                 </Link>
               </li>
               <li className="nav-item rounded">

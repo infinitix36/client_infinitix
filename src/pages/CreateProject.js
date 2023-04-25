@@ -13,6 +13,7 @@ const CreateProject = () => {
         setTechLeadData(response.data);
       });
   }, []);
+  
   const [projectName, setProjectName] = useState();
   const [description, setDescription] = useState();
   const [technology, setTechnology] = useState();
@@ -27,7 +28,7 @@ const CreateProject = () => {
       description: description,
       technology: technology,
       deadline: deadLine,
-      techlead: techLead,
+      Techlead: techLead,
       projectManager:projectManager,
     };
     axios

@@ -3,9 +3,9 @@ import React from 'react'
 
 const Table = () => {
   return (
-    <div>
-        <table class="table table-striped">
-        <thead>
+    <div class="table-responsive-sm">
+        <table className="table align-middle mb-0  ">
+        <thead className="text-light text-center">
                 <tr>
                   <th>RECENT PROJECTS</th>
                   <th>CREATED</th>
@@ -13,7 +13,7 @@ const Table = () => {
                   <th>DUE</th>
                   <th>STATS</th>
                 </tr>
-              </thead>
+        </thead>
               <br/>
               <tbody>
                 <tr>

@@ -17,6 +17,7 @@ const Project = () => {
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
 
+
   const [description, setDescription] = useState("");
 
   const handleSaveClick = async () => {
@@ -40,6 +41,7 @@ const Project = () => {
     }
   };
 
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
@@ -47,6 +49,7 @@ const Project = () => {
         setprojectDetails(response.data);
       });
   }, []);
+
 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);

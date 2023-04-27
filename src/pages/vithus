@@ -1,8 +1,0 @@
-import NavBar from "../components/Navbar";
-import { useState } from "react";
-import { UserData } from "../components/chart/Data";
-import BarChart from "../components/chart/BarChart";
-import ProjectDetails from "../data/Project.json";
-import { Link } from "react-router-dom";
-import Progressb from "../components/Progress";
-

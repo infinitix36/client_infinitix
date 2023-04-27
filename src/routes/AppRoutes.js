@@ -258,16 +258,7 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-        <Route
-          exact
-          path="/projectpm"
-          element={
-            <RequireAuth>
-              <ProjectPM />
-            </RequireAuth>
-          }
-        />
-
+       
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
 

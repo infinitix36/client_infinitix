@@ -58,7 +58,25 @@ const DashboardTL = () => {
       });
   }, []);
   console.log(myProjects);
-  
+  //for testing purpurse
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.year),
+    datasets: [
+      {
+        label: "Users Gained",
+        data: UserData.map((data) => data.userGain),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
   return (
     <div>
       <NavBar />
@@ -116,7 +134,7 @@ const DashboardTL = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="mt-5">
                   {/* project which do not fill by Techlead but fill by project manager */}
                   <Link
@@ -128,15 +146,15 @@ const DashboardTL = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="mt-5">
-                  {/* create project for project manager */}
+                {/* <div className="mt-5">
+                 
                   <Link
                     to="/project/createproject"
                     className="btn btn-outline-secondary form-control"
                   >
                     Create project
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -166,15 +184,10 @@ const DashboardTL = () => {
             </div>
           </div>
         </div>
-        <Link
-          to={"/profile/john"}
-          className="btn btn-outline-primary form-control"
-        >
-          profile
-        </Link>
+       
 
         <div className="container mt-5 mb-5"></div>
-        <h3 className="row justify-content-center">project under my lead</h3>
+        <h3 className="row justify-content-center">project under My lead</h3>
         <div className="container mt-5">
           {" "}
           {/* projects under the tech lead */}

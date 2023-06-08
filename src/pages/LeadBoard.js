@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 import TableSort from "../components/Leaderboard/TableSort";
-import Sort from "../components/Leaderboard/Sort";
+//import Sort from "../components/Leaderboard/Sort";
 import JobRole from "../components/Leaderboard/Jobrole";
 import "./../css/LeadBoard.css"
 
 
 function LeadBoard() {
 	
-	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
+	//const [sort, setSort] = useState({ sort: "rating", order: "desc" });
 	const [selectedUserRoleName, setSelectedUserRoleName] = useState("");
 	const [filteruserRoleName, setFilteruserRoleName] = useState([]);
 
@@ -58,7 +58,7 @@ function LeadBoard() {
 					</div>
 					
 					<div className="filter_container">
-					<Sort setSortBy={setSortBy} setSortOrder={setSortOrder} />
+					{/* <Sort setSortBy={setSortBy} setSortOrder={setSortOrder} /> */}
 						<JobRole userRoleName={setSelectedUserRoleName}/>
 					</div>
 				</div>

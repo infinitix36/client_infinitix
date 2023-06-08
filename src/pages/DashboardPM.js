@@ -62,9 +62,6 @@ const DashboardPM = () => {
     ],
   });
 
-  const now1 = 35;
-  const now2 = 82;
-  const now3 = 57;
 
   return (
     <div>
@@ -131,7 +128,7 @@ const DashboardPM = () => {
           <div className="col-md-6">
             {/* pie chart component for orangeHR chart */}
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <PieChartComponent data={pieData} />
             </div>
           </div>

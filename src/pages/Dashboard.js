@@ -35,7 +35,7 @@ const Dashboard = () => {
     <DashboardBA></DashboardBA>
   ) : userRoleName === "Admin" ? (
     <Admin></Admin>
-  ) : userRoleName === "Project Manager" ? (
+  ) : userRoleName === "ProjectManager" ? (
     <DashboardPM></DashboardPM>
   ) : userRoleName === "Techlead" ? (
     <DashboardTL />

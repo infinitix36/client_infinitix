@@ -2,18 +2,47 @@
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
-import { useState } from "react";
-import Dough from "../components/chart/Dough";
-import {BsFillPlusCircleFill} from "react-icons/bs";
-import Table from "./Table";
-//import ProgressBar from 'react-bootstrap/ProgressBar';
-import SideBar from "../components/Sidebar";
-import { ProgressBar } from "react-bootstrap";
+import { useState, useEffect} from "react";
+
+
+
 import { Link } from "react-router-dom";
-
-
+import PieChartComponent from "../components/PieChartComponent";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import JiraTableAll from "../components/JiraTableAll";
 
 const DashboardPM = () => {
+  const [projectDetails, setprojectDetails] = useState([]);
+  // orangeHR leave fetch
+  const [taken, setTaken] = useState([]);
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const userId = data._id;
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
+      .then(function (response) {
+        setTaken(response.data[0]);
+      });
+  }, []);
+  console.log(taken.taken);
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
+      .then(function (response) {
+        setprojectDetails(response.data);
+      });
+  }, []);
+  
+  // we get as string so convert to float
+  const leaveTaken = parseFloat(taken.taken);
+  const notLeaveTaken = 1 - leaveTaken;
+
+  const pieData = [
+    { name: "Taken", value: leaveTaken * 100 },
+    { name: "Not Taken", value: notLeaveTaken * 100 },
+  ];
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -33,9 +62,6 @@ const DashboardPM = () => {
     ],
   });
 
-  const now1 = 35;
-  const now2 = 82;
-  const now3 = 57;
 
   return (
     <div>
@@ -57,60 +83,36 @@ const DashboardPM = () => {
               <Link to="/project/createProject"><i class="bi bi-plus-circle"></i></Link> Create New Project{" "}
             </div>{" "}
           </div>
-          <div className="col-md-3">
-            <div class="card text-bg-info mb-3" style={{ maxWidth: "18rem" }}>
-              <div class="card-header">
-                <img
-                  src="https://marketplacecontent.zoom.us/%2FnptAB68BTdO6Jrc_A6ROUA%2FDdIgA0x-QJKBkUaxQR_Q5A%2Fapp%2FtKVbP0NiSve_Mul31LfEEw%2FpHAZ_eIvRJi7OmEEMDq6QA.png"
-                  style={{ width: "2rem", height: "2rem" }}
-                  class="card-title"
-                ></img>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Info card title</h5>
-                <ProgressBar striped variant="success" now={now1} label={`${now1}%`} />
-              </div>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div
-              class="card text-bg-warning mb-3"
-              style={{ maxWidth: "18rem" }}
-            >
-              <div class="card-header">
-                <img
-                  src="https://imageio.forbes.com/specials-images/imageserve/5cd9d263169cc600095f2398/0x0.jpg?format=jpg&crop=1200,1200,x0,y0,safe&height=87&width=87"
-                  style={{ width: "2rem", height: "2rem" }}
-                  class="card-title"
-                ></img>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Warning card title</h5>
-                <ProgressBar striped variant="danger" now={now2} label={`${now2}%`}/>
+          <div className="col-md-12 overflow-auto">
+              <div className="container-fluid">
+                <div
+                  className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                  style={{ overflowX: "auto" }}
+                >
+                  {/* map for project details and link */}
+                  {projectDetails.map((e) => {
+                    return (
+                      <div className="col-md-3">
+                        <div className="card" style={{ background: "#B8E8FC" }}>
+                          <div className="card-header">
+                            <h5 className="card-title">{e.projectName}</h5>
+                          </div>
+                          <div className="card-body">
+                            
+                            <p>{e.description}</p>
+                          </div>
+                          <div className="card-footer">
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-3">
-            <div
-              class="card text-bg-success mb-3"
-              style={{ maxWidth: "18rem" }}
-            >
-              <div class="card-header">
-                <img
-                  src="https://i.pinimg.com/originals/2c/b1/a5/2cb1a59484ed73766fd11474667ace8a.jpg"
-                  style={{ width: "2rem", height: "2rem" }}
-                  class="card-title"
-                ></img>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Success card title</h5>
-                <ProgressBar striped variant="info" now={now3} label={`${now3}%`} />
-              </div>
-            </div>
-          </div>
         </div>
         <div className="row mt-5">
-          <Table />
+        <JiraTableAll/>
         </div>
         <br></br>
         <br></br>
@@ -124,7 +126,12 @@ const DashboardPM = () => {
             </div>
           </div>
           <div className="col-md-6">
-            <Dough />
+            {/* pie chart component for orangeHR chart */}
+          <div className="row">
+            <div className="col-md-12">
+              <PieChartComponent data={pieData} />
+            </div>
+          </div>
           </div>
         </div>
       </div>

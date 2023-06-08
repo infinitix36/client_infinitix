@@ -86,7 +86,7 @@ useEffect(()=>{
         <td>{user.fname}</td>
         <td>{user.userRoleName}</td>
         <td><img src="./images/star.png" className={styles.star}></img> {user.rating}</td>
-        <td>{user.commits}</td>
+        <td>{user.commitCount}</td>
       </tr>
     ))
   )}

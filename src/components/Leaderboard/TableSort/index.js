@@ -6,6 +6,8 @@ const TableSort = ({ userRoleName }) => {
   const [userDetails, setUserDetails] = useState([]);
   const [filterType, setFilterType] = useState("getQA");
   const [sortOption, setSortOption] = useState(""); // State variable for sorting option
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [usersPerPage] = useState(5); // Number of users to display per page
 
   function fillTable() {
     let apiEndpoint = `http://localhost:8000/users/all?userRoleName=${userRoleName}`;
@@ -19,7 +21,7 @@ const TableSort = ({ userRoleName }) => {
         Authorization: "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",
       });
       if (users.length === 0) {
-        setUserDetails("");
+        setUserDetails([]);
       } else {
         for (const user of users) {
           if (user.GitHubUsername) {
@@ -36,7 +38,8 @@ const TableSort = ({ userRoleName }) => {
           } else {
             newUsers.push({
               ...user,
-              avatar: "https://avatars.githubusercontent.com/u/111459302?v=4",
+              avatar:
+                "https://avatars.githubusercontent.com/u/111459302?v=4",
             });
             setUserDetails(newUsers);
             console.log(newUsers);
@@ -71,50 +74,80 @@ const TableSort = ({ userRoleName }) => {
     setSortOption(option);
   };
 
+  // Pagination logic
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = userDetails.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <table className="table">
-      <thead className={styles.container}>
-        <tr>
-          <th className={styles.img_tab}>Profile Picture</th>
-          <th className={styles.fname_tab}>F_Name</th>
-          <th className={styles.fname_tab}>Role</th>
-          <th className={styles.rating_tab}>
-            {/* Add onClick event for sorting by rating */}
-            <button onClick={() => handleSort("rating")}>Rating</button>
-          </th>
-          <th className={styles.count_tab}>
-            {/* Add onClick event for sorting by commits */}
-            <button onClick={() => handleSort("commits")}>Commits</button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {userDetails.length === 0 ? (
+    <div>
+      <table className="table">
+        <thead className={styles.container}>
           <tr>
-            <td colSpan="5">No users found</td>
+            <th className={styles.img_tab}>Profile Picture</th>
+            <th className={styles.fname_tab}>F_Name</th>
+            <th className={styles.fname_tab}>Role</th>
+            <th className={styles.rating_tab}>
+              {/* Add onClick event for sorting by rating */}
+              <button onClick={() => handleSort("rating")}>Rating</button>
+            </th>
+            <th className={styles.count_tab}>
+              {/* Add onClick event for sorting by commits */}
+              <button onClick={() => handleSort("commits")}>Commits</button>
+            </th>
           </tr>
-        ) : (
-          userDetails.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <img src={user.avatar} alt="Avatar" className={styles.avatar} />
-              </td>
-              <td>{user.fname}</td>
-              <td>{user.userRoleName}</td>
-              <td>
-                <img
-                  src="./images/star.png"
-                  className={styles.star}
-                  alt="Star"
-                ></img>{" "}
-                {user.rating}
-              </td>
-              <td>{user.commitCount}</td>
+        </thead>
+        <tbody>
+          {currentUsers.length === 0 ? (
+            <tr>
+              <td colSpan="5">No users found</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            currentUsers.map((user) => (
+              <tr key={user.id}>
+                <td>
+                  <img
+                    src={user.avatar}
+                    alt="Avatar"
+                    className={styles.avatar}
+                  />
+                </td>
+                <td>{user.fname}</td>
+                <td>{user.userRoleName}</td>
+                <td>
+                  <img
+                    src="./images/star.png"
+                    className={styles.star}
+                    alt="Star"
+                  ></img>{" "}
+                  {user.rating}
+                </td>
+                <td>{user.commitCount}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+
+      {/* Pagination */}
+      <div>
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentUsers.length < usersPerPage}
+        >
+          Next
+        </button>
+      </div>
+    </div>
   );
 };
 

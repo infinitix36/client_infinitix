@@ -2,9 +2,9 @@
 import BarChart from "../components/chart/BarChart";
 import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
-
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 
 import { Link } from "react-router-dom";
 import PieChartComponent from "../components/PieChartComponent";
@@ -18,9 +18,10 @@ const DashboardPM = () => {
   const [taken, setTaken] = useState([]);
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const userId = data._id;
+  const gitUserName = data.GitHubUsername;
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
+      .get(process.env.REACT_APP_API_URL + `/users/leave/${userId}`)
       .then(function (response) {
         setTaken(response.data[0]);
       });
@@ -29,12 +30,12 @@ const DashboardPM = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
   }, []);
-  
+
   // we get as string so convert to float
   const leaveTaken = parseFloat(taken.taken);
   const notLeaveTaken = 1 - leaveTaken;
@@ -62,7 +63,6 @@ const DashboardPM = () => {
     ],
   });
 
-
   return (
     <div>
       <NavBar />
@@ -80,39 +80,40 @@ const DashboardPM = () => {
             <br />
             <br />
             <div>
-              <Link to="/project/createProject"><i class="bi bi-plus-circle"></i></Link> Create New Project{" "}
+              <Link to="/project/createProject">
+                <i class="bi bi-plus-circle"></i>
+              </Link>{" "}
+              Create New Project{" "}
             </div>{" "}
           </div>
           <div className="col-md-12 overflow-auto">
-              <div className="container-fluid">
-                <div
-                  className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
-                  style={{ overflowX: "auto" }}
-                >
-                  {/* map for project details and link */}
-                  {projectDetails.map((e) => {
-                    return (
-                      <div className="col-md-3">
-                        <div className="card" style={{ background: "#B8E8FC" }}>
-                          <div className="card-header">
-                            <h5 className="card-title">{e.projectName}</h5>
-                          </div>
-                          <div className="card-body">
-                            
-                            <p>{e.description}</p>
-                          </div>
-                          <div className="card-footer">
-                          </div>
+            <div className="container-fluid">
+              <div
+                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                style={{ overflowX: "auto" }}
+              >
+                {/* map for project details and link */}
+                {projectDetails.map((e) => {
+                  return (
+                    <div className="col-md-3">
+                      <div className="card" style={{ background: "#B8E8FC" }}>
+                        <div className="card-header">
+                          <h5 className="card-title">{e.projectName}</h5>
                         </div>
+                        <div className="card-body">
+                          <p>{e.description}</p>
+                        </div>
+                        <div className="card-footer"></div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
+          </div>
         </div>
         <div className="row mt-5">
-        <JiraTableAll/>
+          <JiraTableAll />
         </div>
         <br></br>
         <br></br>
@@ -127,13 +128,14 @@ const DashboardPM = () => {
           </div>
           <div className="col-md-6">
             {/* pie chart component for orangeHR chart */}
-          <div className="row">
-            <div className="col-md-12">
-              <PieChartComponent data={pieData} />
+            <div className="row">
+              <div className="col-md-12">
+                <PieChartComponent data={pieData} />
+              </div>
             </div>
           </div>
-          </div>
         </div>
+        <ProjectVsCommitCount owner={gitUserName} />
       </div>
     </div>
   );

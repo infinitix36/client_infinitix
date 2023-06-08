@@ -213,7 +213,7 @@ const Project = () => {
             />
             <ProjectVsCommitCount
               owner="vjathishwarya2000"
-              repo={projectName}
+      
             />
             {/* {" "}
             Chart{" "}

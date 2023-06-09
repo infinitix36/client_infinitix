@@ -18,7 +18,7 @@ import Home from "../pages/Home";
 import RequireAuth from "../utils/RequireAuth";
 
 import Admin from "../pages/Admin";
-import VerifyUser from "../pages/VerifyUser";
+import VerifyUser from "../pages/VerifyUserDetails";
 import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
 
@@ -292,6 +292,7 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
+         
         <Route
           path="/announcement"
           element={

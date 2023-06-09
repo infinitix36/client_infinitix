@@ -13,7 +13,7 @@ const Admin = () => {
 
       <Row className="justify-content-center flex-column flex-md-row">
         <Col xs="auto" className="mb-2 mb-md-0">
-          <Link to="/verifyuser">
+          <Link to="/pending">
             <Button variant="primary" size="lg">
               Verify New Users
             </Button>

@@ -111,6 +111,7 @@ const DashboardTL = () => {
                             <h5 className="card-title">{e.projectName}</h5>
                           </div>
                           <div className="card-body">
+                            {e.description}
                             <img
                               src={e.projectLogo}
                               className="rounded-circle"
@@ -134,7 +135,7 @@ const DashboardTL = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="mt-5">
                   {/* project which do not fill by Techlead but fill by project manager */}
                   <Link
@@ -146,15 +147,15 @@ const DashboardTL = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="mt-5">
-                  {/* create project for project manager */}
+                {/* <div className="mt-5">
+                 
                   <Link
                     to="/project/createproject"
                     className="btn btn-outline-secondary form-control"
                   >
                     Create project
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -184,15 +185,10 @@ const DashboardTL = () => {
             </div>
           </div>
         </div>
-        <Link
-          to={"/profile/john"}
-          className="btn btn-outline-primary form-control"
-        >
-          profile
-        </Link>
+       
 
         <div className="container mt-5 mb-5"></div>
-        <h3 className="row justify-content-center">project under my lead</h3>
+        <h3 className="row justify-content-center">project under My lead</h3>
         <div className="container mt-5">
           {" "}
           {/* projects under the tech lead */}

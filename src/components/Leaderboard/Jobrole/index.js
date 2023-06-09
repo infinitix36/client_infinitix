@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-const userRoleNames = ["Developer", "QA", "Techlead", "BA"];
+const userRoleNames = ["developer", "QA", "Techlead", "BA"];
 
-const JobRole = ({ userRoleName }) => {
+const UserRoleName = ({ userRoleName }) => {
   const [selectedUserRoleName, setSelectedUserRoleName] = useState("");
   const handleRadioChange = (event) => {
     setSelectedUserRoleName(event.target.value);
@@ -43,4 +43,4 @@ const JobRole = ({ userRoleName }) => {
     </div>
   );
 };
-export default JobRole;
+export default UserRoleName;

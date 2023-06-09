@@ -18,7 +18,7 @@ import Home from "../pages/Home";
 import RequireAuth from "../utils/RequireAuth";
 
 import Admin from "../pages/Admin";
-import VerifyUser from "../pages/VerifyUser";
+import VerifyUser from "../pages/VerifyUserDetails";
 import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
 
@@ -194,7 +194,7 @@ const AppRoutes = () => {
         <Route exact path="/profile/:fname" element={<RequireAuth><Profile /></RequireAuth>} />
         <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
         <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
-        <Route exact path="/projectpm" element={<RequireAuth><DashboardPM/></RequireAuth>} />
+        
 
 
         <Route path="/" element={<Login />} />
@@ -258,7 +258,7 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-       
+
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
 
@@ -292,6 +292,7 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
+         
         <Route
           path="/announcement"
           element={

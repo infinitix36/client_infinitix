@@ -16,7 +16,6 @@ import DashboardTL from "./DashboardTL";
 
 import jwt_decode from "jwt-decode";
 
-
 const Dashboard = () => {
   const [projectDetails, setprojectDetails] = useState([]);
   const [taken, setTaken] = useState([]);
@@ -27,7 +26,7 @@ const Dashboard = () => {
     ?.userData?.userRoleName;
   return !userRoleName ? (
     <p>Loading</p>
-  ) : userRoleName === "Developer" ? (
+  ) : userRoleName === "developer" ? (
     <DashboardDEV></DashboardDEV>
   ) : userRoleName === "QA" ? (
     <DashboardQA></DashboardQA>
@@ -35,7 +34,7 @@ const Dashboard = () => {
     <DashboardBA></DashboardBA>
   ) : userRoleName === "Admin" ? (
     <Admin></Admin>
-  ) : userRoleName === "Project Manager" ? (
+  ) : userRoleName === "ProjectManager" ? (
     <DashboardPM></DashboardPM>
   ) : userRoleName === "Techlead" ? (
     <DashboardTL />

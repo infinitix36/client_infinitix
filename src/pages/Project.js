@@ -9,6 +9,7 @@ import axios from "axios";
 import { useState } from "react";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 import FeedBack from "../components/FeedBack";
 import JiraTable from "../components/JiraTable";
 
@@ -210,6 +211,10 @@ const Project = () => {
               owner="dreamshack1999"
               repo={projectName}
             />
+            <ProjectVsCommitCount
+              owner="vjathishwarya2000"
+      
+            />
             {/* {" "}
             Chart{" "}
             <div>
@@ -236,7 +241,11 @@ const Project = () => {
         return ( <div>{e.label}</div>)
        })} */}
 
+
         {/* <FeedBack projectId="640748a7bfe3ac265c4127f8" /> */}
+
+        <FeedBack projectId={projectId} />
+
       </div>
       {/* <div className="container mt-3 mb-5">
         <JiraTable projectName={projectName} />

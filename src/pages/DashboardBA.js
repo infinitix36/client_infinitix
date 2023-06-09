@@ -1,13 +1,63 @@
 import NavBar from "../components/Navbar";
-import { useState } from "react";
 import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
 import ProjectDetails from "../data/Project.json";
 import { Link } from "react-router-dom";
 import Progressb from "../components/Progress";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { ProgressBar } from "react-bootstrap";
+import JiraTableQA from "../components/jiraTableQA";
 /** */
-
+import jwt_decode from "jwt-decode";
 const DashboardBA = () => {
+  //
+  const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
+    ._id;
+  const [userProjects, setUserProjects] = useState([]);
+
+  const [stageUpdate, setStageUpdate] = useState(0);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/projects/getProjectDetailsQA/${userID}`)
+      .then(function (response) {
+        setUserProjects(response.data);
+        console.log(response.data);
+      });
+  }, [stageUpdate]);
+  //
+  const updateStatus = (value, projectID) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Change it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post("http://localhost:8000/project/addStage", {
+            projectId: projectID,
+            stage: value,
+          })
+          .then((res) => {
+            if (res.data.status === true) {
+              Swal.fire("Updated!", "Stage updated Successfully.", "success");
+              setStageUpdate(stageUpdate + 1);
+            } else {
+              alert("Fail to Change stage");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  };
+
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -26,6 +76,7 @@ const DashboardBA = () => {
       },
     ],
   });
+
   return (
     <div>
       <NavBar />
@@ -37,36 +88,35 @@ const DashboardBA = () => {
                 className="row flex-row flex-nowrap mt-4 pb-4 pt-2 "
                 style={{ overflowX: "auto" }}
               >
-                {ProjectDetails.map((e) => {
+                {userProjects?.map((e) => {
                   return (
                     // width of a single card is 3
                     <div className="col-md-3">
                       <div className="card">
                         {/* Card heading */}
                         <div className="card-header  text-white bg-dark">
-                          <h5 className="card-title">{e.projectName}</h5>
+                          <h5 className="card-title">{e?.projectName}</h5>
                         </div>
-
                         <div className="card-body">
-                          {/* image logo */}
-                          <img
-                            src={e.projectLogo}
-                            className="rounded-circle"
-                            style={{ width: "40px" }}
-                          ></img>
-
                           {/* Project description  */}
-                          <p>{e.projectDescription}</p>
+                          <p>{e?.description}</p>
+                          <ProgressBar variant="success" now={e?.stage} />
                         </div>
-
-                        {/* link to project details */}
                         <div className="card-footer">
-                          <Link
-                            to={"/project/" + e.projectId}
-                            className="btn btn-outline-primary form-control"
+                          <select
+                            onChange={(x) => {
+                              updateStatus(x.target.value, e?._id);
+                            }}
                           >
-                            Open
-                          </Link>
+                            <option disabled selected>
+                              Select Stage
+                            </option>
+                            <option value="0">Reset</option>
+                            <option value="25">Stage 1</option>
+                            <option value="50">Stage 2</option>
+                            <option value="75">Stage 3</option>
+                            <option value="100">Stage 4</option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -84,15 +134,14 @@ const DashboardBA = () => {
               <thead className="bg-dark text-white">
                 <tr>
                   <th>Name</th>
-                  <th>Title</th>
-                  <th>Status</th>
+                  <th>Job Title</th>
                   <th>Position</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
+                    {/* manual data  wanna fetch*/}
                     <div className="d-flex align-items-center">
                       <img
                         src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -203,14 +252,6 @@ const DashboardBA = () => {
           {/* <div className=" col-md-2"></div> */}
         </div>
 
-        {/* progress bar */}
-        <div className="mt-5 p-2">
-          <Progressb />
-          <Progressb />
-          <Progressb />
-          <Progressb />
-        </div>
-
         {/* Bar Chart */}
         <div className="row mt-5 w-50">
           <div class="col-md-10 ">
@@ -221,6 +262,7 @@ const DashboardBA = () => {
             </div>
           </div>
         </div>
+        <JiraTableQA></JiraTableQA>
       </div>
       //{" "}
     </div>

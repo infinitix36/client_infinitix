@@ -169,7 +169,7 @@ const Project = () => {
                 </tr>
               </thead>
               <tbody>
-                {contributors.map((e, index) => {
+                {contributors?.map((e, index) => {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>
@@ -225,16 +225,31 @@ const Project = () => {
         <div className="row mt-5"></div>
         <br></br>
         <br></br>
+        <div className="alert alert-danger">
+          <b>Comments</b>
+        </div>
+
+        {project?.feedBacksQA?.map((e) => {
+          return (
+            <div>
+              <div className="">{e?.feedback}</div>
+            </div>
+          );
+        })}
 
         {/* {contributors?.map((e)=>{
         return ( <div>{e.label}</div>)
        })} */}
 
+
+        {/* <FeedBack projectId="640748a7bfe3ac265c4127f8" /> */}
+
         <FeedBack projectId={projectId} />
+
       </div>
-      <div className="container mt-3 mb-5">
+      {/* <div className="container mt-3 mb-5">
         <JiraTable projectName={projectName} />
-      </div>
+      </div> */}
     </div>
   );
 };

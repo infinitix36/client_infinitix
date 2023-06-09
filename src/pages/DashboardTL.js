@@ -111,6 +111,7 @@ const DashboardTL = () => {
                             <h5 className="card-title">{e.projectName}</h5>
                           </div>
                           <div className="card-body">
+                            {e.description}
                             <img
                               src={e.projectLogo}
                               className="rounded-circle"

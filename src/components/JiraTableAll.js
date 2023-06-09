@@ -19,7 +19,7 @@ function JiraTableAll() {
         <tr>
           <th>ID</th>
           <th>Summary</th>
-          <th>Description</th>
+          <th>Link</th>
           <th>Project Name</th>
           <th>Created Time</th>
           <th>Created By</th>
@@ -30,7 +30,12 @@ function JiraTableAll() {
           <tr key={item._id}>
             <td>{item.id}</td>
             <td>{item.summary}</td>
-            <td>{item.description}</td>
+            <td>
+              {" "}
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                {item.link}
+              </a>
+            </td>
             <td>{item.projectName}</td>
             <td>{item.createdTime}</td>
             <td>{item.createdBy}</td>

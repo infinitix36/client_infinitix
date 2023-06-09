@@ -114,7 +114,7 @@ const Project = () => {
       >
         {/* <SideBar /> */}
       </div>
-      <h1>This project ID is = {projectId}</h1>
+      {/* <h1>This project ID is = {projectId}</h1> */}
 
       <div className="container">
         <div className="row mt-5">
@@ -211,10 +211,10 @@ const Project = () => {
               owner="dreamshack1999"
               repo={projectName}
             />
-            <ProjectVsCommitCount
+            {/* <ProjectVsCommitCount
               owner="vjathishwarya2000"
       
-            />
+            /> */}
             {/* {" "}
             Chart{" "}
             <div>
@@ -241,11 +241,9 @@ const Project = () => {
         return ( <div>{e.label}</div>)
        })} */}
 
-
         {/* <FeedBack projectId="640748a7bfe3ac265c4127f8" /> */}
 
         <FeedBack projectId={projectId} />
-
       </div>
       {/* <div className="container mt-3 mb-5">
         <JiraTable projectName={projectName} />

@@ -55,7 +55,6 @@ function Profile(props) {
                   }}
                 />
               )}
-             
             </div>
             <div className="card-body">
               <form>
@@ -117,7 +116,7 @@ function Profile(props) {
                       type="url"
                       className="form-control a2"
                       id="orangeHrLink"
-                      value={data?.orangeHrLink}
+                      value="orangeHrLink/user"
                       disabled={true}
                     />
                     {console.log(data?.orangeHrLink)}

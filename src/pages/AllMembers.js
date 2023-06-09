@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 
 const AllMembers = () => {
   const [contributorsData, setContributorsData] = useState([]);
-// get all members 
+  // get all members
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL+"/users/getMembers")
+    axios
+      .get(process.env.REACT_APP_API_URL + "/users/getMembers")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -31,7 +32,7 @@ const AllMembers = () => {
                 to={"/profiles/" + contributor._id}
                 className="btn btn-primary"
               >
-                View Profile
+                Add Rating
               </Link>
             </li>
           ))}

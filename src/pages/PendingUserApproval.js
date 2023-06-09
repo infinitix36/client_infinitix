@@ -58,7 +58,7 @@ const PendingUserApproval = () => {
           });
           if (result === "allow") {
             axios
-            .get(`http://localhost:8000/sendmailTo/${email}`)
+            .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
             })
@@ -67,7 +67,7 @@ const PendingUserApproval = () => {
             });
           } else{
             axios
-            .get(`http://localhost:8000/sendmailTo/${email}`)
+            .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
             })

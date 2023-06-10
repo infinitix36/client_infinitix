@@ -9,6 +9,7 @@ import axios from "axios";
 import { useState } from "react";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 import FeedBack from "../components/FeedBack";
 import JiraTable from "../components/JiraTable";
 
@@ -16,7 +17,6 @@ const Project = () => {
   const { projectId } = useParams();
   const { projectName } = useParams();
   const [projectDetails, setprojectDetails] = useState([]);
-
 
   const [description, setDescription] = useState("");
 
@@ -41,7 +41,6 @@ const Project = () => {
     }
   };
 
-
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
@@ -49,7 +48,6 @@ const Project = () => {
         setprojectDetails(response.data);
       });
   }, []);
-
 
   // const project = projectDetails.find((p) => p._id === projectId);
   // console.log(project);
@@ -116,7 +114,7 @@ const Project = () => {
       >
         {/* <SideBar /> */}
       </div>
-      <h1>This project ID is = {projectId}</h1>
+      {/* <h1>This project ID is = {projectId}</h1> */}
 
       <div className="container">
         <div className="row mt-5">
@@ -171,7 +169,7 @@ const Project = () => {
                 </tr>
               </thead>
               <tbody>
-                {contributors.map((e, index) => {
+                {contributors?.map((e, index) => {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>
@@ -213,6 +211,10 @@ const Project = () => {
               owner="dreamshack1999"
               repo={projectName}
             />
+            {/* <ProjectVsCommitCount
+              owner="vjathishwarya2000"
+      
+            /> */}
             {/* {" "}
             Chart{" "}
             <div>
@@ -223,16 +225,29 @@ const Project = () => {
         <div className="row mt-5"></div>
         <br></br>
         <br></br>
+        <div className="alert alert-danger">
+          <b>Comments</b>
+        </div>
+
+        {project?.feedBacksQA?.map((e) => {
+          return (
+            <div>
+              <div className="">{e?.feedback}</div>
+            </div>
+          );
+        })}
 
         {/* {contributors?.map((e)=>{
         return ( <div>{e.label}</div>)
        })} */}
 
-        <FeedBack projectId="640748a7bfe3ac265c4127f8" />
+        {/* <FeedBack projectId="640748a7bfe3ac265c4127f8" /> */}
+
+        <FeedBack projectId={projectId} />
       </div>
-      <div className="container mt-3 mb-5">
+      {/* <div className="container mt-3 mb-5">
         <JiraTable projectName={projectName} />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -116,7 +116,7 @@ const NavBar = () => {
                   <li>
                     <Link
                       className="dropdown-item"
-                      to="/profile/mathesh"
+                      to="/profile/"
                       style={{
                         color: "white",
                         padding: "0.5rem 1rem",

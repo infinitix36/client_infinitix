@@ -38,7 +38,7 @@ const FeedBack = ({ projectId }) => {
   useEffect(() => {
     axios
       .get(
-        process.env.REACT_APP_API_URL+"/projects/getFeedback/640748a7bfe3ac265c4127f8"
+        process.env.REACT_APP_API_URL+`/projects/getFeedback/${projectId}`
       )
       .then(function (response) {
         setFeedBack(response.data[0].feedBacks);

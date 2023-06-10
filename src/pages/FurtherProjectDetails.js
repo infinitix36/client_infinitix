@@ -57,7 +57,7 @@ console.log(contributors);
   return (
     <React.Fragment>
       <NavBar></NavBar>
-      <h1>This project ID is = {_id}</h1>
+      {/* <h1>This project ID is = {_id}</h1> */}
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>
@@ -180,7 +180,7 @@ console.log(contributors);
             </div>
           </form>
         </div>
-        <h1>This project ID is = {_id}</h1>
+        {/* <h1>This project ID is = {_id}</h1> */}
       </div>
       <br></br>
     </React.Fragment>

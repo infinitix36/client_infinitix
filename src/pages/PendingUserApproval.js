@@ -58,18 +58,18 @@ const PendingUserApproval = () => {
               text: "Error",
             });
           });
-        if (result === "allow") {
-          axios
-            .get(`http://localhost:8000/sendmailTo/${email}`)
+          if (result === "allow") {
+            axios
+            .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
             })
             .catch(function (error) {
               console.log(error);
             });
-        } else {
-          axios
-            .get(`http://localhost:8000/sendmailTo/${email}`)
+          } else{
+            axios
+            .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
             })

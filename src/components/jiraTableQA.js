@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function JiraTableAll() {
+function JiraTableQA() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -18,27 +18,16 @@ function JiraTableAll() {
       <thead className="thead-dark">
         <tr>
           <th>ID</th>
-          <th>Summary</th>
-          <th>Link</th>
+          <th>Description</th>
           <th>Project Name</th>
-          <th>Created Time</th>
-          <th>Created By</th>
         </tr>
       </thead>
       <tbody>
         {data.map((item) => (
           <tr key={item._id}>
             <td>{item.id}</td>
-            <td>{item.summary}</td>
-            <td>
-              {" "}
-              <a href={item.link} target="_blank" rel="noopener noreferrer">
-                {item.link}
-              </a>
-            </td>
+            <td>{item.description}</td>
             <td>{item.projectName}</td>
-            <td>{item.createdTime}</td>
-            <td>{item.createdBy}</td>
           </tr>
         ))}
       </tbody>
@@ -46,4 +35,4 @@ function JiraTableAll() {
   );
 }
 
-export default JiraTableAll;
+export default JiraTableQA;

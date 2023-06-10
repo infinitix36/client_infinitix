@@ -3,17 +3,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 import TableSort from "../components/Leaderboard/TableSort";
-import Sort from "../components/Leaderboard/Sort";
+//import Sort from "../components/Leaderboard/Sort";
 import JobRole from "../components/Leaderboard/Jobrole";
-import Pagination from "../components/Leaderboard/Pagination";
 import "./../css/LeadBoard.css"
 
 
 function LeadBoard() {
 	
-	const [sort, setSort] = useState({ sort: "rating", order: "desc" });
-	const [selectedJobRole, setSelectedJobRole] = useState("");
-	const [filterJobRole, setFilterJobRole] = useState([]);
+	//const [sort, setSort] = useState({ sort: "rating", order: "desc" });
+	const [selectedUserRoleName, setSelectedUserRoleName] = useState("");
+	const [filteruserRoleName, setFilteruserRoleName] = useState([]);
 
 	const [sortBy, setSortBy] = useState('')
 	const [sortOrder, setSortOrder] = useState('')
@@ -25,10 +24,10 @@ function LeadBoard() {
 
 	// Do something with the selectedJobRole changed
 	useEffect(()=>{
-		if(selectedJobRole !==""){
+		if(selectedUserRoleName !==""){
 			
 		}
-	}, [selectedJobRole])
+	}, [selectedUserRoleName])
 
 	useEffect(()=>{
 		
@@ -55,19 +54,12 @@ function LeadBoard() {
 				</div>
 				<div className="full-body">
 					<div className="table_container">
-						<TableSort sortBy = {sortBy} sortOrder={sortOrder} userRoleName={selectedJobRole} details={obj.details ? obj.details : []} />
-						<Pagination
-							page={page}
-							limit={obj.limit ? obj.limit : 0}
-							total={obj.total ? obj.total : 0}
-							setPage={(page) => setPage(page)}
-						/>
-						{/* <p>Current page: {page}</p> */}
+						<TableSort sortBy = {sortBy} sortOrder={sortOrder} userRoleName={selectedUserRoleName} details={obj.details ? obj.details : []} />
 					</div>
 					
 					<div className="filter_container">
-					<Sort setSortBy={setSortBy} setSortOrder={setSortOrder} />
-						<JobRole jobRole={setSelectedJobRole}/>
+					{/* <Sort setSortBy={setSortBy} setSortOrder={setSortOrder} /> */}
+						<JobRole userRoleName={setSelectedUserRoleName}/>
 					</div>
 				</div>
 			</div>

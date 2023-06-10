@@ -158,7 +158,14 @@ const CreateProject = () => {
                       className="m-2 btn btn-dark text-white form-control"
                       type="reset"
                       value="Reset"
-                    ></input>
+                      onClick={() => {
+                        setProjectName("");
+                        setDescription("");
+                        setTechnology("");
+                        setDeadLine("");
+                        setTechLead("");
+                      }}
+                    />
                   </div>
                 </div>
               </div>

@@ -24,8 +24,8 @@ const DashboardDEV = () => {
         setTaken(response.data[0]);
       });
   }, []);
-  console.log(taken.taken);
-  const leaveTaken = parseFloat(taken.taken);
+  // console.log(taken.taken);
+  const leaveTaken = parseFloat(taken?.taken);
   const notLeaveTaken = 1 - leaveTaken;
 
   const pieData = [
@@ -93,7 +93,7 @@ const DashboardDEV = () => {
                 className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
                 style={{ overflowX: "auto" }}
               >
-                {projectDetails.map((e) => {
+                {projectDetails?.map((e) => {
                   return (
                     <div className="col-md-3">
                       <div
@@ -101,11 +101,11 @@ const DashboardDEV = () => {
                         style={{ backgroundColor: "rgb(223,255,213)" }}
                       >
                         <div className="card-header">
-                          <h5 className="card-title">{e.projectName}</h5>
+                          <h5 className="card-title">{e?.projectName}</h5>
                         </div>
                         <div className="card-body">
                           <img
-                            src={e.projectLogo}
+                            src={e?.projectLogo}
                             className="rounded-circle"
                             style={{ width: "40px" }}
                           ></img>
@@ -113,7 +113,7 @@ const DashboardDEV = () => {
                         </div>
                         <div className="card-footer">
                           <Link
-                            to={"/project/" + e._id + "/" + e.projectName}
+                            to={"/project/" + e?._id + "/" + e?.projectName}
                             className="btn btn-outline-danger form-control"
                           >
                             Open
@@ -292,7 +292,7 @@ const DashboardDEV = () => {
 
       {/* <div className="container mt-5 mb-5">Project feedback under My Lead</div>
       <h3 className="row justify-content-center">project under my lead</h3> */}
-      <div className="container mt-5"> {myProjects.map((e) => {
+      <div className="container mt-5"> {myProjects?.map((e) => {
               return (
                 <div className="col-12 mt-3">
                   <div
@@ -300,11 +300,11 @@ const DashboardDEV = () => {
                     style={{ backgroundColor: "rgb(223,255,213)" }}
                   >
                     <div className="card-header">
-                      <h5 className="card-title">{e.projectName}</h5>
+                      <h5 className="card-title">{e?.projectName}</h5>
                     </div>
                     <div className="card-footer">
                       <Link
-                        to={"/project/" + e._id + "/" + e.projectName}
+                        to={"/project/" + e?._id + "/" + e?.projectName}
                         className="btn btn-outline-primary form-control"
                       >
                         Open
@@ -319,3 +319,5 @@ const DashboardDEV = () => {
 };
 
 export default DashboardDEV;
+
+

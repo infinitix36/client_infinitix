@@ -73,7 +73,7 @@ const Dashboard = () => {
     ?.userData?.userRoleName;
   return !userRoleName ? (
     <p>Loading</p>
-  ) : userRoleName === "Developer" ? (
+  ) : userRoleName === "developer" ? (
     <DashboardDEV></DashboardDEV>
   ) : userRoleName === "QA" ? (
     <DashboardQA></DashboardQA>
@@ -83,7 +83,7 @@ const Dashboard = () => {
     <Admin></Admin>
   ) : userRoleName === "Project Manager" ? (
     <DashboardPM></DashboardPM>
-  ) : userRoleName === "Tech Lead" ? (
+  ) : userRoleName === "Techlead" ? (
     <DashboardTL />
   ) 
   : null;

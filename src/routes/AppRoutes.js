@@ -20,6 +20,7 @@ import RequireAuth from "../utils/RequireAuth";
 
 import Admin from "../pages/Admin";
 import VerifyUser from "../pages/VerifyUser";
+import AdminNotificationForm from "../pages/AdminNotificationForm";
 import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
 
@@ -29,6 +30,7 @@ import AllMembers from "../pages/AllMembers";
 
 import PendingUserApproval from "../pages/PendingUserApproval";
 import LeadBoard from "../pages/LeadBoard";
+import UserNotificationList from "../pages/UserNotificationList";
 
 
 const AppRoutes = () => {
@@ -84,6 +86,9 @@ const AppRoutes = () => {
           <Route path="/admin" element={<RequireAuth><Admin/></RequireAuth> }/>
           <Route path="/verifyuser" element={<RequireAuth><VerifyUser/> </RequireAuth>} />
           <Route path="/announcement" element={<RequireAuth><Announcement/> </RequireAuth>} />
+          <Route path="/AdminNotificationForm" element={<RequireAuth><AdminNotificationForm/> </RequireAuth>} />
+          <Route path="/UserNotificationList" element={<RequireAuth><UserNotificationList/> </RequireAuth>} />
+
           <Route path="/assignprojectmanager" element={<RequireAuth><AssignProjectManager/></RequireAuth>} />
      
           <Route path="/allmembers" element={<AllMembers />} />

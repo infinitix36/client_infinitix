@@ -22,33 +22,53 @@ const AllMembers = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="container my-5">
-        <h1 className="mb-4">All Members</h1>
-        <ul className="list-group">
+    <NavBar />
+    <div className="container my-5">
+      <h1 className="mb-4">All Members</h1>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
           {/* mapping for all members */}
           {contributorsData.map((contributor) => (
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              {contributor.fname}
-              <Link
-                to={"/users/getMembersProfile/" + contributor._id}
-                className="btn btn-primary"
-              >
-                View
-              </Link>
+            <tr key={contributor._id}>
+              <td>{contributor.fname}</td>
               {data.userRoleName === "Techlead" ? (
+                <td>
+                  {data.userRoleName === "Techlead" ? (
+                    <Link
+                      to={"/profiles/" + contributor._id}
+                      className="btn btn-primary"
+                    >
+                      Add Rating
+                    </Link>
+                  ) : null}
+                </td>
+              ) : (
+                <td></td>
+              )}
+              <td>
                 <Link
-                  to={"/profiles/" + contributor._id}
+                  to={"/users/getMembersProfile/" + contributor._id}
                   className="btn btn-primary"
                 >
-                  Add Rating
+                  View
                 </Link>
-              ) : null}
-            </li>
+              </td>
+              
+            </tr>
           ))}
-        </ul>
-      </div>
-    </>
+        </tbody>
+      </table>
+    </div>
+  </>
+  
+  
   );
 };
 

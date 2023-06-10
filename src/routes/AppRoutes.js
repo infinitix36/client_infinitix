@@ -214,7 +214,7 @@ const AppRoutes = () => {
         />
         <Route
           exact
-          path="/profile/:fname"
+          path="/profile/"
           element={
             <RequireAuth>
               <Profile />

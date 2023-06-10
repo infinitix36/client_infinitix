@@ -30,15 +30,13 @@ import LeadBoard from "../pages/LeadBoard";
 import ProfileRate from "../pages/ProfileRate";
 import ProjectsQA from "../pages/ProjectsQA";
 import ProjectCommentQA from "../pages/ProjectCommentQA";
-
+import ProfileOthers from "../pages/ProfileOthers";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Project></Project>} /> */}
-
-
         <Route
           exact
           path="/project"
@@ -76,11 +74,13 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/profiles/:id" element={<ProfileRate />} />
-
-
+        <Route
+          exact
+          path="/users/getMembersProfile/:id"
+          element={<ProfileOthers />}
+        />
         <Route
           exact
           path="/furtheraddprojects"
@@ -121,9 +121,7 @@ const AppRoutes = () => {
               <FurtherProjectDetails />
             </RequireAuth>
           }
-
         />
-
         <Route
           exact
           path="/DashboardBA"
@@ -187,23 +185,6 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-
-        <Route exact path="/DashboardBA" element={<RequireAuth><DashboardBA /></RequireAuth>} />
-        <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA/></RequireAuth>} />
-        <Route exact path="/DashboardDEV" element={<RequireAuth><DashboardDEV /></RequireAuth>} />
-        <Route exact path="/profile/:fname" element={<RequireAuth><Profile /></RequireAuth>} />
-        <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
-        <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
-        
-
-
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-
-
-        />
-
         <Route
           exact
           path="/DashboardBA"
@@ -258,16 +239,69 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
-
-
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-
+        />
+        <Route
+          exact
+          path="/DashboardBA"
+          element={
+            <RequireAuth>
+              <DashboardBA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardDEV"
+          element={
+            <RequireAuth>
+              <DashboardDEV />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/profile/:fname"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/Todolist"
+          element={
+            <RequireAuth>
+              <TodoList />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/home"
           element={
@@ -292,7 +326,6 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-         
         <Route
           path="/announcement"
           element={
@@ -309,8 +342,6 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-
-
         <Route path="/allmembers" element={<AllMembers />} />
         <Route path="/pending" element={<PendingUserApproval />} />
         <Route path="/projectsQA" element={<ProjectsQA />} />
@@ -318,7 +349,6 @@ const AppRoutes = () => {
           path="/projectscommentQA/:projectId/:projectName"
           element={<ProjectCommentQA />}
         />
-
         {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
       </Routes>
     </BrowserRouter>

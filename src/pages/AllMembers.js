@@ -4,9 +4,11 @@ import SideBar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const AllMembers = () => {
   const [contributorsData, setContributorsData] = useState([]);
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   // get all members
   useEffect(() => {
     axios
@@ -29,11 +31,19 @@ const AllMembers = () => {
             <li className="list-group-item d-flex justify-content-between align-items-center">
               {contributor.fname}
               <Link
-                to={"/profiles/" + contributor._id}
+                to={"/users/getMembersProfile/" + contributor._id}
                 className="btn btn-primary"
               >
-                Add Rating
+                View
               </Link>
+              {data.userRoleName === "Techlead" ? (
+                <Link
+                  to={"/profiles/" + contributor._id}
+                  className="btn btn-primary"
+                >
+                  Add Rating
+                </Link>
+              ) : null}
             </li>
           ))}
         </ul>

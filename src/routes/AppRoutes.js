@@ -20,7 +20,6 @@ import RequireAuth from "../utils/RequireAuth";
 import Admin from "../pages/Admin";
 // import VerifyUser from "../pages/VerifyUser";
 import AdminNotificationForm from "../pages/AdminNotificationForm";
-import VerifyUser from "../pages/VerifyUserDetails";
 import Announcement from "../pages/Announcement";
 import AssignProjectManager from "../pages/AssignProjectManager";
 
@@ -129,33 +128,121 @@ const AppRoutes = () => {
           }
         />
 
+        <Route
+          exact
+          path="/DashboardBA"
+          element={
+            <RequireAuth>
+              <DashboardBA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardDEV"
+          element={
+            <RequireAuth>
+              <DashboardDEV />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/profile/:fname"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/Todolist"
+          element={
+            <RequireAuth>
+              <TodoList />
+            </RequireAuth>
+          }
+        />
+        <Route
+          exact
+          path="/DashboardQA"
+          element={
+            <RequireAuth>
+              <DashboardQA />
+            </RequireAuth>
+          }
+        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
 
-        <Route exact path="/DashboardBA" element={<RequireAuth><DashboardBA /></RequireAuth>} />
-        <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA/></RequireAuth>} />
-        <Route exact path="/DashboardDEV" element={<RequireAuth><DashboardDEV /></RequireAuth>} />
-        <Route exact path="/profile/:fname" element={<RequireAuth><Profile /></RequireAuth>} />
-        <Route exact path="/Todolist" element={<RequireAuth><TodoList/></RequireAuth>} />
-        <Route exact path="/DashboardQA" element={<RequireAuth><DashboardQA /></RequireAuth>} />
-        <Route exact path="/login" element={<Login/>} />
-        <Route exact path="/register" element={<Register/>} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-         <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth>
+              <Admin />
+            </RequireAuth>
+          }
+        />
 
-          <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} />
-          <Route path="/admin" element={<RequireAuth><Admin/></RequireAuth> }/>
-          <Route path="/verifyuser" element={<RequireAuth><VerifyUser/> </RequireAuth>} />
-          <Route path="/announcement" element={<RequireAuth><Announcement/> </RequireAuth>} />
-          <Route path="/AdminNotificationForm" element={<RequireAuth><AdminNotificationForm/> </RequireAuth>} />
-          <Route path="/UserNotificationList" element={<RequireAuth><UserNotificationList/> </RequireAuth>} />
+        <Route
+          path="/announcement"
+          element={
+            <RequireAuth>
+              <Announcement />{" "}
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/AdminNotificationForm"
+          element={
+            <RequireAuth>
+              <AdminNotificationForm />{" "}
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/UserNotificationList"
+          element={
+            <RequireAuth>
+              <UserNotificationList />{" "}
+            </RequireAuth>
+          }
+        />
 
-          <Route path="/assignprojectmanager" element={<RequireAuth><AssignProjectManager/></RequireAuth>} />
-     
-          <Route path="/allmembers" element={<AllMembers />} />
-          <Route path="/pending" element={<PendingUserApproval />} />
-          {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
+        <Route
+          path="/assignprojectmanager"
+          element={
+            <RequireAuth>
+              <AssignProjectManager />
+            </RequireAuth>
+          }
+        />
 
+        <Route path="/allmembers" element={<AllMembers />} />
+        <Route path="/pending" element={<PendingUserApproval />} />
+        {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
 
         <Route
           exact
@@ -277,7 +364,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+
         <Route
           exact
           path="/DashboardBA"

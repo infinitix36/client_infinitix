@@ -10,34 +10,34 @@ body {
   /*background: #DAD299;  /* fallback for old browsers */
 /*background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);  /* Chrome 10-25, Safari 5.1-6 */
 /*background: linear-gradient(to right, #B0DAB9, #DAD299); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: rgb(2,0,36);
+/* background: rgb(2,0,36);
   background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(4,38,111,1) 0%, rgba(0,0,0,1) 100%);
- 
+  */
 }
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
   height: 5px;
-}
+} */
 
 /* Track */
-
+/* 
 ::-webkit-scrollbar-track {
   background: #41295a;
-} 
+}  */
 
 
 /* Handle */
- ::-webkit-scrollbar-thumb {
+ /* ::-webkit-scrollbar-thumb {
   background:  #2F0743;
-} 
+}  */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background:#41295a ;
-}  
+}   */

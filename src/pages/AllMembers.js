@@ -4,12 +4,15 @@ import SideBar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const AllMembers = () => {
   const [contributorsData, setContributorsData] = useState([]);
-
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  // get all members
   useEffect(() => {
-    axios.get("http://localhost:8000/users/getMembers")
+    axios
+      .get(process.env.REACT_APP_API_URL + "/users/getMembers")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -19,24 +22,53 @@ const AllMembers = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="container my-5">
-        <h1 className="mb-4">All Members</h1>
-        <ul className="list-group">
+    <NavBar />
+    <div className="container my-5">
+      <h1 className="mb-4">All Members</h1>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* mapping for all members */}
           {contributorsData.map((contributor) => (
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              {contributor.fname}
-              <Link
-                to={"/profile/" + contributor._id}
-                className="btn btn-primary"
-              >
-                View Profile
-              </Link>
-            </li>
+            <tr key={contributor._id}>
+              <td>{contributor.fname}</td>
+              {data.userRoleName === "Techlead" ? (
+                <td>
+                  {data.userRoleName === "Techlead" ? (
+                    <Link
+                      to={"/profiles/" + contributor._id}
+                      className="btn btn-primary"
+                    >
+                      Add Rating
+                    </Link>
+                  ) : null}
+                </td>
+              ) : (
+                <td></td>
+              )}
+              <td>
+                <Link
+                  to={"/users/getMembersProfile/" + contributor._id}
+                  className="btn btn-primary"
+                >
+                  View
+                </Link>
+              </td>
+              
+            </tr>
           ))}
-        </ul>
-      </div>
-    </>
+        </tbody>
+      </table>
+    </div>
+  </>
+  
+  
   );
 };
 

@@ -26,16 +26,18 @@ code {
 }
 
 /* Track */
+
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #41295a;
 } 
+
 
 /* Handle */
  ::-webkit-scrollbar-thumb {
-  background:  rgb(66, 81, 52);
+  background:  #2F0743;
 } 
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:rgb(0, 255, 145) ;
+  background:#41295a ;
 }  

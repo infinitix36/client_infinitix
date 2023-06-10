@@ -1,11 +1,27 @@
 import NavBar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserData } from "../components/chart/Data";
 import BarChart from "../components/chart/BarChart";
+import Modal from "../components/comment";
 import ProjectDetails from "../data/Project.json";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import JiraTableQA from "../components/jiraTableQA";
 
 const DashboardQA = () => {
+  const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
+    ._id;
+  const [userProjects, setUserProjects] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/projects/getProjectDetailsQA/${userID}`)
+      .then(function (response) {
+        setUserProjects(response.data);
+        console.log(response.data);
+      });
+  }, []);
+  const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -24,39 +40,54 @@ const DashboardQA = () => {
       },
     ],
   });
+  const addComment = (projectID, projectName) => {
+    const message = prompt("Enter Comment for " + projectName);
+    axios
+      .post("http://localhost:8000/project/addFeedQA", {
+        projectId: projectID,
+        feedback: message,
+        feedBy: userID,
+      })
+      .then((res) => {
+        if (res.data.status === true) {
+          alert("Comment Added Successfully");
+        } else {
+          alert("Fail to add comment");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <NavBar />
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-md-10 overflow-auto">
-            <div className="container-fluid">
+      <div className="container ">
+        <div className="row mt-5 justify-content-md-center ">
+          <div className="col-md-10 ">
+            <div className="container-fluid ">
               <div
-                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                className="row flex-row flex-nowrap mt-4 pb-4 pt-2 "
                 style={{ overflowX: "auto" }}
               >
-                {ProjectDetails.map((e) => {
+                {userProjects.map((e) => {
                   return (
                     <div className="col-md-3">
                       <div className="card">
-                        <div className="card-header">
-                          <h5 className="card-title">{e.projectName}</h5>
-                        </div>
                         <div className="card-body">
-                          <img
-                            src={e.projectLogo}
-                            className="rounded-circle"
-                            style={{ width: "40px" }}
-                          ></img>
-                          <p>{e.projectDescription}</p>
+                          Project Name: {e?.projectName} <br></br>
+                          project Description: {e?.description}
                         </div>
                         <div className="card-footer">
-                          <Link
-                            to={"/project/"+e.projectId}
-                            className="btn btn-outline-primary form-control"
+                          <button
+                            className="btn btn-primary form-control"
+                            onClick={() => {
+                              addComment(e?._id, e?.projectName);
+                            }}
                           >
-                            Open
-                          </Link>
+                            Add Comment
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -65,7 +96,17 @@ const DashboardQA = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-2"></div>
+          {/* <div className="col-md-5">
+            {" "}
+            <div className="mt-5">
+              <Link
+                to="/projectsQA"
+                className="btn btn-outline-primary form-control"
+              >
+                My Projects
+              </Link>
+            </div>
+          </div> */}
         </div>
         <div className="row mt-5">
           <div className="col-md-10">
@@ -200,6 +241,7 @@ const DashboardQA = () => {
             </div>
           </div>
         </div>
+        <JiraTableQA></JiraTableQA>
       </div>
     </div>
   );

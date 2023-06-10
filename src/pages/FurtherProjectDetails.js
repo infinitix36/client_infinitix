@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
 const FurtherProjectDetails = () => {
   const { _id } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
+  //get all QA BA PM for add contributors
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/getContributors")
+      .get(process.env.REACT_APP_API_URL+"/users/getContributors")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -23,6 +24,8 @@ const FurtherProjectDetails = () => {
   const [jiraLink, setJira] = useState();
   const [contributors, setContributors] = useState();
 console.log(contributors);
+
+// submit the extra projects details
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -36,12 +39,16 @@ console.log(contributors);
       contributors: contributors,
     };
     axios
-      .post("http://localhost:8000/projects/addExtraProjDetails", postData)
+      .post(process.env.REACT_APP_API_URL+"/projects/addExtraProjDetails", postData)
       .then((res) => {
         alert(res.data.message);
-        swal("Project Details added successfully", {
-          icon: "success",
-        });
+        Swal.fire({
+          title: 'success',
+          text: 'Project Details added successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool'
+        })
+        
       })
       .catch((error) => {
         console.log(error);
@@ -50,7 +57,7 @@ console.log(contributors);
   return (
     <React.Fragment>
       <NavBar></NavBar>
-      <h1>This project ID is = {_id}</h1>
+      {/* <h1>This project ID is = {_id}</h1> */}
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
           <form onSubmit={submitProjectData}>
@@ -88,6 +95,7 @@ console.log(contributors);
                 </div>
               </div>
               <div className="row m-2">
+              {/* clientPhone */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
@@ -102,6 +110,7 @@ console.log(contributors);
                     <label for="clientPhone">clientPhone</label>
                   </div>
                 </div>
+                {/* gitHubLink */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
@@ -130,6 +139,7 @@ console.log(contributors);
                     <label for="jiraLink">jiraLink</label>
                   </div>
                 </div>
+                {/* select contibutors */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <Select
@@ -170,7 +180,7 @@ console.log(contributors);
             </div>
           </form>
         </div>
-        <h1>This project ID is = {_id}</h1>
+        {/* <h1>This project ID is = {_id}</h1> */}
       </div>
       <br></br>
     </React.Fragment>

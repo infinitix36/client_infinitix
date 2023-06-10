@@ -1,9 +1,49 @@
-import NavBar from "../components/Navbar";
-import { useState } from "react";
-import { UserData } from "../components/chart/Data";
+//import { Link } from "react-router-dom";
 import BarChart from "../components/chart/BarChart";
+import { UserData } from "../components/chart/Data";
+import NavBar from "../components/Navbar";
+import { useState, useEffect } from "react";
+
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
+
+import { Link } from "react-router-dom";
+import PieChartComponent from "../components/PieChartComponent";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import JiraTableAll from "../components/JiraTableAll";
 
 const DashboardPM = () => {
+  const [projectDetails, setprojectDetails] = useState([]);
+  // orangeHR leave fetch
+  const [taken, setTaken] = useState([]);
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const userId = data._id;
+  const gitUserName = data.GitHubUsername;
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + `/users/leave/${userId}`)
+      .then(function (response) {
+        setTaken(response.data[0]);
+      });
+  }, []);
+  console.log(taken.taken);
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
+      .then(function (response) {
+        setprojectDetails(response.data);
+      });
+  }, []);
+
+  // we get as string so convert to float
+  const leaveTaken = parseFloat(taken.taken);
+  const notLeaveTaken = 1 - leaveTaken;
+
+  const pieData = [
+    { name: "Taken", value: leaveTaken * 100 },
+    { name: "Not Taken", value: notLeaveTaken * 100 },
+  ];
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
@@ -22,201 +62,80 @@ const DashboardPM = () => {
       },
     ],
   });
+
   return (
     <div>
       <NavBar />
+      {/* <div
+        className="side-bar"
+        style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
+      >
+        <SideBar />
+      </div> */}
       <div className="container">
+        {/* <ProjectProgress /> */}
         <div className="row mt-5">
-          <div className="col-md-10">
-            <div class="card-group">
-              <div class="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                  class="card-img-top"
-                  alt="Hollywood Sign on The Hill"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-              <div class="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
-                  class="card-img-top"
-                  alt="Palm Springs Road"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This card has supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-              <div class="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp"
-                  class="card-img-top"
-                  alt="Los Angeles Skyscrapers"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This card has even longer
-                    content than the first to show that equal height action.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
+          <div className="col-md-3">
+            Add Projects
+            <br />
+            <br />
+            <div>
+              <Link to="/project/createProject">
+                <i class="bi bi-plus-circle"></i>
+              </Link>{" "}
+              Create New Project{" "}
+            </div>{" "}
+          </div>
+          <div className="col-md-12 overflow-auto">
+            <div className="container-fluid">
+              <div
+                className="row flex-row flex-nowrap mt-4 pb-4 pt-2"
+                style={{ overflowX: "auto" }}
+              >
+                {/* map for project details and link */}
+                {projectDetails.map((e) => {
+                  return (
+                    <div className="col-md-3">
+                      <div className="card" style={{ background: "#B8E8FC" }}>
+                        <div className="card-header">
+                          <h5 className="card-title">{e.projectName}</h5>
+                        </div>
+                        <div className="card-body">
+                          <p>{e.description}</p>
+                        </div>
+                        <div className="card-footer"></div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-          <div className="col-md-2"></div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-10">
-            <table class="table align-middle mb-0 bg-white">
-              <thead class="bg-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Title</th>
-                  <th>Status</th>
-                  <th>Position</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                        class="rounded-circle"
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">john.doe@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Software engineer</p>
-                    <p class="text-muted mb-0">IT department</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-success rounded-pill d-inline">
-                      Active
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-sm btn-rounded"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">Alex Ray</p>
-                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Consultant</p>
-                    <p class="text-muted mb-0">Finance</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-primary rounded-pill d-inline">
-                      Onboarding
-                    </span>
-                  </td>
-                  <td>Junior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">Kate Hunington</p>
-                        <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">Designer</p>
-                    <p class="text-muted mb-0">UI/UX</p>
-                  </td>
-                  <td>
-                    <span class="badge badge-warning rounded-pill d-inline">
-                      Awaiting
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class=" col-md-2"></div>
+          <JiraTableAll />
         </div>
-        <div class="row mt-5">
-          <div class="col-md-10">
+        <br></br>
+        <br></br>
+
+        <div className="row mt-5">
+          <div className="col-md-6">
             {" "}
             Chart{" "}
             <div>
-              <BarChart chartData={userData}/>
+              <BarChart chartData={userData} />
+            </div>
+          </div>
+          <div className="col-md-6">
+            {/* pie chart component for orangeHR chart */}
+            <div className="row">
+              <div className="col-md-12">
+                <PieChartComponent data={pieData} />
+              </div>
             </div>
           </div>
         </div>
+        <ProjectVsCommitCount owner={gitUserName} />
       </div>
     </div>
   );

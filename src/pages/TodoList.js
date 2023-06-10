@@ -3,18 +3,21 @@ import NavBar from "../components/Navbar";
 // import SideBar from "../components/Sidebar";
 import axios from "axios";
 import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
 
 const TodoList = () => {
+  const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
+    ._id;
   console.log("Component Rendered !");
   const [task, setTask] = useState();
   const [todoList, setTodoList] = useState(); //only containing todos
-  const [todoID, setToDoID] = useState();
+  const [todoID, setToDoID] = useState(); // contains to ID
   const [due, setDue] = useState();
   const [resetList, setResetList] = useState(0);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/todo/showusertodo/641c62494d6f0b66c98a5c35")
+      .get(process.env.REACT_APP_API_URL + `/todo/showusertodo/${userID}`)
       .then(function (response) {
         setToDoID(response.data[0]._id);
         setTodoList(response.data[0].tasks);
@@ -31,13 +34,13 @@ const TodoList = () => {
   const addTask = (e) => {
     e.preventDefault();
     const postData = {
-      userID: "641c62494d6f0b66c98a5c35",
+      userID: userID,
       taskName: task,
       dueDate: due,
     };
 
     axios
-      .post("http://localhost:8000/todo/addtask", postData)
+      .post(process.env.REACT_APP_API_URL + "/todo/addtask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -59,7 +62,7 @@ const TodoList = () => {
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/markasdone", postData)
+      .post(process.env.REACT_APP_API_URL + "/todo/markasdone", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -75,12 +78,13 @@ const TodoList = () => {
 
   const deleteTask = (taskID) => (event) => {
     event.preventDefault();
+
     const postData = {
       todoid: todoID,
       taskid: taskID,
     };
     axios
-      .post("http://localhost:8000/todo/deleteTask", postData)
+      .post(process.env.REACT_APP_API_URL + "/todo/deleteTask", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Task Deleted!", res.data.message, "success");
@@ -95,12 +99,15 @@ const TodoList = () => {
       });
   };
 
+  // const deleteTask = (taskID) => (e) => {
+
   //   const postData = {
   //     todoid: todoID,
   //     taskid: taskID,
   //   };
+
   //   axios
-  //     .delete("http://localhost:8000/todo/markasdone", postData)
+  //     .delete(process.env.REACT_APP_API_URL+"/todo/markasdone", postData)
   //     .then((res) => {
   //       if (res.data.status === true) {
   //         swal("Good job!", res.data.message, "success");
@@ -117,7 +124,7 @@ const TodoList = () => {
   return (
     <div>
       <NavBar />
-      <div className="container ">
+      <div className="container">
         {/* <div
           className="side-bar"
           style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
@@ -126,7 +133,10 @@ const TodoList = () => {
         </div> */}
       </div>
       <div>
-        <div className="todos mt-5">
+        <br />
+        <br />
+
+        <div className="todos">
           <div class="container">
             <h4 className="bg-dark text-white p-2 rounded">To-Do List</h4>
 
@@ -139,9 +149,8 @@ const TodoList = () => {
                       type="text"
                       class="form-control"
                       placeholder="Add a new task"
-                      aria-label="Add a new task"
-                      aria-describedby="button-addon2"
                       value={task}
+                      //when user changes the value of task it update the value of the task
                       onChange={(e) => {
                         setTask(e.target.value);
                       }}
@@ -172,12 +181,13 @@ const TodoList = () => {
                 </div>
               </form>
             </div>
-            <h6>
+            <h4>
               <br></br>To be Done
-            </h6>
+            </h4>
             <hr />
 
             <div>
+              {/* to iterate over the array  */}
               {todoList?.map((item) => {
                 if (item?.taskStatus === false) {
                   return (
@@ -208,6 +218,7 @@ const TodoList = () => {
                       </div>
                       <div className="col-md-1">
                         <button
+                          type="button"
                           className="btn btn-outline-danger"
                           onClick={deleteTask(item.taskid)}
                         >
@@ -220,7 +231,7 @@ const TodoList = () => {
               })}
             </div>
 
-            <h6 className="mt-4">Completed</h6>
+            <h4 className="mt-4">Completed</h4>
             <hr />
             <div>
               {todoList?.map((item) => {
@@ -233,6 +244,7 @@ const TodoList = () => {
                           type="text"
                           disabled
                           value={item.taskName}
+                          style={{ textDecoration: "line-through" }}
                         />
                       </div>
                       <div className="col-md-3">
@@ -241,6 +253,7 @@ const TodoList = () => {
                           type="text"
                           disabled
                           value={item.dueDate}
+                          style={{ textDecoration: "line-through" }}
                         />
                       </div>
                     </div>

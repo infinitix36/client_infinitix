@@ -8,18 +8,19 @@ const CreateProject = () => {
   const [techLeadData, setTechLeadData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/getTechLead")
+      .get(process.env.REACT_APP_API_URL + "/users/getTechLead")
       .then(function (response) {
         setTechLeadData(response.data);
       });
   }, []);
+
   const [projectName, setProjectName] = useState();
   const [description, setDescription] = useState();
   const [technology, setTechnology] = useState();
   const [deadLine, setDeadLine] = useState();
   const [techLead, setTechLead] = useState();
   const projectManager = data?._id;
-  console.log(projectManager);
+  console.log(techLead);
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -28,10 +29,13 @@ const CreateProject = () => {
       technology: technology,
       deadline: deadLine,
       techlead: techLead,
-      projectManager:projectManager,
+      projectManager: projectManager,
     };
     axios
-      .post("http://localhost:8000/projects/addBasicProjDetails", postData)
+      .post(
+        process.env.REACT_APP_API_URL + "/projects/addBasicProjDetails",
+        postData
+      )
       .then((res) => {
         alert(res.data.message);
         swal("Project Created", {

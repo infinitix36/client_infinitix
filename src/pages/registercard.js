@@ -1,59 +1,77 @@
-
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import { Form, Button, Card } from "react-bootstrap";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import '../css/RegisterCard.css';
 
 const Register = () => {
-  const [userRoleName, setuserRoleName] = useState("");
-  const [fname, setfName] = useState("");
-  const [lname, setlName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [orangeHrLink, setorangeHrLink] = useState("");
-  const [GitHubUsername, setGitHubUsername] = useState("");
-  const [userJiraLink, setuserJiraLink] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const submitFurtherDetails = (e) => {
-    e.preventDefault();
+  // const backgroundImageUrl = 'https://www.freepik.com/free-photo/beautiful-view-greenery-bridge-forest-perfect-background_10606469.htm#query=nature%20background&position=1&from_view=keyword&track=ais';
 
-    if (password !== confirmPassword) {
-      alert("Error: Passwords do not match!");
-    } else {
-      const postData = {
-        userRoleName: userRoleName,
-        fname: fname,
-        lname: lname,
-        email: email,
-        phone: phone,
-        orangeHrLink: orangeHrLink,
-        GitHubUsername: GitHubUsername,
-        userJiraLink: userJiraLink,
-        password: password,
-        confirmPassword: confirmPassword,
-      };
+  // const wrapperStyle = {
+  //   backgroundImage: `url(${backgroundImageUrl})`
+  // };
 
+  const validationSchema = yup.object({
+    fname: yup.string().required("First name is required"),
+    lname: yup.string().required("Last name is required"),
+    userRoleName: yup.string().required("User role name is required"),
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    phone: yup.string().min(10).max(10).required("Phone is required"),
+    orangeHrLink: yup.string().required("Orange HR Link is required"),
+    GitHubUsername: yup.string().required("GitHub username is required"),
+    userJiraLink: yup.string().required("User Jira Link is required"),
+    password: yup.string().min(6).required("Password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      userRoleName: "",
+      fname: "",
+      lname: "",
+      email: "",
+      phone: "",
+      orangeHrLink: "",
+      GitHubUsername: "",
+      userJiraLink: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      // Handle form submission here
       axios
-        .post(process.env.REACT_APP_API_URL+"/authentication/register", postData)
+        .post(
+          process.env.REACT_APP_API_URL + "/authentication/register",
+          values
+        )
         .then((res) => {
           alert(res.data.message);
+          console.log('POST request successful');
         })
         .catch((error) => {
           alert("error");
           console.log(error);
         });
-    }
-  };
+    },
+  });
 
   return (
-    <div className="container">
-      <Card>
-        <Card.Header className="card-title text-center">Register</Card.Header>
+    <div className="container my-form mt-4 ">
+      <Card className="purple-form-card ">
+        <Card.Header className="card-title text-center mt-1 mb-1">Register</Card.Header>
         <Card.Body>
-          <Form onSubmit={submitFurtherDetails}>
+          <Form onSubmit={formik.handleSubmit}>
             <div className="row">
               <div className="col-md">
                 <Form.Group controlId="fname">
@@ -61,10 +79,16 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="fname"
-                    value={fname}
-                    onChange={(e) => setfName(e.target.value)}
-                    required
+                    value={formik.values.fname}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={formik.touched.fname && formik.errors.fname}
                   />
+                  {formik.touched.fname && formik.errors.fname && (
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.fname}
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
               </div>
 
@@ -74,10 +98,17 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="lname"
-                    value={lname}
-                    onChange={(e) => setlName(e.target.value)}
-                    required
+                    value={formik.values.lname}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={formik.touched.lname && formik.errors.lname}
+                    // required
                   />
+                  {formik.touched.lname && formik.errors.lname && (
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.lname}
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
               </div>
             </div>
@@ -88,8 +119,12 @@ const Register = () => {
                   <Form.Label>User Role Name</Form.Label>
                   <Form.Select
                     name="userRoleName"
-                    value={userRoleName}
-                    onChange={(e) => setuserRoleName(e.target.value)}
+                    value={formik.values.userRoleName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.userRoleName && formik.errors.userRoleName
+                    }
                   >
                     <option value="">Select Role</option>
                     <option value="developer">Developer</option>
@@ -99,6 +134,12 @@ const Register = () => {
                     <option value="Techlead">Tech Lead</option>
                     {/* admin - login */}
                   </Form.Select>
+                  {formik.touched.userRoleName &&
+                    formik.errors.userRoleName && (
+                      <Form.Control.Feedback type="invalid">
+                        {formik.errors.userRoleName}
+                      </Form.Control.Feedback>
+                    )}
                 </Form.Group>
               </div>
 
@@ -108,11 +149,18 @@ const Register = () => {
                   <Form.Control
                     type="email"
                     name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={formik.touched.email && formik.errors.email}
+                    // required
                     unique
                   />
+                  {formik.touched.email && formik.errors.email && (
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.email}
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
               </div>
             </div>
@@ -124,10 +172,17 @@ const Register = () => {
                   <Form.Control
                     type="tel"
                     name="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={formik.touched.phone && formik.errors.phone}
+                    // required
                   />
+                  {formik.touched.phone && formik.errors.phone && (
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.phone}
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
               </div>
 
@@ -137,10 +192,20 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="orangeHrLink"
-                    value={orangeHrLink}
-                    onChange={(e) => setorangeHrLink(e.target.value)}
-                    required
+                    value={formik.values.orangeHrLink}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.orangeHrLink && formik.errors.orangeHrLink
+                    }
+                    // required
                   />
+                  {formik.touched.orangeHrLink &&
+                    formik.errors.orangeHrLink && (
+                      <Form.Control.Feedback type="invalid">
+                        {formik.errors.orangeHrLink}
+                      </Form.Control.Feedback>
+                    )}
                 </Form.Group>
               </div>
             </div>
@@ -151,10 +216,21 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="GitHubUsername"
-                    value={GitHubUsername}
-                    onChange={(e) => setGitHubUsername(e.target.value)}
-                    required
+                    value={formik.values.GitHubUsername}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.GitHubUsername &&
+                      formik.errors.GitHubUsername
+                    }
+                    // required
                   />
+                  {formik.touched.GitHubUsername &&
+                    formik.errors.GitHubUsername && (
+                      <Form.Control.Feedback type="invalid">
+                        {formik.errors.GitHubUsername}
+                      </Form.Control.Feedback>
+                    )}
                 </Form.Group>
               </div>
               <div className="col-md">
@@ -163,11 +239,21 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="userJiraLink"
-                    value={userJiraLink}
-                    onChange={(e) => setuserJiraLink(e.target.value)}
-                    required
+                    value={formik.values.userJiraLink}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.userJiraLink && formik.errors.userJiraLink
+                    }
+                    // required
                     style={{ width: "100%" }}
                   />
+                  {formik.touched.userJiraLink &&
+                    formik.errors.userJiraLink && (
+                      <Form.Control.Feedback type="invalid">
+                        {formik.errors.userJiraLink}
+                      </Form.Control.Feedback>
+                    )}
                 </Form.Group>
               </div>
             </div>
@@ -178,10 +264,19 @@ const Register = () => {
                   <Form.Control
                     type="password"
                     name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.password && formik.errors.password
+                    }
+                    // required
                   />
+                  {formik.touched.password && formik.errors.password && (
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.password}
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
               </div>
               <div className="col-md">
@@ -189,10 +284,21 @@ const Register = () => {
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
                     type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Confirm Password"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isInvalid={
+                      formik.touched.confirmPassword &&
+                      formik.errors.confirmPassword
+                    }
+                    // required
                   />
+                  {formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword && (
+                      <Form.Control.Feedback type="invalid">
+                        {formik.errors.confirmPassword}
+                      </Form.Control.Feedback>
+                    )}
                 </Form.Group>
               </div>
             </div>
@@ -234,4 +340,3 @@ const Register = () => {
 };
 
 export default Register;
-

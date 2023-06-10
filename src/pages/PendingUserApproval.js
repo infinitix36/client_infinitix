@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import NavBar from "../components/Navbar";
+
 const PendingUserApproval = () => {
   const [unverifiedUsers, setUnverifiedUsers] = useState([]);
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/users/usersToApproved")
+      .get(process.env.REACT_APP_API_URL + "/users/usersToApproved")
       .then((response) => {
         setUnverifiedUsers(response.data);
       })
@@ -15,6 +16,7 @@ const PendingUserApproval = () => {
         console.log(error);
       });
   }, []);
+
   console.log(unverifiedUsers);
   const convertToTimeStamp = (timestamp) => {
     var myDate = new Date(timestamp * 1000);
@@ -41,7 +43,7 @@ const PendingUserApproval = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .post(process.env.REACT_APP_API_URL+"/users/verifyuser", postData)
+          .post(process.env.REACT_APP_API_URL + "/users/verifyuser", postData)
           .then((res) => {
             console.log(res.data);
             swal({
@@ -74,8 +76,7 @@ const PendingUserApproval = () => {
             .catch(function (error) {
               console.log(error);
             });
-          }
-        
+        }
       } else {
         swal("Action Terminated.", {
           icon: "success",

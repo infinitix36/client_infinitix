@@ -33,6 +33,8 @@ import UserNotificationList from "../pages/UserNotificationList";
 import ProfileRate from "../pages/ProfileRate";
 import ProjectsQA from "../pages/ProjectsQA";
 import ProjectCommentQA from "../pages/ProjectCommentQA";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
 import ProfileOthers from "../pages/ProfileOthers";
 
 const AppRoutes = () => {
@@ -40,6 +42,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Project></Project>} /> */}
+
         <Route
           exact
           path="/project"
@@ -354,7 +357,7 @@ const AppRoutes = () => {
           path="/verifyuser"
           element={
             <RequireAuth>
-              <VerifyUser />{" "}
+              <PendingUserApproval />{" "}
             </RequireAuth>
           }
         />
@@ -382,6 +385,12 @@ const AppRoutes = () => {
           element={<ProjectCommentQA />}
         />
         {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
+
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route
+          path="/resetpassword/:email/:string"
+          element={<ResetPassword></ResetPassword>}
+        />
       </Routes>
     </BrowserRouter>
   );

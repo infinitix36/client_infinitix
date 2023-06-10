@@ -1,108 +1,147 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import "../css/RegisterCard.css";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const loginSchema = yup.object({
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
 
-  const loginUser = async (e) => {
-    e.preventDefault();
-    const postData = {
-      email: email,
-      password: password,
-    };
-    axios
-      .post(process.env.REACT_APP_API_URL+"/authentication/login", postData)
-      .then((res) => {
-        // alert(res.data.message);
-        Swal.fire({
-          title: 'success',
-          text: 'Do you want to continue',
-          icon: 'success',
-          confirmButtonText: 'Cool'
+  const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    loginSchema: loginSchema,
+    onSubmit: (values) => {
+      // Handle form submission here
+
+      axios
+        .post(process.env.REACT_APP_API_URL + "/authentication/login", values)
+        .then((res) => {
+          // alert(res.data.message);
+          Swal.fire({
+            title: "success",
+            text: "Do you want to continue",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          if (res.data.status === true) {
+            navigate("/dashboard");
+          }
         })
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        if (res.data.status === true) {
-          navigate("/dashboard");
-        }
-      })
-      .catch((error) => {
-        alert("error");
-        console.log(error);
-      });
-  };
+        .catch((error) => {
+          alert("error");
+          console.log(error);
+        });
+    },
+  });
 
   return (
-    <Container className="mt-5">
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <Card>
-            <Card.Body>
-              <h5 className="card-title text-center">Login Form</h5>
-              <Form onSubmit={loginUser}>
-                      
-                <Form.Group controlId="email">
-                  <Form.Label style={{
-                      marginTop: "10px"}}>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    unique
-                  />
-                </Form.Group>
-                <Form.Group controlId="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    style={{
-                      marginTop: "20px",
-                    }}
-                  >
-                    Login
-                  </Button>
-                </div>
-              </Form>
-              <div
+    <div className="justify-content-center  mt-5">
+      <Card className="purple-form-card ">
+        <Card.Header className="card-title text-center mt-1 mb-1">Login Form</Card.Header>
+        <Card.Body>
+          <Form onSubmit={formik.handleSubmit}>
+          <div className="row">
+            <Form.Group controlId="email">
+              <Form.Label
                 style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  marginTop: "10px",
                 }}
               >
-                <span>Or </span>
-                <Link to="/register" style={{ marginLeft: "10px" }}>
-                  Create new account
-                </Link>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+                Email address
+              </Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                isInvalid={formik.touched.email && formik.errors.email}
+              />
+              {formik.touched.email && formik.errors.email && (
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+            </div>
+            <Form.Group controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                isInvalid={formik.touched.password && formik.errors.password}
+              />
+              {formik.touched.password && formik.errors.password && (
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                variant="primary"
+                type="submit"
+                style={{
+                  marginTop: "20px",
+                }}
+              >
+                Login
+              </Button>
+            </div>
+          </Form>
+          <div
+            style={{
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Link to="/forgotpassword" style={{ marginLeft: "10px" }}>
+              Forgot Password?
+            </Link>
+          </div>
+          <div
+            style={{
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span>Or </span>
+            <Link to="/register" style={{ marginLeft: "10px" }}>
+              Create new account
+            </Link>
+          </div>
+          
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
 
@@ -113,7 +152,7 @@ function Logcard() {
         marginLeft: "auto",
         marginRight: "auto",
         maxWidth: "6000px",
-        width: "90%",
+        width: "50%",
       }}
     >
       <Login />

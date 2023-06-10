@@ -11,10 +11,11 @@ const Admin = () => {
       <br />
       <br />
       <br />
-      <br />
+      
 
       <Row className="justify-content-center flex-column flex-md-row">
         <Col xs="auto" className="mb-2 mb-md-0">
+          
           <Link to="/pending">
             <Button variant="primary" size="lg">
               Verify New Users
@@ -23,6 +24,7 @@ const Admin = () => {
         </Col>
 
         <Col xs="auto" className="mb-2 mb-md-0">
+          
           <Link to="http://localhost:3000/AdminNotificationForm">
             <Button variant="primary" size="lg">
               Make Announcement
@@ -31,7 +33,7 @@ const Admin = () => {
         </Col>
         <Col xs="auto" className="mb-2 mb-md-0">
           <Link to="/assignprojectmanager">
-            <Button variant="primary" size="lg">
+            <Button variant="dark" size="lg">
               Assign Project Manager
             </Button>
           </Link>

@@ -5,22 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: #C9FFBF;  /* fallback for old browsers */
-  background: #B993D6;  /* fallback for old browsers */
-  background: #DAD299;  /* fallback for old browsers */
-/* background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);   */
-/* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #B0DAB9, #DAD299);
- /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-  background: #41295a;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2F0743, #41295a);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #e6dbeb, #bebac2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  
-
+  /* background: #C9FFBF;  /* fallback for old browsers */
+  /*background: #B993D6;  /* fallback for old browsers */
+  /*background: #DAD299;  /* fallback for old browsers */
+/*background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);  /* Chrome 10-25, Safari 5.1-6 */
+/*background: linear-gradient(to right, #B0DAB9, #DAD299); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(4,38,111,1) 0%, rgba(0,0,0,1) 100%);
+ 
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -1,6 +1,8 @@
 import NavBar from "../components/Navbar";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { Button, Row, Col } from "react-bootstrap";
+import React from 'react';
+import AdminNotificationForm from './AdminNotificationForm';
 
 const Admin = () => {
   return (
@@ -21,7 +23,7 @@ const Admin = () => {
         </Col>
 
         <Col xs="auto" className="mb-2 mb-md-0">
-          <Link to="/announcement">
+          <Link to="http://localhost:3000/AdminNotificationForm">
             <Button variant="primary" size="lg">
               Make Announcement
             </Button>

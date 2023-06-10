@@ -225,8 +225,8 @@ const Project = () => {
         <div className="row mt-5"></div>
         <br></br>
         <br></br>
-        <div className="alert alert-danger">
-          <b>Comments</b>
+        <div className="alert alert-primary">
+          <b>Feedback By Quality Assurance Engineer</b>
         </div>
 
         {project?.feedBacksQA?.map((e) => {

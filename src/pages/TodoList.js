@@ -4,8 +4,31 @@ import NavBar from "../components/Navbar";
 import axios from "axios";
 import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
+import * as yup from "yup";
 
 const TodoList = () => {
+  
+  const taskValidationSchema = yup.object().shape({
+    task: yup
+      .string()
+      .test(
+        "not-only-numbers",
+        "Task should not consist only of numbers",
+        (value) => {
+          // Test function to check if the first name consists only of numbers
+          return !/^\d+$/.test(value);
+        }
+      )
+      .required("Task is required"),
+  });
+
+  const dueDateValidationSchema = yup.object().shape({
+    dueDate: yup
+      .date()
+      .min(new Date(), "Due date cannot be in the past")
+      .required("Due date is required"),
+  });
+
   const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
     ._id;
   console.log("Component Rendered !");
@@ -14,6 +37,8 @@ const TodoList = () => {
   const [todoID, setToDoID] = useState(); // contains to ID
   const [due, setDue] = useState();
   const [resetList, setResetList] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessageDate, setErrorMessageDate] = useState("");
 
   useEffect(() => {
     axios
@@ -31,28 +56,90 @@ const TodoList = () => {
   //   currentYear.getDate - 1
   // }`;
 
+  // const addTask = (e) => {
+  //   e.preventDefault();
+
+  //   taskValidationSchema
+  //     .validate({ task })
+  //     .then(() => {
+  //       // Validation successful, perform the task addition logic here
+  //       console.log("Task added:", task);
+  //       setTask("");
+  //       setErrorMessage("");
+  //       const postData = {
+  //         userID: userID,
+  //         taskName: task,
+  //         dueDate: due,
+  //       };
+
+  //       axios
+  //         .post(process.env.REACT_APP_API_URL + "/todo/addtask", postData)
+  //         .then((res) => {
+  //           if (res.data.status === true) {
+  //             swal("Good job!", res.data.message, "success");
+  //             setResetList(resetList + 1);
+  //             setTask("");
+  //             setDue("");
+  //           } else {
+  //             swal("Error !", res.data.message, "danger");
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       // Validation failed, handle the error
+  //       setErrorMessage(error.message);
+  //     });
+  // };
+
   const addTask = (e) => {
     e.preventDefault();
-    const postData = {
-      userID: userID,
-      taskName: task,
-      dueDate: due,
-    };
 
-    axios
-      .post(process.env.REACT_APP_API_URL + "/todo/addtask", postData)
-      .then((res) => {
-        if (res.data.status === true) {
-          swal("Good job!", res.data.message, "success");
-          setResetList(resetList + 1);
-          setTask("");
-          setDue("");
-        } else {
-          swal("Error !", res.data.message, "danger");
-        }
+    taskValidationSchema
+      .validate({ task })
+      .then(() => {
+        dueDateValidationSchema
+          .validate({ dueDate: due })
+          .then(() => {
+            // Validation successful, perform the task addition logic here
+            console.log("Task added:", task);
+            console.log("Due date:", due);
+            setTask("");
+            setDue("");
+            setErrorMessage("");
+            setErrorMessageDate("");
+
+            // Perform the task addition logic with postData here
+            const postData = {
+              userID: userID,
+              taskName: task,
+              dueDate: due,
+            };
+
+            axios
+              .post(process.env.REACT_APP_API_URL + "/todo/addtask", postData)
+              .then((res) => {
+                if (res.data.status === true) {
+                  swal("Good job!", res.data.message, "success");
+                  setResetList(resetList + 1);
+                } else {
+                  swal("Error!", res.data.message, "danger");
+                }
+              })
+              .catch((error) => {
+                swal("Sorry!", "Backend Error! Try again later!", "info");
+              });
+          })
+          .catch((error) => {
+            // Validation failed for due date, handle the error
+            setErrorMessageDate(error.message);
+          });
       })
       .catch((error) => {
-        swal("Sorry !", "BackEnd Error ! Try again Later !!", "info");
+        // Validation failed for task, handle the error
+        setErrorMessage(error.message);
       });
   };
 
@@ -145,7 +232,6 @@ const TodoList = () => {
                 <div className="row mt-2 justify-content-md-center ">
                   <div className="col-md-4">
                     <input
-                      required={true}
                       type="text"
                       class="form-control"
                       placeholder="Add a new task"
@@ -153,21 +239,30 @@ const TodoList = () => {
                       //when user changes the value of task it update the value of the task
                       onChange={(e) => {
                         setTask(e.target.value);
+                        setErrorMessage("");
                       }}
                     />
+                    {errorMessage && (
+                      <p className="text-danger">{errorMessage}</p>
+                    )}
                   </div>
 
                   <div className="col-md-3">
                     <input
-                      required
                       type="text"
                       className="form-control"
                       placeholder="Select Due Date"
                       onFocus={(e) => (e.target.type = "date")}
                       value={due}
                       id="dob"
-                      onChange={(e) => setDue(e.target.value)}
+                      onChange={(e) => {
+                        setDue(e.target.value);
+                        setErrorMessageDate("");
+                      }}
                     ></input>
+                    {errorMessageDate && (
+                      <p className="text-danger">{errorMessageDate}</p>
+                    )}
                   </div>
                   <div className="col-md-1">
                     <button

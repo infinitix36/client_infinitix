@@ -14,20 +14,20 @@ function JiraTableQA() {
   }, []);
 
   return (
-    <table className="table table-striped table-bordered">
+    <table className="table table-striped table-bordered  border border-dark">
       <thead className="thead-dark">
         <tr>
-          <th>ID</th>
-          <th>Description</th>
-          <th>Project Name</th>
+        <th className="text-white bg-dark text-center">ID</th>
+        <th className="text-white bg-dark text-center">Description</th>
+        <th className="text-white bg-dark text-center">Project Name</th>
         </tr>
       </thead>
       <tbody>
         {data.map((item) => (
           <tr key={item._id}>
-            <td>{item.id}</td>
-            <td>{item.description}</td>
-            <td>{item.projectName}</td>
+            <td className="text-center">{item.id}</td>
+        <td className="text-center">{item.description}</td>
+        <td className="text-center">{item.projectName}</td>
           </tr>
         ))}
       </tbody>

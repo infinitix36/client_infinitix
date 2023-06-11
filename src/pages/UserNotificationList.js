@@ -72,14 +72,14 @@ const UserNotificationList = () => {
           //   <SideBar />
           // </div>
         }
-        <h1 className="text-center">Notifications</h1>
+        <h1 className="text-center text-white">Notifications</h1>
         <div>
-          <h2>New </h2>
+          <h2 className="text-white">New </h2>
           {notifications?.map((notification) => {
             return notification?.status === false ? (
               <div
                 key={notification?._id}
-                class="alert alert-primary"
+                class="alert alert-success"
                 role="alert"
               >
                 {notification?.message} &nbsp;&nbsp;&nbsp;
@@ -93,7 +93,7 @@ const UserNotificationList = () => {
               </div>
             ) : null;
           })}
-          <h2>Earlier</h2>
+          <h2 className="text-white">Earlier</h2>
           {notifications?.map((notification) =>
             notification?.status === true ? (
               <div
@@ -105,9 +105,9 @@ const UserNotificationList = () => {
               </div>
             ) : null
           )}
-          <h2>Broatcast</h2>
+          <h2 className="text-white">Broadcast</h2>
           {notificationsAll.map((item) => (
-            <div class="alert alert-primary" role="alert">
+            <div class="alert alert-info" role="alert">
               <div key={item._id}>
                 <p>{item.message}</p>
               </div>

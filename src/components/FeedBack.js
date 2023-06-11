@@ -4,10 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 const FeedBack = ({ projectId }) => {
   const [feedBack, setFeedBack] = useState([]);
-  const [feedBackId,setFeedBackId] = useState();
-
- 
- 
+  const [feedBackId, setFeedBackId] = useState();
 
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const [feedback, setAddFeedBack] = useState();
@@ -20,9 +17,8 @@ const FeedBack = ({ projectId }) => {
       feedbyName: data.fname,
     };
 
-
     axios
-      .post(process.env.REACT_APP_API_URL+"/project/addFeed", postData)
+      .post(process.env.REACT_APP_API_URL + "/project/addFeed", postData)
       .then((res) => {
         if (res.data.status === true) {
           swal("Good job!", res.data.message, "success");
@@ -37,67 +33,60 @@ const FeedBack = ({ projectId }) => {
 
   useEffect(() => {
     axios
-      .get(
-        process.env.REACT_APP_API_URL+`/projects/getFeedback/${projectId}`
-      )
+      .get(process.env.REACT_APP_API_URL + `/projects/getFeedback/${projectId}`)
       .then(function (response) {
         setFeedBack(response.data[0].feedBacks);
-      
-        
       });
   }, []);
   console.log(feedBack);
   return (
     <div>
       <div className="container mt-5 mb-5">
-      <form onSubmit={addFeedBack} className="mt-3">
-  <div className="row justify-content-center">
-    <div className="col-md-8 col-lg-6">
-      <div className="input-group">
-        <input
-          required={true}
-          type="text"
-          className="form-control"
-          placeholder="Add feedback"
-          aria-label="Add feedback"
-          aria-describedby="button-addon2"
-          value={feedback}
-          onChange={(e) => {
-            setAddFeedBack(e.target.value);
-          }}
-        />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          id="button-addon2"
-        >
-          Comment
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
-
+        <form onSubmit={addFeedBack} className="mt-3">
+          <div className="row justify-content-center">
+            <div className="col-md-8 col-lg-6">
+              <div className="input-group">
+                <input
+                  required={true}
+                  type="text"
+                  className="form-control"
+                  placeholder="Add feedback"
+                  aria-label="Add feedback"
+                  aria-describedby="button-addon2"
+                  value={feedback}
+                  onChange={(e) => {
+                    setAddFeedBack(e.target.value);
+                  }}
+                />
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  id="button-addon2"
+                >
+                  Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
 
         <div className="container mt-5">
-        <table className="table">
-  <thead className="thead-light">
-    <tr>
-      <th scope="col">Feedback</th>
-      <th scope="col">Feedback by</th>
-    </tr>
-  </thead>
-  <tbody>
-    {feedBack.map((feedback) => (
-      <tr key={feedback.feedId}>
-        <td>{feedback.feedback}</td>
-        <td>{feedback.feedbyName ? feedback.feedbyName : '-'}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
-
+          <table className="table text-white">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col ">Feedback</th>
+                <th scope="col">Feedback by</th>
+              </tr>
+            </thead>
+            <tbody>
+              {feedBack.map((feedback) => (
+                <tr key={feedback.feedId}>
+                  <td>{feedback.feedback}</td>
+                  <td>{feedback.feedbyName ? feedback.feedbyName : "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

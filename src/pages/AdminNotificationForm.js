@@ -38,7 +38,7 @@ const AdminNotificationForm = () => {
           //   <SideBar />
           // </div>
         }
-        <h2 className="text-center">Create Notification</h2>
+        <h2 className="text-center text-white">Create Notification</h2>
         <form onSubmit={handleSubmit}>
           <textarea
             className="form-control"

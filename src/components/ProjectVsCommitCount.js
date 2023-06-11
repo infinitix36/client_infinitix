@@ -54,7 +54,7 @@ function ProjectVsCommitCount({ owner }) {
 
   return (
     <div className="container mt-3">
-      <div className="card mb-3">
+      <div className="card mb-3" style={{ backgroundColor: '#d8f7ce' }} >
         <div className="card-header">
           <h2 className="h6 card-title">Commit Count by {owner}</h2>
         </div>

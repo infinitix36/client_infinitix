@@ -15,7 +15,7 @@ function JiraTableQA() {
 
   return (
     <table className="table table-striped table-bordered  border border-dark">
-      <thead className="thead-dark">
+      <thead className="thead-light">
         <tr>
         <th className="text-white bg-dark text-center">ID</th>
         <th className="text-white bg-dark text-center">Description</th>

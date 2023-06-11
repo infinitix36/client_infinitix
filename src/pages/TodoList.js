@@ -266,7 +266,7 @@ const TodoList = () => {
                   </div>
                   <div className="col-md-1">
                     <button
-                      class="btn btn-outline-secondary"
+                      class="btn btn-outline-secondary text-white"
                       type="submit"
                       id="button-addon2"
                     >
@@ -276,7 +276,7 @@ const TodoList = () => {
                 </div>
               </form>
             </div>
-            <h4>
+            <h4 className="text-white">
               <br></br>To be Done
             </h4>
             <hr />
@@ -326,7 +326,7 @@ const TodoList = () => {
               })}
             </div>
 
-            <h4 className="mt-4">Completed</h4>
+            <h4 className="mt-4 text-white">Completed</h4>
             <hr />
             <div>
               {todoList?.map((item) => {

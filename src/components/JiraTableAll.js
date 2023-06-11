@@ -14,8 +14,8 @@ function JiraTableAll() {
   }, []);
 
   return (
-    <table className="table table-striped table-bordered">
-      <thead className="thead-dark">
+    <table className="table table-hover table-dark">
+      <thead className="thead-light">
         <tr>
           <th>ID</th>
           <th>Summary</th>

@@ -5,10 +5,9 @@ import axios from "axios";
 import { Form, Button, Card } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import '../css/RegisterCard.css';
+import "../css/RegisterCard.css";
 
 const Register = () => {
-
   // const backgroundImageUrl = 'https://www.freepik.com/free-photo/beautiful-view-greenery-bridge-forest-perfect-background_10606469.htm#query=nature%20background&position=1&from_view=keyword&track=ais';
 
   // const wrapperStyle = {
@@ -57,7 +56,7 @@ const Register = () => {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log('POST request successful');
+          console.log("POST request successful");
         })
         .catch((error) => {
           alert("error");
@@ -69,7 +68,9 @@ const Register = () => {
   return (
     <div className="container my-form mt-4 ">
       <Card className="purple-form-card ">
-        <Card.Header className="card-title text-center mt-1 mb-1">Register</Card.Header>
+        <Card.Header className="card-title text-center mt-1 mb-1">
+          Register
+        </Card.Header>
         <Card.Body>
           <Form onSubmit={formik.handleSubmit}>
             <div className="row">

@@ -241,7 +241,14 @@ const AppRoutes = () => {
         />
 
         <Route path="/allmembers" element={<AllMembers />} />
-        <Route path="/pending" element={<PendingUserApproval />} />
+        <Route
+          path="/pending"
+          element={
+            <RequireAuth>
+              <PendingUserApproval />
+            </RequireAuth>
+          }
+        />
         {/* <Route path="/home" element={<RequireAuth><Home/></RequireAuth>} /> */}
 
         <Route

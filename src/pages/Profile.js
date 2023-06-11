@@ -116,7 +116,7 @@ function Profile(props) {
                       type="url"
                       className="form-control a2"
                       id="orangeHrLink"
-                      value="orangeHrLink/user"
+                      value={data?.orangeHrLink}
                       disabled={true}
                     />
                     {console.log(data?.orangeHrLink)}
@@ -166,7 +166,7 @@ function Profile(props) {
                       disabled={true}
                     />
                   </div>
-                </div>              
+                </div>
               </form>
             </div>
           </div>
@@ -177,4 +177,3 @@ function Profile(props) {
 }
 
 export default Profile;
-

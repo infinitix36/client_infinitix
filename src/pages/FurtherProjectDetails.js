@@ -2,13 +2,27 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-
 import axios from "axios";
 import NavBar from "../components/Navbar";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
+
+const validationSchema = Yup.object({
+  clientName: Yup.string().required("Client Name is required"),
+  clientAddress: Yup.string().required("Client Address is required"),
+  clientPhone: Yup.string()
+    .matches(/^\d+$/, "Phone number must be numeric")
+    .required("Phone number is required"),
+  gitHubLink: Yup.string().required("GitHub Link is required"),
+  jiraLink: Yup.string().required("JIRA Link is required"),
+});
+
 const FurtherProjectDetails = () => {
+  const navigate = useNavigate();
   const { _id } = useParams();
   const [contributorsData, setContributorsData] = useState([]);
-  //get all QA BA PM for add contributors
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/users/getContributors")
@@ -17,148 +31,183 @@ const FurtherProjectDetails = () => {
       });
   }, []);
 
-  const [clientName, setClientName] = useState();
-  const [clientAddress, setClientAddress] = useState();
-  const [clientPhone, setClientPhone] = useState();
-  const [gitHubLink, setGitHub] = useState();
-  const [jiraLink, setJira] = useState();
-  const [contributors, setContributors] = useState();
-  console.log(contributors);
+  const formik = useFormik({
+    initialValues: {
+      clientName: "",
+      clientAddress: "",
+      clientPhone: "",
+      gitHubLink: "",
+      jiraLink: "",
+      contributors: [],
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const postData = {
+        clientName: values.clientName,
+        clientAddress: values.clientAddress,
+        clientPhone: values.clientPhone,
+        gitHubLink: values.gitHubLink,
+        jiraLink: values.jiraLink,
+        projectId: _id,
+        contributors: values.contributors,
+      };
 
-  // submit the extra projects details
-  const submitProjectData = (e) => {
-    e.preventDefault();
-    const postData = {
-      clientName: clientName,
-      clientAddress: clientAddress,
-      clientPhone: clientPhone,
-      gitHubLink: gitHubLink,
-      jiraLink: jiraLink,
-      projectId: _id,
-
-      contributors: contributors,
-    };
-    axios
-      .post(
-        process.env.REACT_APP_API_URL + "/projects/addExtraProjDetails",
-        postData
-      )
-      .then((res) => {
-        alert(res.data.message);
-        Swal.fire({
-          title: "success",
-          text: "Project Details added successfully",
-          icon: "success",
-          confirmButtonText: "Cool",
+      axios
+        .post(
+          process.env.REACT_APP_API_URL + "/projects/addExtraProjDetails",
+          postData
+        )
+        .then((res) => {
+          alert(res.data.message);
+          Swal.fire({
+            title: "Success",
+            text: "Project Details added successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      navigate("/dashboard");
+    },
+  });
+
   return (
     <React.Fragment>
-      <NavBar></NavBar>
-      {/* <h1>This project ID is = {_id}</h1> */}
+      <NavBar />
       <div className="container mt-3">
         <div className="card shadow shadow-lg">
-          <form onSubmit={submitProjectData}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="card-body mt-3">
               <div className="row m-2">
-                {/* Client Name */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${
+                        formik.touched.clientName && formik.errors.clientName
+                          ? "is-invalid"
+                          : ""
+                      }`}
                       placeholder="Client Name"
-                      value={clientName}
-                      required
                       id="clientName"
-                      onChange={(e) => setClientName(e.target.value)}
-                    ></input>
-                    <label for="clientName">Client Name</label>
+                      {...formik.getFieldProps("clientName")}
+                    />
+                    <label htmlFor="clientName">Client Name</label>
+                    {formik.touched.clientName && formik.errors.clientName && (
+                      <div className="invalid-feedback">
+                        {formik.errors.clientName}
+                      </div>
+                    )}
                   </div>
                 </div>
-                {/* ClientAddress */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
-                      required
                       type="text"
-                      className="form-control"
-                      placeholder="clientAddress"
-                      value={clientAddress}
-                      id="ClientAddress"
-                      onChange={(e) => setClientAddress(e.target.value)}
-                    ></input>
-                    <label for="clientAddress">ClientAddress</label>
+                      className={`form-control ${
+                        formik.touched.clientAddress &&
+                        formik.errors.clientAddress
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                      placeholder="Client Address"
+                      id="clientAddress"
+                      {...formik.getFieldProps("clientAddress")}
+                    />
+                    <label htmlFor="clientAddress">Client Address</label>
+                    {formik.touched.clientAddress &&
+                      formik.errors.clientAddress && (
+                        <div className="invalid-feedback">
+                          {formik.errors.clientAddress}
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
               <div className="row m-2">
-                {/* clientPhone */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
-                      required
                       type="text"
-                      className="form-control"
-                      placeholder="clientPhone"
-                      value={clientPhone}
+                      className={`form-control ${
+                        formik.touched.clientPhone && formik.errors.clientPhone
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                      placeholder="Client Phone"
                       id="clientPhone"
-                      onChange={(e) => setClientPhone(e.target.value)}
-                    ></input>
-                    <label for="clientPhone">clientPhone</label>
+                      {...formik.getFieldProps("clientPhone")}
+                    />
+                    <label htmlFor="clientPhone">Client Phone</label>
+                    {formik.touched.clientPhone &&
+                      formik.errors.clientPhone && (
+                        <div className="invalid-feedback">
+                          {formik.errors.clientPhone}
+                        </div>
+                      )}
                   </div>
                 </div>
-                {/* gitHubLink */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
-                      required
                       type="text"
-                      className="form-control"
-                      placeholder="gitHubLink"
-                      value={gitHubLink}
+                      className={`form-control ${
+                        formik.touched.gitHubLink && formik.errors.gitHubLink
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                      placeholder="GitHub Link"
                       id="gitHubLink"
-                      onChange={(e) => setGitHub(e.target.value)}
-                    ></input>
-                    <label for="gitHubLink">gitHubLink</label>
+                      {...formik.getFieldProps("gitHubLink")}
+                    />
+                    <label htmlFor="gitHubLink">GitHub Link</label>
+                    {formik.touched.gitHubLink && formik.errors.gitHubLink && (
+                      <div className="invalid-feedback">
+                        {formik.errors.gitHubLink}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
-                      required
                       type="text"
-                      className="form-control"
-                      placeholder="jiraLink"
-                      value={jiraLink}
+                      className={`form-control ${
+                        formik.touched.jiraLink && formik.errors.jiraLink
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                      placeholder="JIRA Link"
                       id="jiraLink"
-                      onChange={(e) => setJira(e.target.value)}
-                    ></input>
-                    <label for="jiraLink">jiraLink</label>
+                      {...formik.getFieldProps("jiraLink")}
+                    />
+                    <label htmlFor="jiraLink">JIRA Link</label>
+                    {formik.touched.jiraLink && formik.errors.jiraLink && (
+                      <div className="invalid-feedback">
+                        {formik.errors.jiraLink}
+                      </div>
+                    )}
                   </div>
                 </div>
-                {/* select contibutors */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <Select
                       isMulti
                       name="contributors"
-                      onChange={setContributors}
+                      value={formik.values.contributors}
+                      onChange={(selectedOptions) =>
+                        formik.setFieldValue(
+                          "contributors",
+                          selectedOptions || []
+                        )
+                      }
                       options={contributorsData}
-                      className="basic-multi-select"
-                      classNamePrefix="select contibutors"
+                      classNamePrefix="select contributors"
                     />
-                    <label for=""></label>
+                    <label htmlFor="contributors">Contributors</label>
                   </div>
-                </div>
-              </div>
-              <div className="row m-2">
-                <div className="col-md-12">
-                  <div className="form-floating mb-3"></div>
                 </div>
               </div>
             </div>
@@ -169,31 +218,24 @@ const FurtherProjectDetails = () => {
                     className="m-2 btn btn-dark text-white form-control"
                     type="submit"
                     value="Submit Details"
-                  ></input>
+                  />
                 </div>
                 <div className="col-md-6">
                   <input
                     className="m-2 btn btn-dark text-white form-control"
                     type="reset"
                     value="Reset"
-                    onClick={() => {
-                      setContributors("");
-                      setJira("");
-                      setGitHub("");
-                      setClientPhone("");
-                      setClientAddress("");
-                      setClientName("");
-                    }}
+                    onClick={() => formik.resetForm()}
                   />
                 </div>
               </div>
             </div>
           </form>
         </div>
-        {/* <h1>This project ID is = {_id}</h1> */}
       </div>
-      <br></br>
+      <br />
     </React.Fragment>
   );
 };
+
 export default FurtherProjectDetails;

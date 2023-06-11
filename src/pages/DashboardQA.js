@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import JiraTableQA from "../components/jiraTableQA";
 import PieChartComponent from "../components/PieChartComponent";
 import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
+import JiraTableAll from "../components/JiraTableAll";
 
 const DashboardQA = () => {
   const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
@@ -140,14 +141,10 @@ const DashboardQA = () => {
         </div>
 
         <div className="row mt-5">
-          <div className="col-md-8">
-            {" "}
-            Chart{" "}
-            <div>
-              <BarChart chartData={userData} />
-            </div>
+          <div className="col-md-6">
+            <ProjectVsCommitCount owner={gitUserName} />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             {/* pie chart component for orangeHR chart */}
             <div className="row">
               <div className="col-md-12">
@@ -160,8 +157,8 @@ const DashboardQA = () => {
         <br></br>
         <br></br>
         <div class="row justify-content-center">
-          <div class="col-7">
-            <JiraTableQA></JiraTableQA>
+          <div class="col-md-12">
+            <JiraTableAll />
           </div>
         </div>
 
@@ -169,7 +166,6 @@ const DashboardQA = () => {
         <br></br>
         <br></br>
       </div>
-      <ProjectVsCommitCount owner={gitUserName} />
     </div>
     // </div>
   );

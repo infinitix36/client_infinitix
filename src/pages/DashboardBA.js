@@ -13,6 +13,7 @@ import PieChartComponent from "../components/PieChartComponent";
 import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 /** */
 import jwt_decode from "jwt-decode";
+import JiraTableAll from "../components/JiraTableAll";
 const DashboardBA = () => {
   //
   const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
@@ -32,24 +33,23 @@ const DashboardBA = () => {
       });
   }, [stageUpdate]);
 
-// orangeHR leave fetch
-useEffect(() => {
-  axios
-    .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
-    .then(function (response) {
-      setTaken(response.data[0]);
-    });
-}, []);
-console.log(taken.taken);
-// we get as string so convert to float
-const leaveTaken = parseFloat(taken.taken);
-const notLeaveTaken = 1 - leaveTaken;
+  // orangeHR leave fetch
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + `/users/leave/${userId}`)
+      .then(function (response) {
+        setTaken(response.data[0]);
+      });
+  }, []);
+  console.log(taken.taken);
+  // we get as string so convert to float
+  const leaveTaken = parseFloat(taken.taken);
+  const notLeaveTaken = 1 - leaveTaken;
 
-const pieData = [
-  { name: "Taken", value: leaveTaken * 100 },
-  { name: "Not Taken", value: notLeaveTaken * 100 },
-];
-
+  const pieData = [
+    { name: "Taken", value: leaveTaken * 100 },
+    { name: "Not Taken", value: notLeaveTaken * 100 },
+  ];
 
   //
   const updateStatus = (value, projectID) => {
@@ -155,20 +155,15 @@ const pieData = [
 
         {/* Bar Chart */}
         <div class="row justify-content-center">
-          <div class="col-7">
-            <JiraTableQA></JiraTableQA>
+          <div class="col-12">
+            <JiraTableAll/>
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-8">
-            {" "}
-            Chart{" "}
-            
-            <div>
-              <BarChart chartData={userData} />
-            </div>
+          <div className="col-md-6">
+            <ProjectVsCommitCount owner={gitUserName} />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             {/* pie chart component for orangeHR chart */}
             <div className="row">
               <div className="col-md-12">
@@ -180,7 +175,6 @@ const pieData = [
         <br></br>
         <br></br>
         <br></br>
-        <ProjectVsCommitCount owner={gitUserName} />
 
         <br></br>
         <br></br>

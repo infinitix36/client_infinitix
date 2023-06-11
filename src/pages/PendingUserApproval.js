@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import swal from "sweetalert";
 import axios from "axios";
 import NavBar from "../components/Navbar";
 
 const PendingUserApproval = () => {
   const [unverifiedUsers, setUnverifiedUsers] = useState([]);
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/users/usersToApproved")
@@ -18,22 +18,32 @@ const PendingUserApproval = () => {
   }, []);
 
   console.log(unverifiedUsers);
+
   const convertToTimeStamp = (timestamp) => {
     var myDate = new Date(timestamp * 1000);
     // return(myDate.toLocaleString());
     return timestamp;
   };
+
+  const removeUserFromList = (userID) => {
+    setUnverifiedUsers((prevUsers) =>
+      prevUsers.filter((user) => user._id !== userID)
+    );
+  };
+
   const verification = (result, userID, email) => {
     const postData = {
       result: result,
       userid: userID,
     };
+
     var message = "";
     if (result === "allow") {
       message = "Do you want to allow this user to access ?";
     } else {
       message = "Do you want delete this user from the system permanently ?";
     }
+
     swal({
       title: "Confirm",
       text: message,
@@ -58,8 +68,9 @@ const PendingUserApproval = () => {
               text: "Error",
             });
           });
-          if (result === "allow") {
-            axios
+
+        if (result === "allow") {
+          axios
             .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
@@ -67,8 +78,8 @@ const PendingUserApproval = () => {
             .catch(function (error) {
               console.log(error);
             });
-          } else{
-            axios
+        } else {
+          axios
             .get(`http://localhost:8000/sendmailTo/${email}/${result}`)
             .then((response) => {
               console.log(response);
@@ -77,6 +88,8 @@ const PendingUserApproval = () => {
               console.log(error);
             });
         }
+
+        removeUserFromList(userID); // Remove the user from the list
       } else {
         swal("Action Terminated.", {
           icon: "success",
@@ -84,6 +97,7 @@ const PendingUserApproval = () => {
       }
     });
   };
+
   return (
     <React.Fragment>
       <NavBar />
@@ -94,7 +108,7 @@ const PendingUserApproval = () => {
         <div className="form-control mt-3 bg-dark text-white">
           Users Requests
         </div>
-        <table className=" mt-3 table table-striped">
+        <table className="mt-3 table table-striped">
           <thead>
             <tr>
               {/* <th scope="col">Image</th> */}
@@ -110,7 +124,7 @@ const PendingUserApproval = () => {
           <tbody>
             {unverifiedUsers.map((item) => {
               return (
-                <tr className="align-middle">
+                <tr className="align-middle" key={item._id}>
                   {/* <th scope="row"><img draggable={false} className="rounded-circle" style={{ "width": "40px" }} alt="user" src={item?.image}></img></th> */}
                   <th>{item?.fname}</th>
                   <th>{item?.lname}</th>
@@ -155,4 +169,5 @@ const PendingUserApproval = () => {
     </React.Fragment>
   );
 };
+
 export default PendingUserApproval;

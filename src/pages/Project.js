@@ -148,7 +148,7 @@ const Project = () => {
                   <p className="mb-2">{projectDescription}</p>
                   <button
                     onClick={handleEditClick}
-                    className="btn btn-outline-secondary bi bi-pen"
+                    className="btn btn-outline-secondary bi bi-pen text-white"
                   >
                     Edit
                   </button>
@@ -157,9 +157,9 @@ const Project = () => {
             </div>
           </div>
           <div className="col-md-6">
-            <h3>contributors</h3>
+            <h3 className="text-white">contributors</h3>
 
-            <table class="table">
+            <table class="table text-white">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -226,7 +226,7 @@ const Project = () => {
         <br></br>
         <br></br>
         <div className="alert alert-primary">
-          <b>Feedback By Quality Assurance Engineer</b>
+          <b >Feedback By Quality Assurance Engineer</b>
         </div>
 
         {project?.feedBacksQA?.map((e) => {

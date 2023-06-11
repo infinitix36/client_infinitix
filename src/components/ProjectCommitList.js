@@ -45,7 +45,7 @@ const ProjectCommitList = ({ owner, repo }) => {
   }, [owner, repo]);
 
   return (
-    <div className="container">
+    <div className="container"style={{ backgroundColor: '#d8f7ce' }}>
       <h2 className="mt-3 mb-4">Project Commits by Contributor</h2>
       {contributorCommits.map(contributor => (
         <div key={contributor.name} className="mb-4">

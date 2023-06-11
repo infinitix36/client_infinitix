@@ -15,14 +15,14 @@ const PieChartComponent = ({ data }) => {
     <div
       className="container mt-5 mb-5 p-4"
       style={{
-        backgroundColor: "#41295a",
+        backgroundColor: "#d8f7ce",
         borderRadius: "10px",
         boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
       }}
     >
       <h2
         className="text-center mb-4"
-        style={{ color: "#7DE5ED", borderBottom: "2px solid black" }}
+        style={{ borderBottom: "2px solid black" }}
       >
         Leave System
       </h2>

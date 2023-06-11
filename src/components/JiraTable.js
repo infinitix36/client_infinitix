@@ -15,7 +15,7 @@ function JiraTable({ projectName }) {
 
   return (
     <table className="table table-striped table-bordered">
-      <thead className="thead-dark">
+      <thead className="thead-light">
         <tr>
           <th>ID</th>
           <th>Summary</th>

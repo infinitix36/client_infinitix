@@ -38,8 +38,7 @@ const TableSort = ({ userRoleName }) => {
           } else {
             newUsers.push({
               ...user,
-              avatar:
-                "https://avatars.githubusercontent.com/u/111459302?v=4",
+              avatar: "https://avatars.githubusercontent.com/u/111459302?v=4",
             });
             setUserDetails(newUsers);
             console.log(newUsers);
@@ -84,7 +83,7 @@ const TableSort = ({ userRoleName }) => {
 
   return (
     <div>
-      <table className="table">
+      <table className="table table-hover table-dark">
         <thead className={styles.container}>
           <tr>
             <th className={styles.img_tab}>Profile Picture</th>

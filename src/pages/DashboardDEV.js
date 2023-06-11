@@ -78,7 +78,6 @@ const DashboardDEV = () => {
   return (
     <div>
       <NavBar />
-
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-12 overflow-auto">
@@ -108,7 +107,7 @@ const DashboardDEV = () => {
                         <div className="card-footer">
                           <Link
                             to={"/project/" + e?._id + "/" + e?.projectName}
-                            className="btn btn-outline-danger form-control"
+                            className="btn btn-outline-success form-control"
                           >
                             Open
                           </Link>

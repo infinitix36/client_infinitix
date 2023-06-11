@@ -33,7 +33,7 @@ const NavBar = () => {
     <React.Fragment>
       <nav
         className="navbar navbar-expand-lg navbar-dark fixed-top sticky-top"
-        style={{ backgroundColor: "rgb(11, 97, 57)"}}
+        style={{ backgroundColor: "rgb(25,25,112)"}}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/"></Link>

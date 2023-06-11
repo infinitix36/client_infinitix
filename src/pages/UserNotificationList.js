@@ -21,37 +21,30 @@ const UserNotificationList = () => {
         setNotifications(response.data[0].notification);
       });
 
-    // // Listen for 'notification' event from the server
-    // socket.on("notification", (notification) => {
-    //   // Update the notifications state with the new notification
-    //   setNotifications((prevNotifications) => [...prevNotifications, notification]);
-    // });
+    axios.get(`http://localhost:8000/notifications`).then((response) => {
+      setNotificationsAll([]);
+      setNotificationsAll(response.data);
+    });
+    const interval = setInterval(() => {
+      console.log("halo halo");
+      axios
+        .get(`http://localhost:8000/users/getUserNotifications/${userID}`)
+        .then((response) => {
+          setNotifications([]);
+          setNotifications(response.data[0].notification);
+        });
 
-    // return () => {
-    //   // Clean up the socket.io connection on component unmount
-    //   socket.disconnect();
-    // };
-  }, [updateList]);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/notifications`)
-      .then((response) => {
+      axios.get(`http://localhost:8000/notifications`).then((response) => {
         setNotificationsAll([]);
         setNotificationsAll(response.data);
       });
+    }, 15000); // 60000 milliseconds = 1 minute
 
-    // // Listen for 'notification' event from the server
-    // socket.on("notification", (notification) => {
-    //   // Update the notifications state with the new notification
-    //   setNotifications((prevNotifications) => [...prevNotifications, notification]);
-    // });
-
-    // return () => {
-    //   // Clean up the socket.io connection on component unmount
-    //   socket.disconnect();
-    // };
-  }, [updateList]);
-  console.log(notificationsAll);
+    // Clean up the interval on component unmount
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   const updateStatus = (id) => {
     axios
@@ -79,8 +72,9 @@ const UserNotificationList = () => {
             <SideBar />
           </div>
         }
+        <h1 className="text-center">Notifications</h1>
         <div>
-          <h2>New Notifications</h2>
+          <h2>New </h2>
           {notifications?.map((notification) => {
             return notification?.status === false ? (
               <div
@@ -99,7 +93,7 @@ const UserNotificationList = () => {
               </div>
             ) : null;
           })}
-          <h2>Seen</h2>
+          <h2>Earlier</h2>
           {notifications?.map((notification) =>
             notification?.status === true ? (
               <div
@@ -113,19 +107,14 @@ const UserNotificationList = () => {
           )}
           <h2>Broatcast</h2>
           {notificationsAll.map((item) => (
-            <div
-              
-                class="alert alert-primary"
-                role="alert"
-              >
+            <div class="alert alert-primary" role="alert">
               <div key={item._id}>
-            <p>Message: {item.message}</p>
-          </div>
+                <p>{item.message}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        
-      ))}
-    </div>
-    </div>
+      </div>
     </div>
   );
 };

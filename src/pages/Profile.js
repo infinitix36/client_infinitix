@@ -166,20 +166,7 @@ function Profile(props) {
                       disabled={true}
                     />
                   </div>
-                </div>
-                <div className="row mt-2 ">
-                  <div className="col-md-2"></div>
-                  {/* <div className="col-md-3 mt-3">
-                  <button
-                    type="submit"
-                    className="btn form-control  border border-secondary "
-                    style={{ background: "#ass" }}
-                  >
-                    <i className="bi bi-heart" style={{ height: "50px" }}></i>
-                    <h6>Add to wishlist</h6>
-                  </button>
-                </div> */}
-                </div>
+                </div>              
               </form>
             </div>
           </div>
@@ -190,3 +177,4 @@ function Profile(props) {
 }
 
 export default Profile;
+

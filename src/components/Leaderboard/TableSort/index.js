@@ -15,36 +15,40 @@ const TableSort = ({ userRoleName }) => {
     axios.get(apiEndpoint).then((response) => {
       let users = response.data;
       console.log(users);
-      let newUsers = [];
       const myHeaders = new Headers({
         "Content-Type": "application/json",
         Authorization: "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",
       });
+
       if (users.length === 0) {
         setUserDetails([]);
       } else {
-        for (const user of users) {
+        const fetchUserDetails = users.map((user) => {
           if (user.GitHubUsername) {
-            fetch(`https://api.github.com/users/${user.GitHubUsername}`, {
-              method: "GET",
-              headers: myHeaders,
-            }).then((response) =>
-              response.json().then((data) => {
-                newUsers.push({ ...user, avatar: data.avatar_url });
-                setUserDetails(newUsers);
-                console.log(newUsers);
-              })
+            return fetch(
+              `https://api.github.com/users/${user.GitHubUsername}`,
+              {
+                method: "GET",
+                headers: myHeaders,
+              }
+            ).then((response) =>
+              response.json().then((data) => ({
+                ...user,
+                avatar: data.avatar_url,
+              }))
             );
           } else {
-            newUsers.push({
+            return Promise.resolve({
               ...user,
-              avatar:
-                "https://avatars.githubusercontent.com/u/111459302?v=4",
+              avatar: "https://avatars.githubusercontent.com/u/111459302?v=4",
             });
-            setUserDetails(newUsers);
-            console.log(newUsers);
           }
-        }
+        });
+
+        Promise.all(fetchUserDetails).then((updatedUsers) => {
+          setUserDetails(updatedUsers);
+          console.log(updatedUsers);
+        });
       }
     });
   }

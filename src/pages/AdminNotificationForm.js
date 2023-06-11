@@ -31,12 +31,12 @@ const AdminNotificationForm = () => {
       <NavBar></NavBar>
       <div className="container">
         {
-          <div
-            className="side-bar"
-            style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
-          >
-            <SideBar />
-          </div>
+          // <div
+          //   className="side-bar"
+          //   style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
+          // >
+          //   <SideBar />
+          // </div>
         }
         <h2 className="text-center">Create Notification</h2>
         <form onSubmit={handleSubmit}>

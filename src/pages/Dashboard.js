@@ -32,7 +32,7 @@ const Dashboard = () => {
     <DashboardQA></DashboardQA>
   ) : userRoleName === "BA" ? (
     <DashboardBA></DashboardBA>
-  ) : userRoleName === "Admin" ? (
+  ) : userRoleName === "admin" ? (
     <Admin></Admin>
   ) : userRoleName === "ProjectManager" ? (
     <DashboardPM></DashboardPM>

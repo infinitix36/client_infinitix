@@ -64,6 +64,7 @@ const NavBar = () => {
                   <i className="bi bi-code-square me-2"></i> All Projects
                 </Link>
               </li>
+              
               {/* <li className="nav-item rounded">
                 <Link className="nav-link active" to="/allmembers">
                   <i className="bi bi-code-square me-2"></i> All Members
@@ -77,6 +78,11 @@ const NavBar = () => {
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/Todolist">
                   <i className="bi bi-telephone-fill me-2"></i>Todo
+                </Link>
+              </li>
+              <li className="nav-item rounded">
+                <Link className="nav-link active" to="/UserNotificationList">
+                  <i className="bi bi-bell-fill me-2">Notification</i>
                 </Link>
               </li>
               <li className="nav-item dropdown rounded">

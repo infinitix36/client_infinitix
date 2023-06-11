@@ -117,28 +117,23 @@ const DashboardPM = () => {
         </div>
         <br></br>
         <br></br>
-
         <div className="row mt-5">
           <div className="col-md-6">
-            {" "}
-            Chart{" "}
             <div>
-              <BarChart chartData={userData} />
+              <ProjectVsCommitCount owner={gitUserName} />
             </div>
           </div>
           <div className="col-md-6">
             {/* pie chart component for orangeHR chart */}
-            <div className="row">
               <div className="col-md-12">
                 <PieChartComponent data={pieData} />
               </div>
             </div>
           </div>
         </div>
-        <ProjectVsCommitCount owner={gitUserName} />
-      </div>
+
     </div>
   );
 };
 
-export default DashboardPM;
+export default DashboardPM;

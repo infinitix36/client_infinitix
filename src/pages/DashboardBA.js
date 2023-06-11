@@ -9,6 +9,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { ProgressBar } from "react-bootstrap";
 import JiraTableQA from "../components/jiraTableQA";
+import PieChartComponent from "../components/PieChartComponent";
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 /** */
 import jwt_decode from "jwt-decode";
 const DashboardBA = () => {
@@ -16,7 +18,10 @@ const DashboardBA = () => {
   const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
     ._id;
   const [userProjects, setUserProjects] = useState([]);
-
+  const [taken, setTaken] = useState([]);
+  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const userId = data._id;
+  const gitUserName = data.GitHubUsername;
   const [stageUpdate, setStageUpdate] = useState(0);
   useEffect(() => {
     axios
@@ -26,6 +31,26 @@ const DashboardBA = () => {
         console.log(response.data);
       });
   }, [stageUpdate]);
+
+// orangeHR leave fetch
+useEffect(() => {
+  axios
+    .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
+    .then(function (response) {
+      setTaken(response.data[0]);
+    });
+}, []);
+console.log(taken.taken);
+// we get as string so convert to float
+const leaveTaken = parseFloat(taken.taken);
+const notLeaveTaken = 1 - leaveTaken;
+
+const pieData = [
+  { name: "Taken", value: leaveTaken * 100 },
+  { name: "Not Taken", value: notLeaveTaken * 100 },
+];
+
+
   //
   const updateStatus = (value, projectID) => {
     Swal.fire({
@@ -128,143 +153,39 @@ const DashboardBA = () => {
           {/* <div className="col-md-2"></div> */}
         </div>
 
-        <div className="row mt-5">
-          <div className="col-md-12">
-            <table className="table align-middle mb-0 bg-white ">
-              <thead className="bg-dark text-white">
-                <tr>
-                  <th>Name</th>
-                  <th>Job Title</th>
-                  <th>Position</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    {/* manual data  wanna fetch*/}
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                        className="rounded-circle"
-                      />
-                      <div className="ms-3">
-                        <p className="fw-bold mb-1">John Doe</p>
-                        <p className="text-muted mb-0">john.doe@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">Software engineer</p>
-                    <p className="text-muted mb-0">IT department</p>
-                  </td>
-                  <td>
-                    <span className="badge badge-success rounded-pill d-inline">
-                      Active
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-sm btn-rounded"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        className="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div className="ms-3">
-                        <p className="fw-bold mb-1">Alex Ray</p>
-                        <p className="text-muted mb-0">alex.ray@gmail.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">Consultant</p>
-                    <p className="text-muted mb-0">Finance</p>
-                  </td>
-                  <td>
-                    <span className="badge badge-primary rounded-pill d-inline">
-                      Onboarding
-                    </span>
-                  </td>
-                  <td>Junior</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        className="rounded-circle"
-                        alt=""
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                      <div className="ms-3">
-                        <p className="fw-bold mb-1">Kate Hunington</p>
-                        <p className="text-muted mb-0">
-                          kate.hunington@gmail.com
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">Designer</p>
-                    <p className="text-muted mb-0">UI/UX</p>
-                  </td>
-                  <td>
-                    <span className="badge badge-warning rounded-pill d-inline">
-                      Awaiting
-                    </span>
-                  </td>
-                  <td>Senior</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-rounded btn-sm fw-bold"
-                      data-mdb-ripple-color="dark"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {/* <div className=" col-md-2"></div> */}
-        </div>
-
         {/* Bar Chart */}
-        <div className="row mt-5 w-50">
-          <div class="col-md-10 ">
+        <div class="row justify-content-center">
+          <div class="col-7">
+            <JiraTableQA></JiraTableQA>
+          </div>
+        </div>
+        <div className="row mt-5">
+          <div className="col-md-8">
             {" "}
             Chart{" "}
+            
             <div>
               <BarChart chartData={userData} />
             </div>
           </div>
+          <div className="col-md-4">
+            {/* pie chart component for orangeHR chart */}
+            <div className="row">
+              <div className="col-md-12">
+                <PieChartComponent data={pieData} />
+              </div>
+            </div>
+          </div>
         </div>
-        <JiraTableQA></JiraTableQA>
+        <br></br>
+        <br></br>
+        <br></br>
+        <ProjectVsCommitCount owner={gitUserName} />
+
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
-      //{" "}
     </div>
   );
 };

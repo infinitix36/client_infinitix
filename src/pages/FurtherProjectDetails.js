@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 import axios from "axios";
 import NavBar from "../components/Navbar";
@@ -11,7 +11,7 @@ const FurtherProjectDetails = () => {
   //get all QA BA PM for add contributors
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/users/getContributors")
+      .get(process.env.REACT_APP_API_URL + "/users/getContributors")
       .then(function (response) {
         setContributorsData(response.data);
       });
@@ -23,9 +23,9 @@ const FurtherProjectDetails = () => {
   const [gitHubLink, setGitHub] = useState();
   const [jiraLink, setJira] = useState();
   const [contributors, setContributors] = useState();
-console.log(contributors);
+  console.log(contributors);
 
-// submit the extra projects details
+  // submit the extra projects details
   const submitProjectData = (e) => {
     e.preventDefault();
     const postData = {
@@ -39,16 +39,18 @@ console.log(contributors);
       contributors: contributors,
     };
     axios
-      .post(process.env.REACT_APP_API_URL+"/projects/addExtraProjDetails", postData)
+      .post(
+        process.env.REACT_APP_API_URL + "/projects/addExtraProjDetails",
+        postData
+      )
       .then((res) => {
         alert(res.data.message);
         Swal.fire({
-          title: 'success',
-          text: 'Project Details added successfully',
-          icon: 'success',
-          confirmButtonText: 'Cool'
-        })
-        
+          title: "success",
+          text: "Project Details added successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -95,7 +97,7 @@ console.log(contributors);
                 </div>
               </div>
               <div className="row m-2">
-              {/* clientPhone */}
+                {/* clientPhone */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
@@ -174,7 +176,15 @@ console.log(contributors);
                     className="m-2 btn btn-dark text-white form-control"
                     type="reset"
                     value="Reset"
-                  ></input>
+                    onClick={() => {
+                      setContributors("");
+                      setJira("");
+                      setGitHub("");
+                      setClientPhone("");
+                      setClientAddress("");
+                      setClientName("");
+                    }}
+                  />
                 </div>
               </div>
             </div>

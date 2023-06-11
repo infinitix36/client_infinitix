@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { ProgressBar } from "react-bootstrap";
 import JiraTableQA from "../components/jiraTableQA";
 import PieChartComponent from "../components/PieChartComponent";
-
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 /** */
 import jwt_decode from "jwt-decode";
 const DashboardBA = () => {
@@ -21,7 +21,7 @@ const DashboardBA = () => {
   const [taken, setTaken] = useState([]);
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const userId = data._id;
-
+  const gitUserName = data.GitHubUsername;
   const [stageUpdate, setStageUpdate] = useState(0);
   useEffect(() => {
     axios
@@ -180,7 +180,7 @@ const pieData = [
         <br></br>
         <br></br>
         <br></br>
-       
+        <ProjectVsCommitCount owner={gitUserName} />
 
         <br></br>
         <br></br>

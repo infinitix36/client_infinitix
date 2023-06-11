@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import JiraTableQA from "../components/jiraTableQA";
 import PieChartComponent from "../components/PieChartComponent";
+import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 
 const DashboardQA = () => {
   const userID = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData
@@ -17,6 +18,7 @@ const DashboardQA = () => {
   const [taken, setTaken] = useState([]);
   const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
   const userId = data._id;
+  const gitUserName = data.GitHubUsername;
 
   useEffect(() => {
     axios
@@ -167,7 +169,7 @@ const DashboardQA = () => {
         <br></br>
         <br></br>
       </div>
-      {/* <div><JiraTableQA></JiraTableQA></div> */}
+      <ProjectVsCommitCount owner={gitUserName} />
     </div>
     // </div>
   );

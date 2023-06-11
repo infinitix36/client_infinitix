@@ -3,20 +3,22 @@ import axios from "axios";
 import { Nav } from "react-bootstrap";
 import NavBar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
+import jwt_decode from "jwt-decode";
 
 const AdminNotificationForm = () => {
+  const userName = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData.fname;
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const finalMessage = userName + " : "+message; 
     try {
       // Send a POST request to the backend to create a new notification
       const response = await axios.post("http://localhost:8000/notifications", {
-        message,
+        message: finalMessage,
       });
       console.log(response.data); // Notification object returned from the server
-
+        setMessage('')
       // Clear the input field
       // setMessage('');
     } catch (error) {
@@ -36,7 +38,7 @@ const AdminNotificationForm = () => {
           //   <SideBar />
           // </div>
         }
-        <h2>Create Notification</h2>
+        <h2 className="text-center">Create Notification</h2>
         <form onSubmit={handleSubmit}>
           <textarea
             className="form-control"

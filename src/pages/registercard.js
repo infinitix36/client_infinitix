@@ -178,7 +178,8 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     isInvalid={formik.touched.phone && formik.errors.phone}
                     // required
-                  />
+               
+               />
                   {formik.touched.phone && formik.errors.phone && (
                     <Form.Control.Feedback type="invalid">
                       {formik.errors.phone}

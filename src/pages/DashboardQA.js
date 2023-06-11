@@ -22,7 +22,7 @@ const DashboardQA = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/projects/getProjectDetailsQA/${userID}`)
+      .get(`http://localhost:8000/projects/getProjectDetails/${userID}`)
       .then(function (response) {
         setUserProjects(response.data);
         console.log(response.data);

@@ -35,6 +35,7 @@ import ProjectCommentQA from "../pages/ProjectCommentQA";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
 import ProfileOthers from "../pages/ProfileOthers";
+import EditProfile from "../pages/EditProfile";
 
 const AppRoutes = () => {
   return (
@@ -246,6 +247,15 @@ const AppRoutes = () => {
           element={
             <RequireAuth>
               <PendingUserApproval />
+            </RequireAuth>
+          }
+        />
+             <Route
+          exact
+          path="/editprofile"
+          element={
+            <RequireAuth>
+              <EditProfile/>
             </RequireAuth>
           }
         />

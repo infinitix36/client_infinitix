@@ -1,14 +1,19 @@
-// import addtowishlist from "../images/addtowishlist.png";
-// import { SocialIcon } from "react-social-icons";
 import "../App.css";
 import jwt_decode from "jwt-decode";
 import NavBar from "../components/Navbar";
 import React, { useEffect, useState } from "react";
-
-function Profile(props) {
-  const data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
-  const username = data.GitHubUsername;
+import axios from "axios";
+const EditProfile = () => {
+  let data;
+  data = jwt_decode(JSON.parse(localStorage.getItem("token")))?.userData;
+  const username = data?.GitHubUsername;
   const [avatarUrl, setAvatarUrl] = useState("");
+  // new data
+  const [newGitHUb, setNewGitHub] = useState(data?.GitHubUsername);
+  const [newJira, setNewJira] = useState(data?.userJiraLink);
+  const [newOrange, setNewOrange] = useState(data?.orangeHrLink);
+  const [newPhone, setNewPhone] = useState(data?.phone);
+
   useEffect(() => {
     fetch(`//api.github.com/users/${username}`)
       .then((response) => {
@@ -25,6 +30,24 @@ function Profile(props) {
       });
   }, [username]);
   console.log(data);
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const bodyData = {
+      userID: data._id,
+      newGithub: newGitHUb,
+      newJira: newJira,
+      newOrange: newOrange,
+      newPhone: newPhone,
+    };
+    axios
+      .post("http://localhost:8000/users/updateUserProfile", bodyData)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <NavBar />
@@ -34,7 +57,7 @@ function Profile(props) {
             className="card mt-5 crud shadow-lg p-3 mb-5 mt-5 bg-body rounded "
             // style={{ backgroundColor: "rgb(199,227,244)" }}
           >
-            <h3 className="text-center">Profile</h3>
+            <h3 className="text-center">Edit Profile</h3>
 
             <div className="col d-flex justify-content-center mt-3">
               {avatarUrl && (
@@ -53,7 +76,7 @@ function Profile(props) {
               )}
             </div>
             <div className="card-body">
-              <form>
+              <form onSubmit={handleUpdate}>
                 <div className="row justify-content-center">
                   <div className="col-md-2"></div>
                   <div className="form-group col-md-3">
@@ -65,23 +88,6 @@ function Profile(props) {
                       className="form-control a2"
                       id="inputFirstName"
                       value={data?.fname}
-                      disabled={true}
-                    />
-                    {console.log(data?.fname)}
-                  </div>
-                </div>
-
-                <div className="row mt-2 justify-content-center">
-                  <div className="col-md-2"></div>
-                  <div className="form-group col-md-3">
-                    <label for="userRoleName">userRoleName</label>
-                  </div>
-                  <div className="form-group col-md-5">
-                    <input
-                      type="text"
-                      className="form-control a2"
-                      id="userRoleName"
-                      value={data?.userRoleName}
                       disabled={true}
                     />
                   </div>
@@ -96,10 +102,11 @@ function Profile(props) {
                       type="text"
                       className="form-control a2"
                       id="GitHubUsername"
-                      value={data?.GitHubUsername}
-                      disabled={true}
+                      value={newGitHUb}
+                      onChange={(e) => {
+                        setNewGitHub(e.target.value);
+                      }}
                     />
-                    {console.log(data?.GitHubUsername)}
                   </div>
                 </div>
                 <div className="row mt-2 justify-content-center">
@@ -109,27 +116,13 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="url"
+                      type="text"
                       className="form-control a2"
                       id="orangeHrLink"
-                      value={data?.orangeHrLink}
-                      disabled={true}
-                    />
-                    {console.log(data?.orangeHrLink)}
-                  </div>
-                </div>
-                <div className="row mt-2 justify-content-center">
-                  <div className="col-md-2"></div>
-                  <div className="form-group col-md-3">
-                    <label for="Email">Email</label>
-                  </div>
-                  <div className="form-group col-md-5">
-                    <input
-                      type="email"
-                      className="form-control a2"
-                      id="Email"
-                      value={data?.email}
-                      disabled={true}
+                      value={newOrange}
+                      onChange={(e) => {
+                        setNewOrange(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
@@ -143,8 +136,10 @@ function Profile(props) {
                       type="tel"
                       className="form-control a2"
                       id="phoneNo"
-                      value={data?.phone}
-                      disabled={true}
+                      value={newPhone}
+                      onChange={(e) => {
+                        setNewPhone(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
@@ -155,24 +150,24 @@ function Profile(props) {
                   </div>
                   <div className="form-group col-md-5">
                     <input
-                      type="url"
+                      type="text"
                       className="form-control a2"
                       id="userJiraLink"
-                      value={data?.userJiraLink}
-                      disabled={true}
+                      value={newJira}
+                      onChange={(e) => {
+                        setNewJira(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
                 <br></br>
-                <a
-                  href="http://localhost:3000/editprofile"
-                  class="btn form-control"
-                  role="button"
-                  aria-pressed="true"
+                <button
+                  type="submit"
+                  className="btn btn-primary form-control"
                   style={{ backgroundColor: "#2D033B", color: "white" }}
                 >
-                  Edit Profile
-                </a>
+                  Update
+                </button>
               </form>
             </div>
           </div>
@@ -180,6 +175,5 @@ function Profile(props) {
       </div>
     </>
   );
-}
-
-export default Profile;
+};
+export default EditProfile;

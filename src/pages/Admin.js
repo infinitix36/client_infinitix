@@ -32,11 +32,11 @@ const Admin = () => {
           </Link>
         </Col>
         <Col xs="auto" className="mb-2 mb-md-0">
-          <Link to="/assignprojectmanager">
+          {/* <Link to="/assignprojectmanager">
             <Button variant="dark" size="lg">
               Assign Project Manager
             </Button>
-          </Link>
+          </Link> */}
         </Col>
       </Row>
     </>

@@ -23,14 +23,14 @@ const AllMembers = () => {
   return (
     <>
     <NavBar />
-    <div className="container my-5">
-      <h1 className="mb-4">All Members</h1>
-      <table className="table table-striped">
+    <div className="container my-5 text-white">
+      <h1 className="mb-4 text-white">All Members</h1>
+      <table className="table text-white">
         <thead>
           <tr>
             <th>First Name</th>
-            <th></th>
-            <th></th>
+            <th>Rating</th>
+            <th>View</th>
           </tr>
         </thead>
         <tbody>

@@ -45,7 +45,7 @@ const AppRoutes = () => {
 
         <Route
           exact
-          path="/project"
+          path="/project/:projectId/:project"
           element={
             <RequireAuth>
               <Project></Project>
@@ -250,12 +250,12 @@ const AppRoutes = () => {
             </RequireAuth>
           }
         />
-             <Route
+        <Route
           exact
           path="/editprofile"
           element={
             <RequireAuth>
-              <EditProfile/>
+              <EditProfile />
             </RequireAuth>
           }
         />
@@ -452,7 +452,7 @@ const AppRoutes = () => {
         <Route
           path="/admin"
           element={
-            <RequireAuth>
+            <RequireAuth access={["Admin"]}>
               <Admin />
             </RequireAuth>
           }

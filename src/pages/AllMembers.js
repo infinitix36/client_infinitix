@@ -38,12 +38,17 @@ const AllMembers = () => {
           {contributorsData.map((contributor) => (
             <tr key={contributor._id}>
               <td>{contributor.fname}</td>
+             
+               
+                
               {data.userRoleName === "Techlead" ? (
+                
                 <td>
                   {data.userRoleName === "Techlead" ? (
                     <Link
                       to={"/profiles/" + contributor._id}
-                      className="btn btn-primary"
+                      className="btn btn-sm btn-outline-dark form-control"
+                       style={{ backgroundColor: "#2D033B", color: "white" ,width: '30%'}}
                     >
                       Add Rating
                     </Link>
@@ -53,13 +58,16 @@ const AllMembers = () => {
                 <td></td>
               )}
               <td>
+                
                 <Link
                   to={"/users/getMembersProfile/" + contributor._id}
-                  className="btn btn-primary"
+                  className="btn btn-sm btn-dark form-control "
+                  style={{ backgroundColor: "#2D033B", color: "white" ,width: '50%'}}
                 >
                   View
                 </Link>
               </td>
+             
               
             </tr>
           ))}

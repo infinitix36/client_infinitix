@@ -11,7 +11,7 @@ const AllProjects = () => {
   // get project details
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
@@ -35,18 +35,22 @@ const AllProjects = () => {
             {/* map for project details */}
             {projectDetails.map((e) => {
               return (
-                <div className="col-12 mt-3">
-                  <div
-                    className="card"
-                    style={{ backgroundColor: "rgb(223,255,213)" }}
-                  >
+                <div className="col-md-4 mt-3">
+                  <div className="card">
                     <div className="card-header">
-                      <h5 className="card-title">{e.projectName}</h5>
+                      <h5 className="card-title">
+                        <center>{e.projectName}</center>
+                      </h5>
+                      <hr></hr>
+                      <div style={{ maxHeight: "70px", overflow: "auto", minHeight: "70px" }}>
+                        {e.description}
+                      </div>
                     </div>
                     <div className="card-footer">
                       <Link
                         to={"/project/" + e._id + "/" + e.projectName}
-                        className="btn btn-outline-primary form-control"
+                        className="btn btn-outline-dark form-control"
+                        style={{ backgroundColor: "#2D033B", color: "white" }}
                       >
                         Open
                       </Link>

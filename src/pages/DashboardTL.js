@@ -18,7 +18,7 @@ const DashboardTL = () => {
   // orangeHR leave fetch
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+`/users/leave/${userId}`)
+      .get(process.env.REACT_APP_API_URL + `/users/leave/${userId}`)
       .then(function (response) {
         setTaken(response.data[0]);
       });
@@ -35,7 +35,7 @@ const DashboardTL = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+`/projects/getFeedback/${userId}`)
+      .get(process.env.REACT_APP_API_URL + `/projects/getFeedback/${userId}`)
       .then(function (response) {
         setFeedbacks(response.data);
       });
@@ -45,14 +45,17 @@ const DashboardTL = () => {
   //  Get project details.
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+"/projects/getProjectDetails")
+      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
       .then(function (response) {
         setprojectDetails(response.data);
       });
   }, []);
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL+`/projects/getProjectDetailsTL/${data._id}`)
+      .get(
+        process.env.REACT_APP_API_URL +
+          `/projects/getProjectDetailsTL/${data._id}`
+      )
       .then(function (response) {
         setMyProjects(response.data);
       });
@@ -106,23 +109,27 @@ const DashboardTL = () => {
                   {projectDetails.map((e) => {
                     return (
                       <div className="col-md-3">
-                        <div className="card" style={{ background: "#B8E8FC" }}>
+                        <div className="card">
                           <div className="card-header">
                             <h5 className="card-title">{e.projectName}</h5>
                           </div>
-                          <div className="card-body">
+                          <div
+                            style={{
+                              maxHeight: "100px",
+                              overflow: "auto",
+                              minHeight: "100px",
+                            }}
+                          >
                             {e.description}
-                            <img
-                              src={e.projectLogo}
-                              className="rounded-circle"
-                              style={{ width: "40px" }}
-                            ></img>
-                            <p>{}</p>
                           </div>
                           <div className="card-footer">
                             <Link
                               to={"/project/" + e._id + "/" + e.projectName}
-                              className="btn btn-outline-primary form-control"
+                              className="btn btn-outline-dark form-control"
+                              style={{
+                                backgroundColor: "#2D033B",
+                                color: "white",
+                              }}
                             >
                               Open
                             </Link>
@@ -162,9 +169,7 @@ const DashboardTL = () => {
           <div className="row mt-5">
             {/* testing purpose */}
             <div className="col-md-12">
-             
-               <JiraTableAll/>
-             
+              <JiraTableAll />
             </div>
             <div className=" col-md-2"></div>
           </div>
@@ -185,36 +190,35 @@ const DashboardTL = () => {
             </div>
           </div>
         </div>
-       
 
         <div className="container mt-5 mb-5"></div>
-        <h3 className="row justify-content-center">project under My lead</h3>
+        <h5 className="border border-dark p-4 rounded rounded shadow-lg">Project under my lead</h5>
         <div className="container mt-5">
           {" "}
           {/* projects under the tech lead */}
-          {myProjects.map((e) => {
-            return (
-              <div className="col-12 mt-3">
-                <div
-                  className="card"
-                  style={{ backgroundColor: "rgb(223,255,213)" }}
-                >
-                  <div className="card-header">
-                    <h5 className="card-title">{e.projectName}</h5>
-                  </div>
-                  <div className="card-footer">
-                    {/* link for specifi project page here i sent project id and name by params */}
-                    <Link
-                      to={"/project/" + e._id + "/" + e.projectName}
-                      className="btn btn-outline-primary form-control"
-                    >
-                      Open
-                    </Link>
+          <div className="row mb-3">
+            {myProjects.map((e) => {
+              return (
+                <div className="col-md-4 mt-3">
+                  <div className="card">
+                    <div className="card-header">
+                      <h5 className="card-title">{e.projectName}</h5>
+                    </div>
+                    <div className="card-footer">
+                      {/* link for specifi project page here i sent project id and name by params */}
+                      <Link
+                        to={"/project/" + e._id + "/" + e.projectName}
+                        className="btn btn-outline-dark form-control"
+                        style={{ backgroundColor: "#2D033B", color: "white" }}
+                      >
+                        Open
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

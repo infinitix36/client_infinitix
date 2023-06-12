@@ -119,16 +119,28 @@ const DashboardBA = () => {
                     <div className="col-md-3">
                       <div className="card">
                         {/* Card heading */}
-                        <div className="card-header  text-white bg-dark">
+                        <div className="card-header">
                           <h5 className="card-title">{e?.projectName}</h5>
                         </div>
                         <div className="card-body">
                           {/* Project description  */}
-                          <p>{e?.description}</p>
+                          <div
+                            style={{
+                              maxHeight: "70px",
+                              overflow: "auto",
+                              minHeight: "70px",
+                            }}
+                          >
+                            {e.description}
+                          </div>
                           <ProgressBar variant="success" now={e?.stage} />
                         </div>
                         <div className="card-footer">
                           <select
+                            style={{
+                              backgroundColor: "#2D033B",
+                              color: "white",
+                            }}
                             onChange={(x) => {
                               updateStatus(x.target.value, e?._id);
                             }}
@@ -156,7 +168,7 @@ const DashboardBA = () => {
         {/* Bar Chart */}
         <div class="row justify-content-center">
           <div class="col-12">
-            <JiraTableAll/>
+            <JiraTableAll />
           </div>
         </div>
         <div className="row mt-5">

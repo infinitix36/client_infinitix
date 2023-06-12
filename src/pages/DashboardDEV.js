@@ -92,7 +92,7 @@ const DashboardDEV = () => {
                     <div className="col-md-3">
                       <div
                         className="card"
-                        style={{ backgroundColor: "rgb(223,255,213)" }}
+                        
                       >
                         <div className="card-header">
                           <h5 className="card-title">{e?.projectName}</h5>
@@ -108,7 +108,8 @@ const DashboardDEV = () => {
                         <div className="card-footer">
                           <Link
                             to={"/project/" + e?._id + "/" + e?.projectName}
-                            className="btn btn-outline-danger form-control"
+                            className="btn btn-outline-dark form-control"
+                            style={{ backgroundColor: "#2D033B", color: "white" }}
                           >
                             Open
                           </Link>

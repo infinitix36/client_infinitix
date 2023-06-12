@@ -105,7 +105,7 @@ const UserNotificationList = () => {
               </div>
             ) : null
           )}
-          <h2>Broatcast</h2>
+          <h2>Broadcast</h2>
           {notificationsAll.map((item) => (
             <div class="alert alert-primary" role="alert">
               <div key={item._id}>

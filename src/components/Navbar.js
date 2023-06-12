@@ -82,7 +82,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item rounded">
                 <Link className="nav-link active" to="/UserNotificationList">
-                  <i className="bi bi-bell-fill me-2">Notification</i>
+                  <i className="bi bi-bell-fill me-2" style={{ fontStyle: 'normal' }}> Notification </i>
                 </Link>
               </li>
               <li className="nav-item dropdown rounded">

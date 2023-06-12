@@ -96,14 +96,16 @@ const DashboardPM = () => {
                 {projectDetails.map((e) => {
                   return (
                     <div className="col-md-3">
-                      <div className="card" style={{ background: "#B8E8FC" }}>
+                      <div className="card shadow-lg" >
                         <div className="card-header">
                           <h5 className="card-title">{e.projectName}</h5>
                         </div>
                         <div className="card-body">
-                          <p>{e.description}</p>
+                        <div style={{ maxHeight: "70px", overflow: "auto", minHeight: "70px" }}>
+                        {e.description}
+                      </div>
                         </div>
-                        <div className="card-footer"></div>
+                        <div className="card-footer"  style={{ backgroundColor: "#2D033B", color: "white" }}></div>
                       </div>
                     </div>
                   );

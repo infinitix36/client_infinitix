@@ -26,20 +26,25 @@ const Login = () => {
     loginSchema: loginSchema,
     onSubmit: (values) => {
       // Handle form submission here
-
       axios
         .post(process.env.REACT_APP_API_URL + "/authentication/login", values)
         .then((res) => {
-          // alert(res.data.message);
-          Swal.fire({
-            title: "success",
-            text: "Do you want to continue",
-            icon: "success",
-            confirmButtonText: "Cool",
-          });
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          if (res.data.status === true) {
+          if (res.data.status) {
+            Swal.fire({
+              title: "success",
+              text: "Login success",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+            localStorage.setItem("token", JSON.stringify(res.data.token));
             navigate("/dashboard");
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: res.data.message,
+              icon: "warning",
+              confirmButtonText: "OK",
+            });
           }
         })
         .catch((error) => {
@@ -52,32 +57,34 @@ const Login = () => {
   return (
     <div className="justify-content-center  mt-5">
       <Card className="purple-form-card ">
-        <Card.Header className="card-title text-center mt-1 mb-1">Login Form</Card.Header>
+        <Card.Header className="card-title text-center mt-1 mb-1">
+          Login Form
+        </Card.Header>
         <Card.Body>
           <Form onSubmit={formik.handleSubmit}>
-          <div className="row">
-            <Form.Group controlId="email">
-              <Form.Label
-                style={{
-                  marginTop: "10px",
-                }}
-              >
-                Email address
-              </Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                isInvalid={formik.touched.email && formik.errors.email}
-              />
-              {formik.touched.email && formik.errors.email && (
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.email}
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
+            <div className="row">
+              <Form.Group controlId="email">
+                <Form.Label
+                  style={{
+                    marginTop: "10px",
+                  }}
+                >
+                  Email address
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  isInvalid={formik.touched.email && formik.errors.email}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.email}
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
             </div>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
@@ -138,7 +145,6 @@ const Login = () => {
               Create new account
             </Link>
           </div>
-          
         </Card.Body>
       </Card>
     </div>

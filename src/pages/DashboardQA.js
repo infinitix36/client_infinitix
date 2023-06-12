@@ -102,17 +102,29 @@ const DashboardQA = () => {
                   return (
                     <div className="col-md-3">
                       <div className="card">
-                        <div className="card-header bg-dark text-white text-center">
+                        <div className="card-header text-center">
                           <h5 className="card-title">{e?.projectName}</h5>
                         </div>
                         <div className="card-body">
                           {/* Project Name: {e?.projectName} <br></br> */}
                           {/* project Description: {e?.description} */}{" "}
-                          {e?.description}
+                          <div
+                            style={{
+                              maxHeight: "70px",
+                              overflow: "auto",
+                              minHeight: "70px",
+                            }}
+                          >
+                            {e.description}
+                          </div>
                         </div>
                         <div className="card-footer ">
                           <button
                             className="btn btn-white form-control"
+                            style={{
+                              backgroundColor: "#2D033B",
+                              color: "white",
+                            }}
                             onClick={() => {
                               addComment(e?._id, e?.projectName);
                             }}

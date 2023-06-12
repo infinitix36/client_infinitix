@@ -1,41 +1,41 @@
 import { useParams } from "react-router-dom";
-import BarChart from "../components/chart/BarChart";
-import { UserData } from "../components/chart/Data";
 import NavBar from "../components/Navbar";
-import SideBar from "../components/Sidebar";
-
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import ContributorCommitMessages from "../components/ContributorCommitMessages.js";
 import ContributorCommitMessagesChart from "../components/ContributorCommitMessagesChart";
-import ProjectVsCommitCount from "../components/ProjectVsCommitCount";
 import FeedBack from "../components/FeedBack";
-import JiraTable from "../components/JiraTable";
-
+import swal from "sweetalert";
 const Project = () => {
-  const { projectId } = useParams();
-  const { projectName } = useParams();
-  const [projectDetails, setprojectDetails] = useState([]);
+  const { projectId, project } = useParams();
 
+  const [projectDetails, setprojectDetails] = useState([]);
+  const [contributors, setContributors] = useState([]);
   const [description, setDescription] = useState("");
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch(
-        process.env.REACT_APP_API_URL + `/projects/${projectId}/description`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ description }),
-        }
-      );
-      const data = await response.json();
-      setDescription(data.description); // update the description state with the new value
-      setIsEditing(false);
-      window.location.reload();
+      const bodyData = {
+        projectId: projectId,
+        description: description,
+      };
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/projects/changeDescription`,
+          bodyData
+        )
+        .then((response) => {
+          if (response.data.status === true) {
+            swal("Good job!", response.data.message, "success");
+          } else {
+            swal("Error !", response.data.message, "danger");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -43,117 +43,107 @@ const Project = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/projects/getProjectDetails")
+      .get(
+        process.env.REACT_APP_API_URL + "/projects/getOneProject/" + projectId
+      )
       .then(function (response) {
         setprojectDetails(response.data);
+        setDescription(response.data.description);
+        setContributors(response.data.contributors);
       });
   }, []);
 
-  // const project = projectDetails.find((p) => p._id === projectId);
-  // console.log(project);
-
-  const project = projectDetails.find((p) => p._id === projectId);
-  const projectDescription = project ? project.description : "";
-  let contributors = [];
-  if (project) {
-    contributors = project.contributors;
-  }
-
-  console.log(contributors);
-
-  // if (project) {
-  //   const contributors = project.contributors.map((contributor) => {
-  //     return {
-  //       label: contributor.label,
-  //       value: contributor.value,
-  //     };
-  //   });
-
-  //   console.log(contributors); // This will log the array of contributor labels and values
-  // }
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.year),
-    datasets: [
-      {
-        label: "Users Gained",
-        data: UserData.map((data) => data.userGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  });
-
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleCancelClick = () => {
-    setDescription(projectDescription);
-    setIsEditing(false);
-  };
-
-  const handleChange = (e) => {
-    setDescription(e.target.value);
-  };
+  // const [userData, setUserData] = useState({
+  //   labels: UserData.map((data) => data.year),
+  //   datasets: [
+  //     {
+  //       label: "Users Gained",
+  //       data: UserData.map((data) => data.userGain),
+  //       backgroundColor: [
+  //         "rgba(75,192,192,1)",
+  //         "#ecf0f1",
+  //         "#50AF95",
+  //         "#f3ba2f",
+  //         "#2a71d0",
+  //       ],
+  //       borderColor: "black",
+  //       borderWidth: 2,
+  //     },
+  //   ],
+  // });
 
   return (
     <div>
       <NavBar />
-      <div
-        className="side-bar"
-        style={{ position: "fixed", left: "0", top: "64px", bottom: "0" }}
-      >
-        {/* <SideBar /> */}
-      </div>
-      {/* <h1>This project ID is = {projectId}</h1> */}
 
       <div className="container">
+        <br></br>
+        <br></br>
+        <h5>{"Project Name: " + project}</h5>
         <div className="row mt-5">
           <div className="col-md-6">
             <div>
-              {isEditing ? (
-                <div className="col-md-6">
-                  <input
-                    type="text"
-                    value={description}
-                    onChange={handleChange}
-                    className="form-control mb-2"
-                  />
-                  <div className="btn-group" role="group">
-                    <button
-                      onClick={handleSaveClick}
-                      className="btn btn-primary"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={handleCancelClick}
-                      className="btn btn-secondary"
-                    >
-                      Cancel
-                    </button>
+              <div>
+                <p className="mb-2">{description}</p>
+                {/* ---------------------------Modal-------------------- */}
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Edit
+                </button>
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          Change Description
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <form onSubmit={handleSaveClick}>
+                        <div class="modal-body">
+                          <textarea
+                            placeholder="Enter your new description"
+                            rows={5}
+                            className="form-control"
+                            value={description}
+                            onChange={(e) => {
+                              setDescription(e.target.value);
+                            }}
+                          ></textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Save changes
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
-              ) : (
-                <div>
-                  <p className="mb-2">{projectDescription}</p>
-                  <button
-                    onClick={handleEditClick}
-                    className="btn btn-outline-secondary bi bi-pen"
-                  >
-                    Edit
-                  </button>
-                </div>
-              )}
+                {/* -------------------------------------- Modal Ends here --------------------------------- */}
+              </div>
             </div>
           </div>
           <div className="col-md-6">
@@ -201,7 +191,7 @@ const Project = () => {
               {/* <ProjectCommitList  owner="dreamshack1999" repo={projectName} /> */}
               <ContributorCommitMessages
                 owner="dreamshack1999"
-                repo={projectName}
+                repo={project}
               />
             </div>
           </div>
@@ -209,7 +199,7 @@ const Project = () => {
             {/* <ProjectCommitChart owner="dreamshack1999" repo={projectName}/> */}
             <ContributorCommitMessagesChart
               owner="dreamshack1999"
-              repo={projectName}
+              repo={project}
             />
             {/* <ProjectVsCommitCount
               owner="vjathishwarya2000"
@@ -226,10 +216,10 @@ const Project = () => {
         <br></br>
         <br></br>
         <div className="alert alert-primary">
-          <b>Feedback By Quality Assurance Engineer</b>
+          <b>Feedback </b>
         </div>
 
-        {project?.feedBacksQA?.map((e) => {
+        {projectDetails?.feedBacksQA?.map((e) => {
           return (
             <div>
               <div className="">{e?.feedback}</div>

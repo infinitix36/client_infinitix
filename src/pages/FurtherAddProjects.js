@@ -22,17 +22,24 @@ const FurtherAddProjects = () => {
   return (
     <div>
       <NavBar></NavBar>
-      {incompleteDetProj.map((e) => {
-        return (
-          // link to specific project sent project id as params
-          <Link
-            to={"/project/furtherproject/" + e._id}
-            className="btn btn-outline-primary form-control mt-2"
-          >
-            <li key={e._id}>{e.projectName}</li>
-          </Link>
-        );
-      })}
+      <br></br>
+      <div className="container">
+        <div className="row">
+          {incompleteDetProj.map((e) => {
+            return (
+              <div className="col-md-12" key={e._id}>
+                <Link
+                  to={"/project/furtherproject/" + e._id}
+                  className="btn btn-outline-dark form-control mt-2 "
+                  style={{ width: "100%" }}
+                >
+                  {e.projectName}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

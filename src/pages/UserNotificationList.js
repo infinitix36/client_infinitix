@@ -38,7 +38,7 @@ const UserNotificationList = () => {
         setNotificationsAll([]);
         setNotificationsAll(response.data);
       });
-    }, 15000); // 60000 milliseconds = 1 minute
+    }, 1000); // 60000 milliseconds = 1 minute
 
     // Clean up the interval on component unmount
     return () => {

@@ -12,8 +12,11 @@ const validationSchema = Yup.object({
   clientName: Yup.string().required("Client Name is required"),
   clientAddress: Yup.string().required("Client Address is required"),
   clientPhone: Yup.string()
-    .matches(/^\d+$/, "Phone number must be numeric")
-    .required("Phone number is required"),
+    .matches(
+      /^\d{10}$/,
+      "Phone Number must be a 10-digit number without spaces or dashes"
+    )
+    .required("Phone Number is required"),
   gitHubLink: Yup.string().required("GitHub Link is required"),
   jiraLink: Yup.string().required("JIRA Link is required"),
 });

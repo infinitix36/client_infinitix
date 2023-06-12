@@ -22,7 +22,13 @@ const Register = () => {
       .string()
       .email("Invalid email address")
       .required("Email is required"),
-    phone: yup.string().min(10).max(10).required("Phone is required"),
+    phone: yup
+      .string()
+      .matches(
+        /^\d{10}$/,
+        "Phone Number must be a 10-digit number without spaces or dashes"
+      )
+      .required("Phone Number is required"),
     orangeHrLink: yup.string().required("Orange HR Link is required"),
     GitHubUsername: yup.string().required("GitHub username is required"),
     userJiraLink: yup.string().required("User Jira Link is required"),
@@ -178,8 +184,7 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     isInvalid={formik.touched.phone && formik.errors.phone}
                     // required
-               
-               />
+                  />
                   {formik.touched.phone && formik.errors.phone && (
                     <Form.Control.Feedback type="invalid">
                       {formik.errors.phone}
